@@ -1,0 +1,88 @@
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(279px, 1fr));
+	gap: 12px 20px;
+}
+
+.card {
+	width: 100%;
+	border-radius: 32px;
+	overflow: hidden;
+	border: 1px solid #262D291A;
+	box-shadow: 0 0 16px 0 #00000029;
+}
+
+.card-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: 80px;
+	padding: 24px 24px 0;
+}
+
+.card-img {
+	padding: 0 24px;
+}
+
+.card-img > img {
+	width: 100%;
+	object-fit: cover;
+}
+
+
+.card-top-btn {
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: 1px solid #1DBE60;
+	border-radius: 50%;
+	position: relative;
+}
+
+.card-top-btn > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.card-bottom {
+	border-top: 1px solid #262D291A;
+	padding: 24px;
+}
+
+.card-bottom > h3 {
+	margin-bottom: 18px;
+	font-size: 20px;
+	line-height: 20px;
+	font-weight: 600;
+	color: #262D29;
+}
+
+.card-bottom-items {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+.card-bottom-items > p {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 32px;
+	color: #F83427;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+.card-bottom-items > p > span {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #F83427;
+	text-decoration: line-through;
+	opacity: .4;
+}

@@ -1,0 +1,85 @@
+.mobile-catalog-list > .text {
+  color: red;
+}
+
+.catalog-lists > .text {
+  color: green;
+}
+
+.catalog {
+  height: 100%;
+  background: white;
+  position: absolute;
+  z-index: 20;
+  top: 116px;
+  left: -1200px;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .catalog {
+    top: 100px;
+  }
+}
+
+.activeCatalog {
+  left: 0;
+  transition: all 0.2s ease;
+  visibility: visible;
+}
+
+.catalog-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: #262d29;
+  opacity: 0.5;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.catalog-lists {
+  max-width: 408px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.catalog-lists > .catalog-list {
+  max-width: 179px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.catalog-lists > .catalog-list > li {
+  color: #262d29;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.catalog-lists > .catalog-list > li:hover {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-catalog-lists {
+  padding: 16px 16px;
+}
+
+.mobile-catalog-lists > .catalog-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-catalog-lists > .catalog-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+}

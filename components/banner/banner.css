@@ -1,0 +1,40 @@
+.banner {
+	background: linear-gradient(110.67deg, #1DBE60 -1.99%, #05A748 106.83%);
+	border-radius: 32px;
+	overflow: hidden;
+	margin-top: 40px;
+	@media (max-width: 1024px) {
+		margin-top: 19px;
+	}
+}
+
+.banner-item {
+	display: flex;
+	justify-content: space-between;
+	@media (max-width: 1024px) {
+		flex-wrap: wrap-reverse;
+	}
+}
+
+.banner-content {
+	width: 100%;
+	padding: 36px;
+	max-width: 575px;
+	@media (max-width: 1024px) {
+		max-width: 100%;
+		padding: 20px;
+	}
+}
+
+.banner-image {
+	width: 100%;
+	max-width: 900px;
+}
+
+.banner-image > img {
+	height: 100%;
+	width: 100%;
+	min-width: 320px;
+	min-height: 240px;
+	object-fit: cover;
+}
