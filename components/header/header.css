@@ -1,8 +1,10 @@
 .header {
 	border-bottom: 1px solid #1DBE60;
 	position: relative;
-	z-index: 15;
 	background: white;
+	@media (max-width: 768px) {
+		z-index: 15;
+	}
 }
 
 .decor {
@@ -68,6 +70,8 @@
 }
 
 .logo {
+	display: flex;
+	gap: 24px;
 	width: 132px;
 	height: 40px;
 	@media (max-width: 768px) {
@@ -146,11 +150,11 @@
 }
 
 .mobile-menu > button {
-	box-shadow: 4px 4px 12px 0px #00000033;
+	box-shadow: 4px 4px 12px 0 #00000033;
 }
 
 .active {
-	left: 0px;
+	left: 0;
 	visibility: visible;
 	transition: all 0.2s ease;
 }
@@ -161,9 +165,16 @@
 	gap: 4px;
 }
 
-.mobile-lists > li:hover > button >  svg > path {
+.mobile-lists > li:hover > a >  svg > path {
 	stroke: #1DBE60;
 	transition: all 0.2s ease;
+}
+
+.mobile-lists > li:hover, .mobile-lists > li > a.active {
+	color: #1DBE60;
+}
+.mobile-lists > li:hover svg path, .mobile-lists > li > a.active svg path {
+	stroke: #1DBE60;
 }
 
 .mobile-lists > li:hover {
@@ -175,7 +186,7 @@
 	color: #262D2999;
 }
 
-.mobile-lists > li > button {
+.mobile-lists > li > a {
 	font-size: 16px;
 	line-height: 16px;
 	font-weight: 400;

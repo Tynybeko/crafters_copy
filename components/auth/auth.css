@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(4px);
 }
 
 .auth-modal-item {
@@ -82,13 +83,13 @@
 }
 
 form button {
-  box-shadow: 4px 4px 12px 0px #00000033;
+  box-shadow: 4px 4px 12px 0 #00000033;
 }
 
 .forgot-password {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .forgot-password > p {
@@ -115,9 +116,10 @@ form button {
   height: 16px;
   border-radius: 50%;
   margin-right: 0.5em;
-  border: 0.15em solid #1dbe60;
+  border: 0.15em solid  #262D2966;
   outline: none;
   cursor: pointer;
+  padding: 4px;
 }
 
 .checkbox-wrapper > label {

@@ -1,0 +1,140 @@
+.personal-cabinet {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.cabinet-sidebar {
+	max-width: 312px;
+	width: 100%;
+	background: transparent;
+	@media (max-width: 768px) {
+		max-width: 100%;
+	}
+}
+
+.cabinet-sidebar > nav > ul {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.cabinet-sidebar > nav > ul > li:not(:last-child):after{
+	content: "";
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #262D2933;
+	margin: 12px 0;
+}
+
+.cabinet-sidebar > nav > ul > li> a {
+	cursor: pointer;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 120%;
+	color: #262D2999;
+	transition: all 0.3s ease;
+	padding: 8px 0;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.cabinet-sidebar > nav > ul > li > a:hover, .cabinet-sidebar > nav > ul > li > a.active {
+	color: #1DBE60;
+}
+.cabinet-sidebar > nav > ul > li > a:hover svg path, .cabinet-sidebar > nav > ul > li > a.active svg path {
+	stroke: #1DBE60;
+}
+
+.user {
+	padding: 24px;
+}
+
+.user-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.user-header:after {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #262D2933;
+	margin-bottom: 16px;
+}
+
+.user-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 0;
+	color: #262D2999;
+}
+
+.user-edit_btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #262D2966;
+	transition: stroke 0.2s ease;
+}
+
+.user-edit_btn > span{
+	position: relative;
+}
+
+.user-edit_btn > span:after {
+	content: "";
+	position: absolute;
+	bottom: 10%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	width: 100%;
+	height: 1px;
+	background: #262D2933;
+}
+
+.user-edit_btn:hover svg g path, .user-edit_btn:hover span{
+	stroke: #1DBE60;
+	transition: stroke 0.2s ease;
+}
+
+.user-edit_btn:hover span:after {
+	transition: stroke 0.2s ease;
+	background-color: #1DBE60;
+}
+
+
+.user-info {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 12px;
+}
+
+.user-info-item > p {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 120%;
+	color: #262D2999;
+	padding: 0 24px;
+}
+
+.user-info-item > h1 {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 100%;
+	color: #262D29;
+	padding: 12px 0;
+}
+
+.user-contact {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+	gap: 12px;
+}

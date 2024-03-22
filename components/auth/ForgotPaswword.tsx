@@ -5,10 +5,14 @@ import { Input } from "../ui/input";
 
 //styles
 import './auth.css'
-const ForgotPassword = ({ setIsForgotPassword, setIsLogin, setisRegister }: any) => {
+const ForgotPassword = ({ setIsForgotPassword, setIsLogin, setIsRegister }: any) => {
     return (
         <div className='auth'>
-            <div onClick={() => setIsLogin(false)} className='auth-modal' />
+            <div onClick={() => {
+                setIsLogin(false)
+                setIsForgotPassword(false)
+                setIsRegister(false)
+            }} className='auth-modal' />
             <div className='auth-modal-item'>
                 <div className="auth-carousel">
                     <div className="auth_title">
@@ -25,7 +29,7 @@ const ForgotPassword = ({ setIsForgotPassword, setIsLogin, setisRegister }: any)
                             </Button>
                         </div>
                         <div className="mb-[12px]">
-                            <Button onClick={() => { setisRegister(true); setIsForgotPassword(false) }} size='full' variant='outline'>
+                            <Button onClick={() => { setIsRegister(true); setIsForgotPassword(false) }} size='full' variant='outline'>
                                 Back to registration
                             </Button>
                         </div>
