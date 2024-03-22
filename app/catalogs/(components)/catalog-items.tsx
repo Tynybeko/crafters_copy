@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 //style
 import './catalog-items.css'
 
-export function CatalogItems(props : { ref : React.MutableRefObject<HTMLDivElement | null>, onClick : () => void, onMouseEnter : () => void, onMouseLeave : () => void, openDrop : boolean }) {
+export function CatalogItems(props : { onClick : () => void, onMouseEnter : () => void, onMouseLeave : () => void, openDrop : boolean }) {
     const [ catalogData, setCatalogData ] = useState<string[]>([]);
     const [ currentCatalog, setCurrentCatalog ] = useState<string | null>(null);
     
@@ -32,7 +32,7 @@ export function CatalogItems(props : { ref : React.MutableRefObject<HTMLDivEleme
     };
     
     return (
-      <div ref={ props.ref }>
+      <div >
           <Link href={ '/catalogs' }>
               <Button onClick={ props.onClick } onMouseEnter={ props.onMouseEnter }
                       onMouseLeave={ props.onMouseLeave }>Catalog

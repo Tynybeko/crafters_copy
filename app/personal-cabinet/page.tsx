@@ -20,7 +20,6 @@ export default function PersonalCabinet() {
     const handleChangeContact = () => {
         setIsDisabledContact(!isDisabledContact)
     }
-    
     return (
       <div className='personal-cabinet'>
           <Box className='user'>
@@ -49,7 +48,7 @@ export default function PersonalCabinet() {
                       </Button>}
                   </div>
               </div>
-              <div className='user-info'>
+              <form className='user-info'>
                   <div className='user-info-item'>
                       <p>First name</p>
                       <Input value={ 'Ivan' } disabled={ !isDisabledUserData }/>
@@ -62,7 +61,7 @@ export default function PersonalCabinet() {
                       <p>By middle name</p>
                       <Input value={ 'Ivan' } disabled={ !isDisabledUserData }/>
                   </div>
-              </div>
+              </form>
               { isDisabledUserData && <Button className='mt-4'>Save</Button> }
           </Box>
           <Box className='user'>
@@ -91,7 +90,7 @@ export default function PersonalCabinet() {
                       </Button>}
                   </div>
               </div>
-              <div className='user-contact'>
+              <form className='user-contact'>
                   <div className='user-info-item'>
                       <p>Email</p>
                       <Input value={ 'PROlab@gmail.com' } disabled={ !isDisabledContact }/>
@@ -100,7 +99,7 @@ export default function PersonalCabinet() {
                       <p>Phone</p>
                       <Input value={ '+996 (000) 000 000' } disabled={ !isDisabledContact }/>
                   </div>
-              </div>
+              </form>
               { isDisabledContact && <Button className='mt-4'>Save</Button> }
           </Box>
           <Box className='user'>
@@ -129,16 +128,16 @@ export default function PersonalCabinet() {
                       </Button>}
                   </div>
               </div>
-              <div className='user-contact'>
+              <form className='user-contact'>
                   <div className='user-info-item'>
                       <p>Password</p>
-                      <Input type={'password'} value={ '+996 (000) 000 000' } disabled={ !isDisabledPassword }/>
+                      <Input type={'password'} value={ '+996 (000) 000 000' } disabled={ !isDisabledPassword }  autoComplete="new-password" />
                   </div>
                   <div className='user-info-item'>
                       <p>Password</p>
-                      <Input type={'password'} value={ '+996 (000) 000 000' } disabled={ !isDisabledPassword }/>
+                      <Input type={'password'} value={ '+996 (000) 000 000' } disabled={ !isDisabledPassword }  autoComplete="new-password" />
                   </div>
-              </div>
+              </form>
               { isDisabledPassword && <Button className='mt-4'>Save</Button> }
           </Box>
       </div>

@@ -33,7 +33,6 @@ export function HeaderItem(props : { onClick : () => void, openMenu : boolean, o
         </Link>
         <div className="header-catalog max-w-[135px] w-full ">
             <CatalogItems
-              ref={ props.dropdownRef }
               onClick={ props.onClick1 }
               onMouseEnter={ props.onMouseEnter }
               onMouseLeave={ props.onMouseLeave }
