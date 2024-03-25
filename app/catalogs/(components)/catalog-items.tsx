@@ -43,13 +43,12 @@ export function CatalogItems(props : { onClick : () => void, onMouseEnter : () =
                   </svg>
               </Button>
           </Link>
-          { props.openDrop && (
             <>
-                <div className='w-full h-full fixed top-0 left-0 bg-[#262D294D] -z-50 backdrop-blur-sm'
+                <div className={ props.openDrop ? 'fonCatalog fonCatalog-active' : 'fonCatalog' }
                      onMouseEnter={ props.onMouseLeave }/>
                 <div
                   onMouseEnter={ props.onMouseEnter }
-                  className="catalog-menu"
+                  className={ props.openDrop ? "catalog-menu  catalog-menu-active" : "catalog-menu" }
                   onMouseLeave={ props.onMouseLeave }>
                     <div className='catalog-menu-lists'>
                         <button onMouseEnter={ () => handleCatalogHover("Catalog1") }>
@@ -70,7 +69,6 @@ export function CatalogItems(props : { onClick : () => void, onMouseEnter : () =
                     </div>
                 </div>
             </>
-         ) }
       </div>
     );
 }

@@ -12,25 +12,36 @@ import Register from '../auth/Register';
 //styles
 import './header.css';
 import { HeaderItem } from "@/components/header/(components)/HeaderItem";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchUser } from "@/redux/slices/user";
 
 const Header = () => {
     const { screenWidth } = useScreenWidth();
-    const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [isOpenCatalog, setIsOpenCatalog] = useState(false);
-    const [isAuth, setIsAuth] = useState(true);
-    const [isLogin, setIsLogin] = useState(false);
-    const [isRegister, setIsRegister] = useState(false);
-    const [isForgotPassword, setIsForgotPassword] = useState(false);
-    const [isOpenDrop, setIsOpenDrop] = useState(false);
-    let timer: any;
+    const dispatch = useAppDispatch();
+    const [ isOpenMenu, setIsOpenMenu ] = useState(false);
+    const [ isOpenCatalog, setIsOpenCatalog ] = useState(false);
+    const [ isAuth, setIsAuth ] = useState(false);
+    const [ isLogin, setIsLogin ] = useState(false);
+    const [ isRegister, setIsRegister ] = useState(false);
+    const [ isForgotPassword, setIsForgotPassword ] = useState(false);
+    const [ isOpenDrop, setIsOpenDrop ] = useState(false);
+    let timer : any;
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const {data: user, isAuth: isAuthUser} = useAppSelector(state => state.user);
+    
+    
+    
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, []);
+    
     
     const closeCatalog = () => {
         setIsOpenCatalog(false);
     };
     
-    const handleClickOutside = (event: any) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event : any) => {
+        if ( dropdownRef.current && !dropdownRef.current.contains(event.target) ) {
             setIsOpenDrop(false);
         }
     };
@@ -58,39 +69,44 @@ const Header = () => {
     }, []);
     
     useEffect(() => {
-        if (screenWidth <= 768) {
+        if ( screenWidth <= 768 ) {
             setIsOpenMenu(false);
             closeCatalog();
         }
-    }, [screenWidth]);
+    }, [ screenWidth ]);
     
     useEffect(() => {
-        function handleClick(event: any) {
-            if (!event.target.closest('.header')) {
+        function handleClick(event : any) {
+            if ( !event.target.closest('.header') ) {
                 setIsOpenMenu(prev => !prev);
             }
         }
         
-        if (isOpenMenu) {
+        if ( isOpenMenu ) {
             document.addEventListener('click', handleClick);
             closeCatalog();
         }
         return () => {
             document.removeEventListener('click', handleClick);
         };
-    }, [isOpenMenu]);
+    }, [ isOpenMenu ]);
     
     return (
       <>
-          <MobileMenu setIsLogin={setIsLogin} isAuth={isAuth} setIsOpenCatalog={setIsOpenCatalog}
-                      close={() => setIsOpenMenu(false)} open={isOpenMenu} />
-          <Catalog setIsOpenMenu={setIsOpenMenu} setIsOpenCatalog={setIsOpenCatalog}
-                   isOpenCatalog={isOpenCatalog} />
-          {isForgotPassword && <ForgotPassword setIsForgotPassword={setIsForgotPassword} setIsRegister={setIsRegister}
-                                               setIsLogin={setIsLogin} />}
-          {isLogin && <Login setIsForgotPassword={setIsForgotPassword} setIsRegister={setIsRegister}
-                             setIsLogin={setIsLogin} />}
-          {isRegister && <Register setisRegister={setIsRegister} setIsLogin={setIsLogin} />}
+          <MobileMenu setIsLogin={ setIsLogin } isAuth={ isAuth } setIsOpenCatalog={ setIsOpenCatalog }
+                      close={ () => setIsOpenMenu(false) } open={ isOpenMenu }/>
+          <Catalog setIsOpenMenu={ setIsOpenMenu } setIsOpenCatalog={ setIsOpenCatalog }
+                   isOpenCatalog={ isOpenCatalog }/>
+          { isForgotPassword && <ForgotPassword
+            setIsForgotPassword={ setIsForgotPassword }
+            setIsRegister={ setIsRegister }
+            setIsLogin={ setIsLogin }/>
+          }
+          { isLogin && <Login
+            setIsForgotPassword={ setIsForgotPassword }
+            setIsRegister={ setIsRegister }
+            setIsLogin={ setIsLogin }/> }
+          { isRegister && <Register setIsRegister={ setIsRegister } setIsLogin={ setIsLogin }/> }
           <header className='header'>
               <div className='decor'>
                   <div className='globalContainer'>
@@ -111,19 +127,19 @@ const Header = () => {
               <div className='globalContainer'>
                   <div className='header-item'>
                       <HeaderItem
-                        onClick={() => {
+                        onClick={ () => {
                             setIsOpenMenu(!isOpenMenu);
                             closeCatalog();
-                        }}
-                        openMenu={isOpenMenu}
-                        openCatalog={isOpenCatalog}
-                        dropdownRef={dropdownRef}
-                        onClick1={handleButtonClick}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                        openDrop={isOpenDrop}
-                        auth={isAuth}
-                        onClick2={() => setIsLogin(prev => !prev)}
+                        } }
+                        openMenu={ isOpenMenu }
+                        openCatalog={ isOpenCatalog }
+                        dropdownRef={ dropdownRef }
+                        onClick1={ handleButtonClick }
+                        onMouseEnter={ handleMouseEnter }
+                        onMouseLeave={ handleMouseLeave }
+                        openDrop={ isOpenDrop }
+                        isAuthUser={ isAuthUser }
+                        onClick2={ () => setIsLogin(prev => !prev) }
                       />
                   </div>
               </div>

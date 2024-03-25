@@ -1,12 +1,14 @@
-import React from "react";
+'use client';
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 
-
 //styles
 import './auth.css'
+import { signIn } from "next-auth/react";
 
 const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
+    const [ userData, setUserData ] = useState({})
     
     
     const forgotPassword = () => {
@@ -14,6 +16,15 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
         setIsLogin(false);
         setIsRegister(false)
     }
+    
+    const handleChange = (e : any) => {
+        setUserData({
+            ...userData,
+            [e.target.name] : e.target.value
+        })
+    }
+    
+    
     return (
       <div className='auth'>
           <div onClick={ () => setIsLogin(false) } className='auth-modal'/>
@@ -25,10 +36,10 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                   </div>
                   <form>
                       <div className="login-input">
-                          <Input type="email" name="email" placeholder="Email"/>
+                          <Input onChange={(e) => handleChange(e)} type="email" name="email" placeholder="Email"/>
                       </div>
                       <div className="login-input">
-                          <Input type="password" name="email" placeholder="Password"/>
+                          <Input onChange={(e) => handleChange(e)} type="password" name="email" placeholder="Password"/>
                       </div>
                       <div className="text-end forgot-password">
                           <p onClick={ forgotPassword } className="p-0 mb-[40px] w-max">Forgot password</p>
@@ -53,7 +64,7 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                           <p>or</p>
                       </div>
                       <div className="flex items-center gap-[12px]">
-                          <Button variant={ 'outline' } className="flex items-center gap-[4px]">
+                          <Button onClick={() => signIn('google')} variant={ 'outline' } className="flex items-center gap-[4px]">
                               <img src="/svg/google.svg" alt="Google"/>
                               Google
                           </Button>

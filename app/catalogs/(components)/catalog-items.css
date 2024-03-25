@@ -1,7 +1,8 @@
 .catalog-menu {
 	position: absolute;
 	top: 131px;
-	left: 0;
+	left: -10000px;
+	transition: all 0.2s ease;
 	z-index: 50;
 	display: flex;
 	height: 100vh;
@@ -41,4 +42,27 @@
 
 .catalog-menu-lists > button:hover {
 	opacity: 1;
+}
+
+.fonCatalog {
+	position: absolute;
+	top: 131px;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: #262D29;
+	opacity: 0;
+	z-index: -1000;
+	backdrop-filter: blur(10px);
+}
+
+.catalog-menu-active {
+	left: 0;
+	transition: all 0.2s ease;
+}
+
+.fonCatalog-active {
+	z-index: 1;
+	opacity: 0.5;
+	transition: opacity 0.2s ease;
 }

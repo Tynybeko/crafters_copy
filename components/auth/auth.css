@@ -185,3 +185,11 @@ input.checked::before {
   width: 40%;
   background: #1dbe60;
 }
+
+.error {
+  color: #F83427;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 300;
+  margin-top: 8px;
+}

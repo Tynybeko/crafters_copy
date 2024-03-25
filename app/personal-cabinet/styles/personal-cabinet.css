@@ -28,7 +28,13 @@
 	margin: 12px 0;
 }
 
-.cabinet-sidebar > nav > ul > li> a {
+.sidebar-link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.cabinet-sidebar > nav > ul > li a {
 	cursor: pointer;
 	font-weight: 400;
 	font-size: 16px;
@@ -41,10 +47,28 @@
 	gap: 12px;
 }
 
-.cabinet-sidebar > nav > ul > li > a:hover, .cabinet-sidebar > nav > ul > li > a.active {
+.cabinet-sidebar > nav > ul > li span {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #1DBE60;
+	color: #FFFFFF;
+	border-radius: 50%;
+	box-shadow: 4px 4px 12px 0px #00000033;
+	border: 1px solid #FFFFFF;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 14px;
+	text-align: center;
+	
+}
+
+.cabinet-sidebar > nav > ul > li  a:hover, .cabinet-sidebar > nav > ul > li  a.active {
 	color: #1DBE60;
 }
-.cabinet-sidebar > nav > ul > li > a:hover svg path, .cabinet-sidebar > nav > ul > li > a.active svg path {
+.cabinet-sidebar > nav > ul > li  a:hover svg path, .cabinet-sidebar > nav > ul > li  a.active svg path {
 	stroke: #1DBE60;
 }
 

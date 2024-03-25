@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-export function HeaderItem(props : { onClick : () => void, openMenu : boolean, openCatalog : boolean, dropdownRef : React.MutableRefObject<HTMLDivElement | null>, onClick1 : () => void, onMouseEnter : () => void, onMouseLeave : () => void, openDrop : boolean, auth : boolean, onClick2 : () => void }) {
+export function HeaderItem(props : { onClick : () => void, openMenu : boolean, openCatalog : boolean, dropdownRef : React.MutableRefObject<HTMLDivElement | null>, onClick1 : () => void, onMouseEnter : () => void, onMouseLeave : () => void, openDrop : boolean, isAuthUser: any, onClick2 : () => void }) {
     const path = useRouter()
     
     const handleToPage = () => {
@@ -58,7 +58,7 @@ export function HeaderItem(props : { onClick : () => void, openMenu : boolean, o
             </Select>
         </div>
         <div className="header-icons">
-            { props.auth ? (
+            { props.isAuthUser ? (
               <button onClick={ handleToPage } className="flex items-center gap-2 h-[20px]">
                   <img src="/svg/user.svg" alt="User"/>
                   Profile

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import NextBreadcrumb from "@/components/utils/Breascrumb";
+import { PersonalSidebar } from "@/app/personal-cabinet/(components)/Sidebar";
+
 
 //styles
 import "../globals.css";
 import './styles/personal-cabinet.css';
-import React from "react";
-import { PersonalSidebar } from "@/app/personal-cabinet/(components)/Sidebar";
 
 export const metadata : Metadata = {
     title: "Personal cabinet",
@@ -16,7 +16,6 @@ export const metadata : Metadata = {
 export default function PersonalCabinetLayout({ children } : Readonly<{
     children : ReactNode;
 }>) {
-    
     
     return (
       <>
