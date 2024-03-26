@@ -20,7 +20,6 @@ const Header = () => {
     const dispatch = useAppDispatch();
     const [ isOpenMenu, setIsOpenMenu ] = useState(false);
     const [ isOpenCatalog, setIsOpenCatalog ] = useState(false);
-    const [ isAuth, setIsAuth ] = useState(false);
     const [ isLogin, setIsLogin ] = useState(false);
     const [ isRegister, setIsRegister ] = useState(false);
     const [ isForgotPassword, setIsForgotPassword ] = useState(false);
@@ -28,7 +27,6 @@ const Header = () => {
     let timer : any;
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const {data: user, isAuth: isAuthUser} = useAppSelector(state => state.user);
-    
     
     
     useEffect(() => {
@@ -93,7 +91,7 @@ const Header = () => {
     
     return (
       <>
-          <MobileMenu setIsLogin={ setIsLogin } isAuth={ isAuth } setIsOpenCatalog={ setIsOpenCatalog }
+          <MobileMenu setIsLogin={ setIsLogin } isAuthUser={ isAuthUser } setIsOpenCatalog={ setIsOpenCatalog }
                       close={ () => setIsOpenMenu(false) } open={ isOpenMenu }/>
           <Catalog setIsOpenMenu={ setIsOpenMenu } setIsOpenCatalog={ setIsOpenCatalog }
                    isOpenCatalog={ isOpenCatalog }/>

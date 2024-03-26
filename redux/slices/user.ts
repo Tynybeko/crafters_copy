@@ -1,6 +1,7 @@
-import { asyncThunkCreator, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { apiToken } from "@/axios";
 import { InitialStateType, IUser } from "@/types";
+import { useAppDispatch } from "@/redux/hooks";
 
 
 export const fetchUser = createAsyncThunk(
@@ -12,7 +13,6 @@ export const fetchUser = createAsyncThunk(
       }
       catch ( error ) { throw error }
   })
-
 
 
 const initialState: InitialStateType<IUser> = {
@@ -37,6 +37,13 @@ const userSlice = createSlice({
             if ( action.payload ) {
                 state.isAuth = true
             }
+        },
+        LogoutUser(state) {
+            state.data = null
+            state.isAuth = false
+            if(typeof window !== 'undefined') {
+              localStorage.removeItem('token')
+            }
         }
     },
     extraReducers: builder => {
@@ -59,6 +66,19 @@ const userSlice = createSlice({
     }
 })
 
-export const { LoginUser, RegisterUser } = userSlice.actions
+export const { LoginUser, RegisterUser, LogoutUser } = userSlice.actions
 
 export default userSlice.reducer
+
+
+
+export function onEditUserData(data: any) {
+    const dispatch = useAppDispatch();
+    apiToken.patch('/accounts/profile/', data)
+      .then(() => {
+          dispatch(fetchUser());
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+}

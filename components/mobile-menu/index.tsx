@@ -3,18 +3,27 @@
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { CustomLink } from "@/components/utils/CustomLink";
+import { useAppDispatch } from "@/redux/hooks";
+import { LogoutUser } from "@/redux/slices/user";
 
 interface IMobileMenuProps
     {
         open : boolean;
         setIsOpenCatalog : any
-        isAuth : boolean
+        isAuthUser : any
         setIsLogin : any
         close : any
     }
 
 
-export function MobileMenu({ close, setIsLogin, isAuth, open, setIsOpenCatalog } : IMobileMenuProps) {
+export function MobileMenu({ close, setIsLogin, isAuthUser, open, setIsOpenCatalog } : IMobileMenuProps) {
+    const dispatch = useAppDispatch()
+    const handleLogout = () => {
+        setIsLogin(false);
+        close((prev : any) => !prev)
+        dispatch(LogoutUser())
+    };
+    
     const pathName = usePathname()
     return (
       <div className={ open ? 'mobile-menu active' : 'mobile-menu' }>
@@ -27,7 +36,7 @@ export function MobileMenu({ close, setIsLogin, isAuth, open, setIsOpenCatalog }
               </svg>
           </Button>
           <div className='py-[20px] px-[18px] flex flex-col gap-[12px]'>
-              { isAuth && <>
+              { isAuthUser && <>
                   <div className=''>
                       <ul className='mobile-lists'>
                           <li>
@@ -156,8 +165,8 @@ export function MobileMenu({ close, setIsLogin, isAuth, open, setIsOpenCatalog }
                       </ul>
                   </div>
               </> }
-              { isAuth ? (
-                <Button variant={ 'destructiveOutline' }>
+              { isAuthUser ? (
+                <Button onClick={handleLogout} variant={ 'destructiveOutline' }>
                     Get out
                 </Button>
               ) : (

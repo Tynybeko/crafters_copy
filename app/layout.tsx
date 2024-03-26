@@ -4,6 +4,8 @@ import Header from "@/components/header";
 import type { ReactNode } from "react";
 import StoreProvider from "@/providers/storeProvider";
 import localFont from 'next/font/local';
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 
 const myFont = localFont({
@@ -61,7 +63,9 @@ export default function RootLayout({
       <StoreProvider>
         <body className={myFont.className}>
           <Header />
-          {children}
+          <Suspense fallback={<Loading/>}>
+            {children}
+          </Suspense>
         </body>
       </StoreProvider>
     </html>

@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       <Banner />
-      <section className="popular relative -z-[100]">
+      <section className="popular">
         <div className="globalContainer">
           <div className="popular-title">
             <h2>Popular category</h2>

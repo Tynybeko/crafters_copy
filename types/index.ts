@@ -17,3 +17,15 @@ export interface IUser
         phone : string | null
         token : string
     }
+
+export interface ICompany
+    {
+        id : number
+        legal_name : string
+        legal_address : string
+        phone : string
+        city : string
+        index : string
+        site_url : string
+        image : string
+    }

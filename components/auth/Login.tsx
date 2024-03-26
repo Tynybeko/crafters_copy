@@ -6,10 +6,16 @@ import { Input } from "../ui/input";
 //styles
 import './auth.css'
 import { signIn } from "next-auth/react";
+import { api, apiToken } from "@/axios";
+import { useAppDispatch } from "@/redux/hooks";
+import { fetchUser, LoginUser } from "@/redux/slices/user";
 
 const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
+    const dispatch = useAppDispatch()
     const [ userData, setUserData ] = useState({})
-    
+    const [ error, setError ] = useState({
+        detail: ""
+    })
     
     const forgotPassword = () => {
         setIsForgotPassword(true);
@@ -20,10 +26,36 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
     const handleChange = (e : any) => {
         setUserData({
             ...userData,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
+        onfocus(e)
     }
     
+    const handleSubmit = (e : any) => {
+        e.preventDefault();
+        api.post('/accounts/login/', userData)
+          .then(res => {
+              localStorage.setItem('token', res.data.token)
+              dispatch(LoginUser(res.data))
+              setError({
+                  detail: ""
+              })
+              dispatch(fetchUser())
+              setIsLogin(false)
+          })
+          .catch(err => {
+              setError(err?.response?.data)
+          })
+    }
+    
+    
+    const onfocus = (e : any) => {
+        if ( e.target.value ) {
+            setError({
+                detail: ""
+            })
+        }
+    }
     
     return (
       <div className='auth'>
@@ -34,25 +66,28 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                       <h3>Welcome</h3>
                       <p>Let's do a couple of hoggish and start looking for art</p>
                   </div>
-                  <form>
+                  <form onSubmit={ handleSubmit }>
                       <div className="login-input">
-                          <Input onChange={(e) => handleChange(e)} type="email" name="email" placeholder="Email"/>
+                          <Input onFocus={ onfocus } onChange={ handleChange } type="email" name="login"
+                                 placeholder="Email"/>
                       </div>
                       <div className="login-input">
-                          <Input onChange={(e) => handleChange(e)} type="password" name="email" placeholder="Password"/>
+                          <Input onFocus={ onfocus } onChange={ handleChange } type="password" name="password"
+                                 placeholder="Password"/>
                       </div>
-                      <div className="text-end forgot-password">
-                          <p onClick={ forgotPassword } className="p-0 mb-[40px] w-max">Forgot password</p>
+                      <div className="forgot-password mb-[40px]">
+                          <span className='error m-0'>{ error ? error?.detail : '' }</span>
+                          <p onClick={ forgotPassword } className="p-0  w-max">Forgot password</p>
                       </div>
                       <div className="mb-[12px]">
-                          <Button size='full'>
+                          <Button type="submit" size='full'>
                               Sign in
                           </Button>
                       </div>
                       <div className="auth-links">
-              <span>
-                You haven't registered yet?
-              </span>
+                          <span>
+                            You haven't registered yet?
+                          </span>
                           <p onClick={ () => {
                               setIsRegister(true);
                               setIsLogin(false)
@@ -64,7 +99,8 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                           <p>or</p>
                       </div>
                       <div className="flex items-center gap-[12px]">
-                          <Button onClick={() => signIn('google')} variant={ 'outline' } className="flex items-center gap-[4px]">
+                          <Button onClick={ () => signIn('google') } variant={ 'outline' }
+                                  className="flex items-center gap-[4px]">
                               <img src="/svg/google.svg" alt="Google"/>
                               Google
                           </Button>

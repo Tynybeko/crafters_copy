@@ -89,7 +89,7 @@ form button {
 .forgot-password {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .forgot-password > p {
@@ -189,7 +189,7 @@ input.checked::before {
 .error {
   color: #F83427;
   font-size: 14px;
-  line-height: 14px;
+  line-height: 100%;
   font-weight: 300;
   margin-top: 8px;
 }

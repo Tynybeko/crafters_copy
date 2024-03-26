@@ -61,6 +61,25 @@ import { apiToken } from "@/axios";
         }));
     }
     
+    const onPasswordEdit = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        apiToken.post('/accounts/change-password/', userPassword)
+          .then(() => {
+              handleEdit('');
+              setError({});
+              setUserPassword({
+                  old_password: '',
+                  password: '',
+                  password_confirm: ''
+              })
+          })
+          .catch((error) => {
+              setError(error?.response?.data);
+          })
+    }
+     
+     console.log(data);
+    
     return (
       <div className='personal-cabinet'>
           <Box className='user'>
@@ -174,18 +193,21 @@ import { apiToken } from "@/axios";
               <form className='user-contact'>
                   <div className='user-info-item'>
                       <p>Old Password</p>
-                      <Input name={'old_password'} onChange={setUserPassword} type={'password'} value={ userPassword.old_password } disabled={ !isDisabledPassword } autoComplete={'current-password'}/>
+                      <Input name={'old_password'} onChange={onPasswordChange} type={'password'} value={ userPassword.old_password } disabled={ !isDisabledPassword }/>
+                      <span className={'error'}>{error && error.old_password ? error.old_password[0] : ''}</span>
                   </div>
                   <div className='user-info-item'>
                       <p>Password</p>
-                      <Input name={'password'} onChange={setUserPassword} type={'password'} value={ userPassword.password } disabled={ !isDisabledPassword } autoComplete={'new-password'}/>
+                      <Input name={'password'} onChange={onPasswordChange} type={'password'} value={ userPassword.password } disabled={ !isDisabledPassword }/>
+                      <span className={'error'}>{error && error.password ? error.password[0] : ''}</span>
                   </div>
                   <div className='user-info-item'>
                       <p>Password confirm</p>
-                      <Input name={'password_confirm'} onChange={setUserPassword} type={'password'} value={ userPassword.password_confirm } disabled={ !isDisabledPassword } autoComplete={'new-password'}/>
+                      <Input name={'password_confirm'} onChange={onPasswordChange} type={'password'} value={ userPassword.password_confirm } disabled={ !isDisabledPassword }/>
+                      <span className={'error'}>{error && error.password_confirm ? error.password_confirm[0] : ''}</span>
                   </div>
               </form>
-              { isDisabledPassword && <Button className='mt-4'>Save</Button> }
+              { isDisabledPassword && <Button onClick={onPasswordEdit} className='mt-4'>Save</Button> }
           </Box>
       </div>
     );

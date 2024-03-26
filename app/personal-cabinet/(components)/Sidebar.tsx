@@ -1,15 +1,28 @@
 'use client'
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useScreenWidth } from "@/lib/hooks";
 import { CustomLink } from "@/components/utils/CustomLink";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/redux/hooks";
+import { LogoutUser } from "@/redux/slices/user";
+import { fetchCompany } from "@/redux/slices/company";
 
 
 export function PersonalSidebar() {
+    const dispatch = useAppDispatch()
     const { screenWidth } = useScreenWidth();
     const pathName = usePathname()
+    
+    const handleLogout = () => {
+        dispatch(LogoutUser())
+        window.location.href = '/'
+    }
+    useEffect(() => {
+        dispatch(fetchCompany());
+    }, [dispatch]);
     return (
       <>
           { (screenWidth > 768) && <aside className="cabinet-sidebar">
@@ -147,6 +160,11 @@ export function PersonalSidebar() {
                           </div>
                       </li>
                   </ul>
+                  <div className='mt-[20px]'>
+                      <Button variant='destructiveOutline' onClick={handleLogout} className={'w-full'}>
+                          Get out
+                      </Button>
+                  </div>
               </nav>
           </aside> }
       </>
