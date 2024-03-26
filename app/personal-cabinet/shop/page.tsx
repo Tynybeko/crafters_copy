@@ -19,7 +19,6 @@ function Shop() {
     const [isDisabledAddress, setIsDisabledAddress] = useState<boolean>(false);
     const [isDisabledLocation, setIsDisabledLocation] = useState<boolean>(false);
     
-    
     const handleEdit = (text: string) => {
         setIsDisabledCompany(text === 'company');
         setIsDisabledAddress(text === 'address');
@@ -36,7 +35,6 @@ function Shop() {
             [name]: value
         }));
     }
-    
     if (!data || Object.keys(data).length === 0) {
         return <div>Data is an empty object</div>;
     }

@@ -43,7 +43,7 @@ export function HeaderItem(
     
     
     return <>
-        <Link className="logo" href="/">
+        <div className="logo">
             <button onClick={ onClick } className="w-max burger-menu">
                 { openMenu || openCatalog ? (
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
@@ -59,8 +59,8 @@ export function HeaderItem(
                   </svg>
                 ) }
             </button>
-            <img src="/logo.svg" alt="Logo"/>
-        </Link>
+            <img  src="/logo.svg" alt="Logo"/>
+        </div>
         <div className="header-catalog max-w-[135px] w-full ">
             <CatalogItems
               onClick={ onClick1 }

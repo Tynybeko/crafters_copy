@@ -3,9 +3,6 @@ import { ICompany, InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
 
-
-
-
 const initialState: InitialStateType<ICompany> = {
     data: null,
     isLoading: false,

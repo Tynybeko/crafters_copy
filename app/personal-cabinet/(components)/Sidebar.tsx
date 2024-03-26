@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useScreenWidth } from "@/lib/hooks";
 import { CustomLink } from "@/components/utils/CustomLink";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/redux/hooks";
@@ -11,9 +10,10 @@ import { LogoutUser } from "@/redux/slices/user";
 import { fetchCompany } from "@/redux/slices/company";
 
 
+//styles
+import '../personal-cabinet.css'
 export function PersonalSidebar() {
     const dispatch = useAppDispatch()
-    const { screenWidth } = useScreenWidth();
     const pathName = usePathname()
     
     const handleLogout = () => {
@@ -25,7 +25,7 @@ export function PersonalSidebar() {
     }, [dispatch]);
     return (
       <>
-          { (screenWidth > 768) && <aside className="cabinet-sidebar">
+        <aside className="cabinet-sidebar">
               <nav>
                   <ul>
                       <li>
@@ -166,7 +166,7 @@ export function PersonalSidebar() {
                       </Button>
                   </div>
               </nav>
-          </aside> }
+          </aside>
       </>
     )
 }

@@ -6,7 +6,7 @@ import { PersonalSidebar } from "@/app/personal-cabinet/(components)/Sidebar";
 
 //styles
 import "../globals.css";
-import './styles/personal-cabinet.css';
+import './personal-cabinet.css';
 import { Suspense } from "react";
 import Loading from "@/app/personal-cabinet/loading";
 

@@ -1,8 +1,12 @@
 import React from 'react'
 
+
+//styles
+import './message.css'
+import Box from "@/components/ui/Box";
 function Message() {
     return (
-      <div>Message</div>
+      <Box>Message</Box>
     )
 }
 
