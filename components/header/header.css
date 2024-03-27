@@ -129,6 +129,13 @@
 	gap: 20px;
 }
 
+.btn {
+	width: 25px;
+	height: 25px;
+	mask: url("../../public/svg/burger-menu.svg");
+	background: #1DBE60;
+}
+
 .header-icons-mobil > span {
 	width: 1px;
 	height: 100%;

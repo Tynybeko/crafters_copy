@@ -1,11 +1,12 @@
 import React from "react";
-import Link from "next/link";
 import { CatalogItems } from "@/app/catalogs/(components)/catalog-items";
 import { InputSearch } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+//styles
+import '../header.css'
 
 interface HeaderItemProps
     {
@@ -102,6 +103,8 @@ export function HeaderItem(
             <div className="w-[20px] h-[20px]">
                 <img src="/svg/heart.svg" alt="Heart"/>
             </div>
+            <button className='btn'/>
+            
             <span></span>
             <div className="w-[20px] h-[20px]">
                 <img src="/svg/shopping-bag.svg" alt="Heart"/>
