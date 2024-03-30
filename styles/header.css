@@ -135,7 +135,7 @@
 .btn {
   width: 25px;
   height: 25px;
-  mask: url("../../public/svg/burger-menu.svg");
+  mask: url("../public/svg/burger-menu.svg");
   background: #1dbe60;
 }
 

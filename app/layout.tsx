@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/layout/Header";
 import type { ReactNode } from "react";
 import StoreProvider from "@/providers/storeProvider";
 import localFont from 'next/font/local';
