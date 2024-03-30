@@ -72,11 +72,6 @@
 .logo {
   display: flex;
   gap: 24px;
-  width: 132px;
-  @media (max-width: 768px) {
-    width: 96px;
-    height: 32px;
-  }
 }
 
 .logo > img {
@@ -85,8 +80,6 @@
 }
 
 .header-icons {
-  width: 240px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,6 +91,61 @@
   height: 100%;
   background: #262d291a;
   opacity: 0.3;
+}
+
+.header-icons ul {
+  display: flex;
+  align-items: center;
+}
+
+.header-icons ul li {
+  width: 84px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-icons ul li a {
+  position: relative;
+}
+
+.header-icons ul li a img {
+  width: 20px;
+  height: 20px;
+}
+
+.counter {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  background: #1dbe60;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 8px 0px #00000033;
+}
+
+.header-icons ul li::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: #000;
+  left: 0%;
+  transform: translateX(-50%);
+  opacity: 0.1;
 }
 
 .burger-menu {
@@ -132,18 +180,11 @@
   gap: 20px;
 }
 
-.btn {
-  width: 25px;
-  height: 25px;
-  mask: url("../public/svg/burger-menu.svg");
-  background: #1dbe60;
-}
-
 .header-icons-mobil > span {
   width: 1px;
   height: 100%;
   background: #262d291a;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .mobile-menu {

@@ -63,29 +63,29 @@ const Header = () => {
 
     return (
         <>
-            <MobileMenu setIsLogin={ setIsLogin } isAuthUser={ isAuthUser } setIsOpenCatalog={ setIsOpenCatalog }
-                        close={ () => setIsOpenMenu(false) } open={ isOpenMenu }/>
-            <Catalog setIsOpenMenu={ setIsOpenMenu } setIsOpenCatalog={ setIsOpenCatalog }
-                     isOpenCatalog={ isOpenCatalog }/>
-            <Auth isLogin={ isLogin } setIsLogin={ setIsLogin }/>
+            <MobileMenu setIsLogin={setIsLogin} isAuthUser={isAuthUser} setIsOpenCatalog={setIsOpenCatalog}
+                close={() => setIsOpenMenu(false)} open={isOpenMenu} />
+            <Catalog setIsOpenMenu={setIsOpenMenu} setIsOpenCatalog={setIsOpenCatalog}
+                isOpenCatalog={isOpenCatalog} />
+            <Auth isLogin={isLogin} setIsLogin={setIsLogin} />
             <header className='header'>
-                <HeaderTop/>
+                <HeaderTop />
                 <div className='globalContainer'>
                     <div className='header-item'>
                         <HeaderItem
-                          onClick={ () => {
-                              setIsOpenMenu(!isOpenMenu);
-                              closeCatalog();
-                          } }
-                          openMenu={ isOpenMenu }
-                          openCatalog={ isOpenCatalog }
-                          dropdownRef={ dropdownRef }
-                          onClick1={ handleButtonClick }
-                          onMouseEnter={ handleMouseEnter }
-                          onMouseLeave={ handleMouseLeave }
-                          openDrop={ isOpenDrop }
-                          isAuthUser={ isAuthUser }
-                          onClick2={ () => setIsLogin(prev => !prev) }
+                            onClick={() => {
+                                setIsOpenMenu(!isOpenMenu);
+                                closeCatalog();
+                            }}
+                            openMenu={isOpenMenu}
+                            openCatalog={isOpenCatalog}
+                            dropdownRef={dropdownRef}
+                            onClick1={handleButtonClick}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            openDrop={isOpenDrop}
+                            isAuthUser={isAuthUser}
+                            onClick2={() => setIsLogin(prev => !prev)}
                         />
                     </div>
                 </div>
@@ -98,20 +98,22 @@ export default Header;
 
 
 function HeaderTop() {
-    return <div className="decor">
-        <div className="globalContainer">
-            <div className="decor-header">
-                <div className="phone">
-                    <p>+ 000 000 00 00</p>
-                    <p>+ 000 000 00 00</p>
+    return (
+        <div className="decor">
+            <div className="globalContainer">
+                <div className="decor-header">
+                    <div className="phone">
+                        <p>+ 000 000 00 00</p>
+                        <p>+ 000 000 00 00</p>
+                    </div>
+                    <ul className="lists">
+                        <li><Link href={"/discount"}>Discount</Link></li>
+                        <li><Link href={"/payment"}>Payment</Link></li>
+                        <li><Link href={"/delivery"}>Delivery</Link></li>
+                        <li><Link href={"/contact"}>Contact</Link></li>
+                    </ul>
                 </div>
-                <ul className="lists">
-                    <li><Link href={ "/discount" }>Discount</Link></li>
-                    <li><Link href={ "/payment" }>Payment</Link></li>
-                    <li><Link href={ "/delivery" }>Delivery</Link></li>
-                    <li><Link href={ "/contact" }>Contact</Link></li>
-                </ul>
             </div>
         </div>
-    </div>;
+    );
 }
