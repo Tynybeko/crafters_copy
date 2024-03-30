@@ -4,7 +4,8 @@ import React from 'react'
 //styles
 import './message.css'
 import Box from "@/components/ui/Box";
-import { Input, InputSearch } from "@/components/ui/input";
+import { InputSearch } from "@/components/ui/input";
+
 function Message() {
     return (
       <Box className='message'>
