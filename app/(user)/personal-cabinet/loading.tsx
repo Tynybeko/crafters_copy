@@ -1,6 +1,7 @@
 import React from "react";
 
-import '../globals.css';
+import '../../globals.css';
+
 function LoadingSkeleton() {
     return (
         <div className="loading">

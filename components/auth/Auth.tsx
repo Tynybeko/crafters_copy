@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ForgotPassword from "@/components/auth/ForgotPaswword";
+import { ForgotPassword } from "@/components/auth/ForgotPaswword";
 import Login from "@/components/auth/Login";
 import Register from "@/components/auth/Register";
 

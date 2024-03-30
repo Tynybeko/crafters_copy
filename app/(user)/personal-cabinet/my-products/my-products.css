@@ -1,0 +1,23 @@
+.my-products {
+
+}
+
+.my-products-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 40px;
+}
+
+.my-products-title > h1 {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 100%;
+}
+
+.my-products-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+}

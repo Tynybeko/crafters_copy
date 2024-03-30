@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { CatalogItems } from "@/app/catalogs/(components)/catalog-items";
 import { InputSearch } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -38,10 +38,6 @@ export function HeaderItem(
 
     const path = useRouter()
     const localStorage = typeof window !== 'undefined' ? window.localStorage.getItem('token') : null;
-
-    const handleToPage = () => {
-        path.push('/personal-cabinet')
-    }
 
     return (
         <>
@@ -94,13 +90,13 @@ export function HeaderItem(
             </div>
             <div className="header-icons">
                 {isAuthUser && localStorage !== null ? (
-                    <button onClick={handleToPage} className="flex items-center gap-2 h-[20px]">
+                    <button onClick={() => path.push('/personal-cabinet')} className="flex items-center gap-2 h-[20px]">
                         <img src="/svg/user.svg" alt="User" />
                         Profile
                     </button>
                 ) : (
                     <Button onClick={onClick2} className="w-[77px] shadow-custom">
-                        Signin
+                        Sign in
                     </Button>
                 )}
                 <ul>
@@ -139,7 +135,6 @@ export function HeaderItem(
             </div>
         </>
     );
-
 }
 
 function Counter({ count }: any) {

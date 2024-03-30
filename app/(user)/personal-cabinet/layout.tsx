@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import NextBreadcrumb from "@/components/utils/Breascrumb";
-import { PersonalSidebar } from "@/app/personal-cabinet/(components)/Sidebar";
+import { PersonalSidebar } from "@/app/(user)/personal-cabinet/(components)/Sidebar";
 
 
 //styles
-import "../globals.css";
+import "../../globals.css";
 import './personal-cabinet.css';
-import { Suspense } from "react";
-import Loading from "@/app/personal-cabinet/loading";
+import Loading from "@/app/(user)/personal-cabinet/loading";
 
 export const metadata : Metadata = {
     title: "Personal cabinet",
@@ -33,7 +33,7 @@ export default function PersonalCabinetLayout({ children } : Readonly<{
                   />
               </div>
               <main className='flex !mt-[20px] md:mt-[40px]'>
-                  <div className='globalContainer flex justify-between gap-[20px]'>
+                  <div className='globalContainer flex justify-between gap-[48px]'>
                       <PersonalSidebar/>
                       <div className='max-w-[1080px] w-full'>
                           { children }

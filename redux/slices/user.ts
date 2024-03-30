@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/redux/hooks";
 
 
 export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
+  '(user)/fetchUser',
   async () => {
       const response = await apiToken.get('/accounts/profile/', )
       try {
@@ -58,7 +58,7 @@ const userSlice = createSlice({
               state.isAuth = true;
               state.isError = false;
           })
-          .addCase(fetchUser.rejected, (state, action) => {
+          .addCase(fetchUser.rejected, (state) => {
               state.isLoading = false;
               state.isError = true;
               state.data = null

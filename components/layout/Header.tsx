@@ -2,10 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from "next/link";
 
-import ForgotPassword from '../auth/ForgotPaswword';
 import { MobileMenu } from "../mobile-menu";
-import Login from '../auth/Login';
-import Register from '../auth/Register';
 import { HeaderItem } from "@/components/layout/HeaderItem";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUser } from "@/redux/slices/user";

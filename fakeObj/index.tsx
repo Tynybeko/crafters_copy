@@ -38,7 +38,8 @@ export const ProductData = [
         price   : 40,
         oldPrice: 52,
         isNew   : true,
-        raiting : 4
+        raiting : 4,
+        popular: true
     },
     {
         id      : 2,
@@ -46,8 +47,9 @@ export const ProductData = [
         img     : '/images/product1.png',
         price   : 40,
         oldPrice: 52,
-        isNew   : true,
-        raiting : 2
+        isNew   : false,
+        raiting : 2,
+        popular: true
     },
     {
         id      : 3,
@@ -56,7 +58,8 @@ export const ProductData = [
         price   : 40,
         oldPrice: 52,
         isNew   : true,
-        raiting : 3
+        raiting : 3,
+        popular: true
     },
     {
         id      : 4,

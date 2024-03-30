@@ -86,3 +86,22 @@
 	text-decoration: line-through;
 	opacity: .4;
 }
+
+.status-product {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 12px;
+}
+
+.status-product > div {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 100%;
+	color: #1DBE60;
+	border: 1px solid #1DBE60;
+	padding: 8px 16px;
+	gap: 4px;
+	border-radius: 32px;
+	box-shadow: 4px 4px 12px 0 #00000033;
+}
