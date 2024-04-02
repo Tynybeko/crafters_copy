@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 
@@ -6,69 +6,78 @@ import { Button } from "@/components/ui/button";
 
 //style
 import './catalog-items.css'
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchItemCategories } from "@/redux/slices/item-categories";
+import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 
-export function CatalogItems(props: { onClick: () => void, onMouseEnter: () => void, onMouseLeave: () => void, openDrop: boolean }) {
-    const [catalogData, setCatalogData] = useState<string[]>([]);
-    const [currentCatalog, setCurrentCatalog] = useState<string | null>(null);
-
-    const handleCatalogHover = (catalog: string) => {
-        switch (catalog) {
-            case "Catalog1":
-                setCatalogData(["Data for Catalog1"]);
-                break;
-            case "Catalog2":
-                setCatalogData(["Data for Catalog2"]);
-                break;
-            case "Catalog3":
-                setCatalogData(["Data for Catalog3"]);
-                break;
-            case "Catalog4":
-                setCatalogData(["Data for Catalog4"]);
-                break;
-            default:
-                setCatalogData([]);
+export function CatalogItems(props : {
+    onClick : () => void,
+    onMouseEnter : () => void,
+    onMouseLeave : () => void,
+    openDrop : boolean
+}) {
+    const dispatch = useAppDispatch()
+    const [ catalogData, setCatalogData ] = useState<string[]>([]);
+    const { data: categories } = useAppSelector(state => state.categories)
+    const { data: subcategories } = useAppSelector(state => state.subCategories)
+    const [ categoryId, setCategoryId ] = useState<any>();
+    
+    useEffect(() => {
+        dispatch(fetchItemCategories())
+    }, [ dispatch ]);
+    
+    useEffect(() => {
+        if(categoryId){
+            dispatch(fetchItemSubcategories({ categoryId }))
         }
-        setCurrentCatalog(catalog);
-    };
-
+    }, [ dispatch, categoryId ]);
+    
+    const handleCatalogHover = (id : any) => setCategoryId(id)
+    
     return (
-        <div >
-            <Link href={'/catalogs'}>
-                <Button onClick={props.onClick} onMouseEnter={props.onMouseEnter}
-                    onMouseLeave={props.onMouseLeave}>Catalog
-                    <svg className="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 10 6">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
-                </Button>
-            </Link>
-            <>
-                <div className={props.openDrop ? 'fonCatalog fonCatalog-active' : 'fonCatalog'}
-                    onMouseEnter={props.onMouseLeave} />
-                <div
-                    onMouseEnter={props.onMouseEnter}
-                    className={props.openDrop ? "catalog-menu  catalog-menu-active" : "catalog-menu"}
-                    onMouseLeave={props.onMouseLeave}>
-                    <div className='catalog-menu-lists'>
-                        <button onMouseEnter={() => handleCatalogHover("Catalog1")}>
-                            Catalog1
+      <div>
+          <Link href={ '/catalogs' }>
+              <Button onClick={ props.onClick } onMouseEnter={ props.onMouseEnter }
+                      onMouseLeave={ props.onMouseLeave }>Catalog
+                  <svg className="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                       viewBox="0 0 10 6">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                            d="m1 1 4 4 4-4"/>
+                  </svg>
+              </Button>
+          </Link>
+          <div className={ props.openDrop ? 'fonCatalog fonCatalog-active' : 'fonCatalog' }
+               onMouseEnter={ props.onMouseLeave }/>
+          <>
+              <div
+                onMouseEnter={ props.onMouseEnter }
+                className={ props.openDrop ? "catalog-menu  catalog-menu-active" : "catalog-menu " }
+                onMouseLeave={ props.onMouseLeave }>
+                  <div className='catalog-menu-lists'>
+                      { categories?.map((item : any) => (
+                        <button className={'text-left'} key={ item.id } onMouseEnter={ () => handleCatalogHover(item.id) }>
+                            { item.name }
                         </button>
-                    </div>
-                    <div className='catalog-menu-items'>
-                        <h3>
-                            Catalog1
-                        </h3>
-                        {currentCatalog === "Catalog1" && (
-                            <div>
-                                {catalogData.map((item, index) => (
-                                    <div key={index}>{item}</div>
-                                ))}
+                      )) }
+                  </div>
+                  <div className='catalog-menu-items'>
+                      <h3>
+                          Catalog
+                      </h3>
+                      <div className={'sub_catalog-cards'}>
+                          { subcategories?.map((item, index) => (
+                            <div className={'cart-subcategory'} key={ item.id }>
+                                <div className={'cart-subcategory-item'}>
+                                    <img src={item.image ? item.image : "/images/sub-category.png" } alt="Image"/>
+                                    <span>{ item.name }</span>
+                                </div>
                             </div>
-                        )}
-                    </div>
-                </div>
-            </>
-        </div>
+                          )) }
+                      </div>
+                  </div>
+              </div>
+          
+          </>
+      </div>
     );
 }

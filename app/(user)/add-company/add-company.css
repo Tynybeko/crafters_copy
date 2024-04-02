@@ -1,0 +1,144 @@
+.add-company {
+	margin-top: 36px;
+}
+
+.add-company-stages {
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+}
+
+.add-company-stages-page {
+	margin-bottom: 24px;
+}
+
+.add-company-checkbox {
+	display: flex;
+	align-items: center;
+}
+
+.add-company-stage {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 18px;
+	text-align: center;
+	color: #262D2999;
+	cursor: pointer;
+	width: 100%;
+}
+
+.add-company-stage:after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 2px;
+	background: #D9D9D9;
+	margin-top: 16px;
+}
+
+.add-company-stage-active {
+	color: #262D29;
+}
+
+.add-company-stage-active:after {
+	transition: all 0.3s ease;
+	background: #00C48C;
+	height: 2px;
+	color: #262D29;
+}
+
+.add-company-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.add-company-footer-btn {
+	max-width: 416px;
+	width: 100%;
+}
+
+/*ADD COMPANY STAGE 1*/
+.add-company-stage1-boxes {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(410px, 1fr));
+	gap: 24px;
+}
+
+.add-company-stage1-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 100%;
+	color: #262D2999;
+	margin-bottom: 21px;
+}
+
+.add-company-stage1-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.add-company-stage1-form > label > p {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	color: #262D2999;
+margin-left: 24px;
+	margin-bottom: 8px;
+}
+
+.add-company-stage1-box1 {
+	width: 100%;
+	height: 316px;
+}
+
+.add-company-stage1-box2, .add-company-stage1-box3 {
+	padding: 24px;
+}
+
+.add-company-stage1-box3 {
+
+}
+
+.add-company-checkbox-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #262D29;
+	margin-left: 24px;
+}
+
+
+
+/*ADD COMPANY STAGE 2*/
+.add-company-stage2 {
+	padding: 24px;
+}
+
+.add-company-stage2 > h1 {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 100%;
+	color: #262D2999;
+	margin-bottom: 26px;
+}
+
+.add-company-stage2 p {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 130%;
+	text-align: left;
+	color: #262D29;
+	margin-bottom: 26px;
+}

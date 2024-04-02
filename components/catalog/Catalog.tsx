@@ -3,8 +3,12 @@
 //STYLES
 import './catalog.css'
 import { useScreenWidth } from "@/lib/hooks";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from '@/components/ui/button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchItemCategories } from "@/redux/slices/item-categories";
+import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 
 
 const catalogData = [
@@ -32,7 +36,24 @@ const catalogData = [
 ]
 
 const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpenMenu: any, isOpenCatalog: boolean, setIsOpenCatalog: any }) => {
+    const dispatch = useAppDispatch()
     const { screenWidth } = useScreenWidth()
+    const [categoryId, setCategoryId] = useState<number>(1);
+    const { data: categories } = useAppSelector(state => state.categories)
+    const { data: subcategories } = useAppSelector(state => state.subCategories)
+    const handleCatalogHover = (id : any) => setCategoryId(id)
+    useEffect(() => {
+        dispatch(fetchItemCategories())
+    }, [ dispatch ]);
+    
+    
+    useEffect(() => {
+        if(categoryId){
+            dispatch(fetchItemSubcategories({ categoryId }))
+        }
+    }, []);
+    
+    
     return (
         <>
             <div
@@ -49,20 +70,20 @@ const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpen
                                 Back
                             </Button>
                         ) : null}
-                        <ul className='catalog-list'>
-                            {catalogData.map(item => (
-                                <li key={item.id}>
-                                    <button>{item.name}
-                                        {screenWidth <= 768 && (
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#262D29" strokeOpacity="0.6"
-                                                    strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        )}
-                                    </button>
-                                </li>))}
-                        </ul>
+                        <Accordion type="single" collapsible className="w-full">
+                            {categories?.map((item : any) => (
+                                <AccordionItem onMouseEnter={() => handleCatalogHover(item.id)} value={item.id} key={item.id}>
+                                    <AccordionTrigger>{item.name}</AccordionTrigger>
+                                    {subcategories?.map((item : any) => (
+                                        <AccordionContent key={item.id}>
+                                           <div>
+                                               {item.name}
+                                           </div>
+                                        </AccordionContent>
+                                    ))}
+                                </AccordionItem>
+                            ))}
+                        </Accordion>
                     </div>
                     <div className={'mobile-catalog-list-items'}>
 

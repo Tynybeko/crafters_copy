@@ -3,9 +3,9 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>
-    {
-    }
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+    image?: string
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -52,4 +52,30 @@ const InputSearch = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = "InputSearch"
 
-export { Input, InputSearch }
+const InputFile = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, image, children, type, ...props }, ref) => {
+      return (
+        <label style={ {
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundImage: image ? `url(${ image })` : 'url("/images/no-photo.png")',
+        }} className={ cn(
+          "border w-[100%] h-[100%] border-input rounded-[32px] flex items-center gap-[12px]",
+          className
+        ) }>
+            <input
+              type={ "file" }
+              hidden
+              ref={ ref }
+              { ...props }
+            />
+            { children }
+        </label>
+      
+      )
+  }
+)
+Input.displayName = "InputFile"
+
+export { Input, InputSearch, InputFile }

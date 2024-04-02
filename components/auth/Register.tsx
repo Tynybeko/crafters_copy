@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from '../ui/input';
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { api, apiToken } from "@/axios";
+import { useAppDispatch } from "@/redux/hooks";
+import { api } from "@/axios";
 import { RegisterUser } from "@/redux/slices/user";
+import MiniLoading from "@/components/mini-loading/MiniLoading";
 
 interface userType {
   email: string
@@ -16,6 +17,7 @@ interface userType {
 const Register = ({ setIsLogin, setIsRegister } : any) => {
     const dispatch = useAppDispatch()
     const [ isChecked, setIsChecked ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false)
     const [ userData, setUserData ] = useState<userType>({
         email          : '',
         password       : '',
@@ -61,6 +63,7 @@ const Register = ({ setIsLogin, setIsRegister } : any) => {
     }
     
     const handleSubmit = (e: any) => {
+        setIsLoading(true)
         e.preventDefault()
         api.post('/accounts/register/', {
             email          : userData.email,
@@ -71,9 +74,11 @@ const Register = ({ setIsLogin, setIsRegister } : any) => {
                 localStorage.setItem('token', res.data.token)
                 setIsRegister(false);
                 setIsLogin(false);
+                setIsLoading(false)
             })
             .catch(err => {
                 console.log(err)
+                setIsLoading(false)
             })
     }
     
@@ -110,7 +115,7 @@ const Register = ({ setIsLogin, setIsRegister } : any) => {
                             placeholder="Password"/>
                           {error.password && <span className='err'>{error.password}</span>}
                       </div>
-                      <div className="login-input mb-[33px]">
+                      <div className="login-input !mb-[40px]">
                           <Input
                             value={ userData.confirmPassword }
                             onChange={ onInputChange }
@@ -124,13 +129,22 @@ const Register = ({ setIsLogin, setIsRegister } : any) => {
                           <label>
                               <input className={ isChecked ? "checked" : "" }
                                      onChange={ () => setIsChecked(prev => !prev) } type="checkbox"
-                                     checked={ isChecked }/>
+                                     checked={ isChecked } hidden />
+                              {isChecked ? (
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.9987 7.99967L6.9987 9.99967L10.9987 5.99967M14.6654 7.99967C14.6654 11.6816 11.6806 14.6663 7.9987 14.6663C4.3168 14.6663 1.33203 11.6816 1.33203 7.99967C1.33203 4.31778 4.3168 1.33301 7.9987 1.33301C11.6806 1.33301 14.6654 4.31778 14.6654 7.99967Z" stroke="#1DBE60" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                              ):(
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.9987 14.6663C11.6806 14.6663 14.6654 11.6816 14.6654 7.99967C14.6654 4.31778 11.6806 1.33301 7.9987 1.33301C4.3168 1.33301 1.33203 4.31778 1.33203 7.99967C1.33203 11.6816 4.3168 14.6663 7.9987 14.6663Z" stroke="#262D29" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                              )}
                               <span>Confidentiality policy</span>
                           </label>
                       </div>
                       <div className="mb-[12px]">
-                          <Button type={'submit'} disabled={ !isChecked } size='full'>
-                              Registration
+                          <Button variant={isChecked ? 'default' : 'outline'} type={'submit'} disabled={ !isChecked } size='full'>
+                              { isLoading ? <MiniLoading /> : 'Registration'}
                           </Button>
                       </div>
                       <div className="auth-links">

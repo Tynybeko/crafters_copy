@@ -116,7 +116,7 @@ form button {
   height: 16px;
   border-radius: 50%;
   margin-right: 0.5em;
-  border: 0.15em solid  #262D2966;
+  border: 1px solid  #262D2966;
   outline: none;
   cursor: pointer;
   padding: 4px;
@@ -128,10 +128,6 @@ form button {
   cursor: pointer;
 }
 
-input.checked {
-  background-color: #1dbe60;
-  position: relative;
-}
 
 input.checked::before {
   content: "";
@@ -147,6 +143,7 @@ input.checked::before {
   font-weight: 300;
   line-height: 14px;
   text-decoration: underline;
+  margin-left: 8px;
 }
 
 .checkbox-wrapper input[type="checkbox"]:disabled {

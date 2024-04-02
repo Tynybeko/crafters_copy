@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '@/redux/hooks';
 import Box from '@/components/ui/Box';
-import { ICompany } from '@/types';
-
-// styles
-import './shop.css';
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-function Shop() {
+import { ICompany } from '@/types';
+// styles
+import './shop.css';
+import Link from "next/link";
+
+const  Shop = () => {
     const { data } = useAppSelector((state) => state.company);
     const [inputData, setInputData] = useState<ICompany | null>(data)
 
@@ -38,7 +38,6 @@ function Shop() {
     if (!data || Object.keys(data).length === 0) {
         return <div>Data is an empty object</div>;
     }
-    console.log(data)
     
     return (
         <div className='shop'>
@@ -50,7 +49,7 @@ function Shop() {
                                 {data.legal_name}
                             </div>
                             <div className='shop-card-url'>
-                                <Link href={data.site_url}>{data.site_url}</Link>
+                                <Link href={data.site_url ? data.site_url : '#'}>{data.site_url}</Link>
                             </div>
                         </div>
                         <div className='shop-card-body'>
@@ -170,7 +169,7 @@ function Shop() {
                             </div>
                             <div className='user-info-item'>
                                 <p>City</p>
-                                <Input name={'legal_address'} value={inputData?.city} onChange={onInputChange} disabled={!isDisabledLocation} />
+                                <Input name={'legal_address'} value={inputData?.city ? inputData?.city : ''} onChange={onInputChange} disabled={!isDisabledLocation} />
                             </div>
                             <div className='user-info-item'>
                                 <p>Index</p>

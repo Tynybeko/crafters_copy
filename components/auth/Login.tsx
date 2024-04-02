@@ -6,9 +6,10 @@ import { Input } from "../ui/input";
 //styles
 import './auth.css'
 import { signIn } from "next-auth/react";
-import { api, apiToken } from "@/axios";
+import { api } from "@/axios";
 import { useAppDispatch } from "@/redux/hooks";
 import { fetchUser, LoginUser } from "@/redux/slices/user";
+import MiniLoading from "../mini-loading/MiniLoading";
 
 const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
     const dispatch = useAppDispatch()
@@ -16,6 +17,7 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
     const [ error, setError ] = useState({
         detail: ""
     })
+    const [ isLoading, setIsLoading ] = useState(false)
     
     const forgotPassword = () => {
         setIsForgotPassword(true);
@@ -32,6 +34,7 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
     }
     
     const handleSubmit = (e : any) => {
+        setIsLoading(true)
         e.preventDefault();
         api.post('/accounts/login/', userData)
           .then(res => {
@@ -42,9 +45,11 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
               })
               dispatch(fetchUser())
               setIsLogin(false)
+              setIsLoading(false)
           })
           .catch(err => {
               setError(err?.response?.data)
+              setIsLoading(false)
           })
     }
     
@@ -81,7 +86,7 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                       </div>
                       <div className="mb-[12px]">
                           <Button type="submit" size='full'>
-                              Sign in
+                              { isLoading ? <MiniLoading /> : 'Sign in'}
                           </Button>
                       </div>
                       <div className="auth-links">

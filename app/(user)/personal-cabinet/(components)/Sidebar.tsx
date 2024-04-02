@@ -2,10 +2,10 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { CustomLink } from "@/components/utils/CustomLink";
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { LogoutUser } from "@/redux/slices/user";
 import { fetchCompany } from "@/redux/slices/company";
 
@@ -16,15 +16,20 @@ import '../personal-cabinet.css'
 export function PersonalSidebar() {
     const dispatch = useAppDispatch()
     const pathName = usePathname()
-    
+    const router = useRouter();
+    const { data} = useAppSelector(state => state.user)
     
     const handleLogout = () => {
         dispatch(LogoutUser())
         window.location.href = '/'
     }
     useEffect(() => {
-        dispatch(fetchCompany());
-    }, [dispatch]);
+        if(data && data.role !== 'client'){
+            dispatch(fetchCompany());
+        }
+    }, [dispatch, data]);
+    
+    
     return (
       <>
         <aside className="cabinet-sidebar">
@@ -102,47 +107,49 @@ export function PersonalSidebar() {
                               <span>21</span>
                           </div>
                       </li>
-                       <li>
-                          <div className={ 'flex items-center justify-between' }>
-                              <CustomLink href="/personal-cabinet/shop"
-                                          active={ pathName === "/personal-cabinet/shop" }>
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                       xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                        d="M6.2513 9.16667H3.83464C3.36792 9.16667 3.13457 9.16667 2.95631 9.25749C2.79951 9.33739 2.67202 9.46487 2.59213 9.62167C2.5013 9.79993 2.5013 10.0333 2.5013 10.5V17.5M13.7513 9.16667H16.168C16.6347 9.16667 16.868 9.16667 17.0463 9.25749C17.2031 9.33739 17.3306 9.46487 17.4105 9.62167C17.5013 9.79993 17.5013 10.0333 17.5013 10.5V17.5M13.7513 17.5V5.16667C13.7513 4.23325 13.7513 3.76654 13.5696 3.41002C13.4099 3.09641 13.1549 2.84144 12.8413 2.68166C12.4848 2.5 12.0181 2.5 11.0846 2.5H8.91797C7.98455 2.5 7.51784 2.5 7.16132 2.68166C6.84771 2.84144 6.59275 3.09641 6.43296 3.41002C6.2513 3.76654 6.2513 4.23325 6.2513 5.16667V17.5M18.3346 17.5H1.66797M9.16797 5.83333H10.8346M9.16797 9.16667H10.8346M9.16797 12.5H10.8346"
-                                        stroke="#262D2999" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                  </svg>
-                                  Shop
-                              </CustomLink>
-                          </div>
-                          <div className={ 'flex items-center justify-between' }>
-                              <Link className={ pathName === "/personal-cabinet/orders" ? "active" : "" }
-                                    href={ "/personal-cabinet/orders" }>
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                       xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                        d="M10.8346 5.83333L9.90502 3.9741C9.63747 3.439 9.50369 3.17144 9.30411 2.97597C9.12762 2.80311 8.91491 2.67164 8.68136 2.59109C8.41727 2.5 8.11814 2.5 7.51988 2.5H4.33464C3.40121 2.5 2.9345 2.5 2.57798 2.68166C2.26438 2.84144 2.00941 3.09641 1.84962 3.41002C1.66797 3.76654 1.66797 4.23325 1.66797 5.16667V5.83333M1.66797 5.83333H14.3346C15.7348 5.83333 16.4348 5.83333 16.9696 6.10582C17.44 6.3455 17.8225 6.72795 18.0622 7.19836C18.3346 7.73314 18.3346 8.4332 18.3346 9.83333V13.5C18.3346 14.9001 18.3346 15.6002 18.0622 16.135C17.8225 16.6054 17.44 16.9878 16.9696 17.2275C16.4348 17.5 15.7348 17.5 14.3346 17.5H5.66797C4.26784 17.5 3.56777 17.5 3.03299 17.2275C2.56259 16.9878 2.18014 16.6054 1.94045 16.135C1.66797 15.6002 1.66797 14.9001 1.66797 13.5V5.83333ZM7.5013 11.6667L9.16797 13.3333L12.918 9.58333"
-                                        stroke="#262D29" strokeOpacity="0.6" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                  </svg>
-                                  Orders
-                              </Link>
-                          </div>
-                          <div className={ 'flex items-center justify-between' }>
-                              <Link className={ pathName === "/personal-cabinet/my-products" ? "active" : "" }
-                                    href={ "/personal-cabinet/my-products" }>
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                       xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                        d="M17.0833 6.06527L9.99997 10.0005M9.99997 10.0005L2.91664 6.06527M9.99997 10.0005L10 17.9171M11.6667 17.4079L10.6475 17.9741C10.4112 18.1054 10.293 18.171 10.1679 18.1968C10.0571 18.2195 9.94288 18.2195 9.83213 18.1968C9.70698 18.171 9.58881 18.1054 9.35248 17.9741L3.18581 14.5481C2.93621 14.4095 2.8114 14.3401 2.72053 14.2415C2.64013 14.1543 2.57929 14.0509 2.54207 13.9382C2.5 13.8109 2.5 13.6681 2.5 13.3826V6.61835C2.5 6.33281 2.5 6.19005 2.54207 6.06271C2.57929 5.95007 2.64013 5.84667 2.72053 5.75942C2.8114 5.66081 2.93621 5.59148 3.18581 5.45281L9.35248 2.02688C9.58881 1.89558 9.70698 1.82993 9.83213 1.80419C9.94288 1.78141 10.0571 1.78141 10.1679 1.80419C10.293 1.82993 10.4112 1.89558 10.6475 2.02688L16.8142 5.4528C17.0638 5.59147 17.1886 5.66081 17.2795 5.75942C17.3599 5.84666 17.4207 5.95007 17.4579 6.06271C17.5 6.19004 17.5 6.33281 17.5 6.61835L17.5 10.4171M6.25 3.75048L13.75 7.91714M13.3333 15.0005L15 16.6671L18.3333 13.3338"
-                                        stroke="#262D29" strokeOpacity="0.6" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                  </svg>
-                                  My products
-                              </Link>
-                          </div>
-                      </li>
+                      {data?.role !== "client" && (
+                        <li>
+                            <div className={ 'flex items-center justify-between' }>
+                                <CustomLink href={ "/personal-cabinet/shop" }
+                                            active={ pathName === "/personal-cabinet/shop" }>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M6.2513 9.16667H3.83464C3.36792 9.16667 3.13457 9.16667 2.95631 9.25749C2.79951 9.33739 2.67202 9.46487 2.59213 9.62167C2.5013 9.79993 2.5013 10.0333 2.5013 10.5V17.5M13.7513 9.16667H16.168C16.6347 9.16667 16.868 9.16667 17.0463 9.25749C17.2031 9.33739 17.3306 9.46487 17.4105 9.62167C17.5013 9.79993 17.5013 10.0333 17.5013 10.5V17.5M13.7513 17.5V5.16667C13.7513 4.23325 13.7513 3.76654 13.5696 3.41002C13.4099 3.09641 13.1549 2.84144 12.8413 2.68166C12.4848 2.5 12.0181 2.5 11.0846 2.5H8.91797C7.98455 2.5 7.51784 2.5 7.16132 2.68166C6.84771 2.84144 6.59275 3.09641 6.43296 3.41002C6.2513 3.76654 6.2513 4.23325 6.2513 5.16667V17.5M18.3346 17.5H1.66797M9.16797 5.83333H10.8346M9.16797 9.16667H10.8346M9.16797 12.5H10.8346"
+                                          stroke="#262D2999" strokeWidth="1.5" strokeLinecap="round"
+                                          strokeLinejoin="round"/>
+                                    </svg>
+                                    Shop
+                                </CustomLink>
+                            </div>
+                            <div className={ 'flex items-center justify-between' }>
+                                <Link className={ pathName === "/personal-cabinet/orders" ? "active" : "" }
+                                      href={ "/personal-cabinet/orders" }>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M10.8346 5.83333L9.90502 3.9741C9.63747 3.439 9.50369 3.17144 9.30411 2.97597C9.12762 2.80311 8.91491 2.67164 8.68136 2.59109C8.41727 2.5 8.11814 2.5 7.51988 2.5H4.33464C3.40121 2.5 2.9345 2.5 2.57798 2.68166C2.26438 2.84144 2.00941 3.09641 1.84962 3.41002C1.66797 3.76654 1.66797 4.23325 1.66797 5.16667V5.83333M1.66797 5.83333H14.3346C15.7348 5.83333 16.4348 5.83333 16.9696 6.10582C17.44 6.3455 17.8225 6.72795 18.0622 7.19836C18.3346 7.73314 18.3346 8.4332 18.3346 9.83333V13.5C18.3346 14.9001 18.3346 15.6002 18.0622 16.135C17.8225 16.6054 17.44 16.9878 16.9696 17.2275C16.4348 17.5 15.7348 17.5 14.3346 17.5H5.66797C4.26784 17.5 3.56777 17.5 3.03299 17.2275C2.56259 16.9878 2.18014 16.6054 1.94045 16.135C1.66797 15.6002 1.66797 14.9001 1.66797 13.5V5.83333ZM7.5013 11.6667L9.16797 13.3333L12.918 9.58333"
+                                          stroke="#262D29" strokeOpacity="0.6" strokeWidth="1.5" strokeLinecap="round"
+                                          strokeLinejoin="round"/>
+                                    </svg>
+                                    Orders
+                                </Link>
+                            </div>
+                            <div className={ 'flex items-center justify-between' }>
+                                <Link className={ pathName === "/personal-cabinet/my-products" ? "active" : "" }
+                                      href={ "/personal-cabinet/my-products" }>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M17.0833 6.06527L9.99997 10.0005M9.99997 10.0005L2.91664 6.06527M9.99997 10.0005L10 17.9171M11.6667 17.4079L10.6475 17.9741C10.4112 18.1054 10.293 18.171 10.1679 18.1968C10.0571 18.2195 9.94288 18.2195 9.83213 18.1968C9.70698 18.171 9.58881 18.1054 9.35248 17.9741L3.18581 14.5481C2.93621 14.4095 2.8114 14.3401 2.72053 14.2415C2.64013 14.1543 2.57929 14.0509 2.54207 13.9382C2.5 13.8109 2.5 13.6681 2.5 13.3826V6.61835C2.5 6.33281 2.5 6.19005 2.54207 6.06271C2.57929 5.95007 2.64013 5.84667 2.72053 5.75942C2.8114 5.66081 2.93621 5.59148 3.18581 5.45281L9.35248 2.02688C9.58881 1.89558 9.70698 1.82993 9.83213 1.80419C9.94288 1.78141 10.0571 1.78141 10.1679 1.80419C10.293 1.82993 10.4112 1.89558 10.6475 2.02688L16.8142 5.4528C17.0638 5.59147 17.1886 5.66081 17.2795 5.75942C17.3599 5.84666 17.4207 5.95007 17.4579 6.06271C17.5 6.19004 17.5 6.33281 17.5 6.61835L17.5 10.4171M6.25 3.75048L13.75 7.91714M13.3333 15.0005L15 16.6671L18.3333 13.3338"
+                                          stroke="#262D29" strokeOpacity="0.6" strokeWidth="1.5" strokeLinecap="round"
+                                          strokeLinejoin="round"/>
+                                    </svg>
+                                    My products
+                                </Link>
+                            </div>
+                        </li>
+                      )}
                       <li>
                           <div className={ 'flex items-center justify-between' }>
                               <Link className={ pathName === "/personal-cabinet/settings" ? "active" : "" }
@@ -161,7 +168,13 @@ export function PersonalSidebar() {
                                   Settings
                               </Link>
                           </div>
+                          {data?.role === 'client' && (
+                            <Button onClick={() => router.push('/add-company')} className={'w-full'}>
+                                Opens company
+                            </Button>
+                          )}
                       </li>
+                      
                   </ul>
                   <div className='mt-[20px]'>
                       <Button variant='destructiveOutline' onClick={handleLogout} className={'w-full'}>
