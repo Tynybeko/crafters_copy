@@ -114,13 +114,13 @@
 	padding: 40px 24px;
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
 }
 
 .stage2-box-inputs {
 	display: flex;
 	align-items: center;
 	gap: 24px;
+	margin-bottom: 4px;
 }
 
 .stage2-box-inputs-color {
@@ -147,6 +147,11 @@
 	
 }
 
+.stage2-box-inputs-price input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
 .stage2-box-inputs-price > button {
 	justify-content: center;
 	width: max-content;
@@ -157,6 +162,7 @@
 	grid-auto-rows: 116px;
 	grid-auto-flow: row;
 	gap: 24px;
+	margin-bottom: 24px;
 }
 
 .stage2-box-btn {
@@ -210,4 +216,24 @@
 	cursor: pointer;
 	text-decoration: underline;
 	color: #262d29;
+}
+
+.stage2-box-inputs-color-item > .icon {
+	display: none;
+}
+
+.stage2-colors {
+	padding: 4px 18px;
+	border-radius: 18px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.stage2-colors img {
+	color: #262D29CC;
+	font-size: 9px;
+	font-weight: 300;
+	line-height: 100%;
+	width: 8px;
 }

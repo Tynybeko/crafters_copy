@@ -1,7 +1,8 @@
 'use client';
-import { Input, InputFile } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import Box from "@/components/ui/Box";
 import { useCallback, useState } from "react";
+import { InputFile } from "@/components/ui/InputFile";
 
 const CompanyStage1 = ({handleChange, setIsChecked, dataCompany} : any) => {
     const [ isCheckedPayment, setIsCheckedPayment ] = useState(false)
@@ -24,7 +25,7 @@ const CompanyStage1 = ({handleChange, setIsChecked, dataCompany} : any) => {
             <div className={'add-company-stage1-wrapper'}>
                 <div className={'add-company-stage1-boxes'}>
                     <div className={'add-company-stage1-box1'}>
-                        <InputFile image={''} />
+                        <InputFile onChange={handleInputChange} image={''} />
                     </div>
                     <Box className={'add-company-stage1-box2'}>
                         <h2 className={'add-company-stage1-title'}>

@@ -3,8 +3,8 @@ import { ICompany, InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
 
-const initialState: InitialStateType<ICompany> = {
-    data: null,
+const initialState: InitialStateType<ICompany[]> = {
+    data: [],
     isLoading: false,
     isError: false,
 }
@@ -39,7 +39,7 @@ const companySlice = createSlice({
       .addCase(fetchCompany.rejected, (state) => {
         state.isError = true
         state.isLoading = false
-        state.data = null
+        state.data = []
       })
   }
 })

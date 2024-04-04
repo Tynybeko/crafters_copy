@@ -11,34 +11,10 @@ import { fetchItemCategories } from "@/redux/slices/item-categories";
 import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 
 
-const catalogData = [
-    {
-        id: 1,
-        name: 'Category 1'
-    },
-    {
-        id: 2,
-        name: 'Category 2'
-    },
-    {
-        id: 3,
-        name: 'Category 3'
-    },
-    {
-        id: 4,
-        name: 'Category 4'
-    }
-    ,
-    {
-        id: 5,
-        name: 'Category 5'
-    }
-]
-
 const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpenMenu: any, isOpenCatalog: boolean, setIsOpenCatalog: any }) => {
     const dispatch = useAppDispatch()
     const { screenWidth } = useScreenWidth()
-    const [categoryId, setCategoryId] = useState<number>(1);
+    const [categoryId, setCategoryId] = useState<number>();
     const { data: categories } = useAppSelector(state => state.categories)
     const { data: subcategories } = useAppSelector(state => state.subCategories)
     const handleCatalogHover = (id : any) => setCategoryId(id)
@@ -51,8 +27,7 @@ const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpen
         if(categoryId){
             dispatch(fetchItemSubcategories({ categoryId }))
         }
-    }, []);
-    
+    }, [categoryId, dispatch]);
     
     return (
         <>

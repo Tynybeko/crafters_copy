@@ -3,7 +3,7 @@ import { ICategories, InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
 const initialState: InitialStateType<ICategories[]> = {
-    data     : null,
+    data     : [],
     isLoading: false,
     isError  : false
 }
@@ -37,7 +37,7 @@ const itemCategoriesSlice = createSlice({
             .addCase(fetchItemCategories.rejected, (state) => {
                 state.isError = true
                 state.isLoading = false
-                state.data = null
+                state.data = []
             })
     }
 })

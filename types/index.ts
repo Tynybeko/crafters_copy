@@ -1,6 +1,6 @@
 export interface InitialStateType<T>
     {
-        data : T | null
+        data : T
         isLoading : boolean
         isError : boolean
         isAuth? : boolean
@@ -62,3 +62,22 @@ export interface ICurrency
         name : string
         code : string
     }
+
+export interface IMyItems
+    {
+        id : number
+        name : string
+        description : string
+        main_features : string
+        category : number
+        subcategory : number
+        image : string
+        price : number
+        currency : ICurrency
+    }
+
+export interface ICurrency {
+    code : string
+    id : number
+    name : string
+}

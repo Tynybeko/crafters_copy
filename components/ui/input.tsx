@@ -19,7 +19,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={ type }
           className={ cn(
-            "flex h-10 w-full rounded-[32px] bg-background py-[12px] px-[24px] border-primary border text-[16px] ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  focus-visible:ring-offset-2 disabled:cursor-text disabled:border-none",
+            "flex h-10 w-full appearance-none rounded-[32px] bg-background py-[12px] px-[24px] border-primary border text-[16px] ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  focus-visible:ring-offset-2 disabled:cursor-text disabled:border-none",
             className
           ) }
           ref={ ref }
@@ -52,30 +52,30 @@ const InputSearch = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = "InputSearch"
 
-const InputFile = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, image, children, type, ...props }, ref) => {
-      return (
-        <label style={ {
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundImage: image ? `url(${ image })` : 'url("/images/no-photo.png")',
-        }} className={ cn(
-          "border w-[100%] h-[100%] border-input rounded-[32px] flex items-center gap-[12px]",
-          className
-        ) }>
-            <input
-              type={ "file" }
-              hidden
-              ref={ ref }
-              { ...props }
-            />
-            { children }
-        </label>
-      
-      )
-  }
-)
-Input.displayName = "InputFile"
+// const InputFile = React.forwardRef<HTMLInputElement, InputProps>(
+//   ({ className, image, children, type, ...props }, ref) => {
+//       return (
+//         <label style={ {
+//             backgroundPosition: 'center',
+//             backgroundRepeat: 'no-repeat',
+//             backgroundSize: 'cover',
+//             backgroundImage: image ? `url(${ image })` : 'url("/images/no-photo.png")',
+//         }} className={ cn(
+//           "border cursor-pointer w-[100%] h-[100%] border-input rounded-[32px] flex items-center gap-[12px]",
+//           className
+//         ) }>
+//             <input
+//               type={ "file" }
+//               hidden
+//               ref={ ref }
+//               { ...props }
+//             />
+//             { children }
+//         </label>
+//
+//       )
+//   }
+// )
+// Input.displayName = "InputFile"
 
-export { Input, InputSearch, InputFile }
+export { Input, InputSearch }

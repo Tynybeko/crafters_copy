@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IColors, InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
-const initialState: InitialStateType<IColors> = {
-  data     : null,
+const initialState: InitialStateType<IColors[]> = {
+  data     : [],
   isLoading: false,
   isError  : false
 }
@@ -39,7 +39,7 @@ const colorsSlice = createSlice({
       .addCase(fetchColors.rejected, (state) => {
         state.isError = true
         state.isLoading = false
-        state.data = null
+        state.data = []
       })
   }
 })

@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ICurrency, InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
-const initialState: InitialStateType<ICurrency> = {
-  data     : null,
+const initialState: InitialStateType<ICurrency[]> = {
+  data     : [],
   isLoading: false,
   isError  : false
 }
@@ -38,7 +38,7 @@ const currencySlice = createSlice({
       .addCase(fetchCurrency.rejected, (state) => {
         state.isError = true
         state.isLoading = false
-        state.data = null
+        state.data = []
       })
   }
 })

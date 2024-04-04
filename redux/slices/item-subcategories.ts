@@ -3,7 +3,7 @@ import type { InitialStateType, ISubcategories } from "@/types";
 import { apiToken } from "@/axios";
 
 const initialState : InitialStateType<ISubcategories[]> = {
-    data     : null,
+    data     : [],
     isLoading: false,
     isError  : false
 }
@@ -37,7 +37,7 @@ const itemSubcategoriesSlice = createSlice({
           .addCase(fetchItemSubcategories.rejected, (state) => {
             state.isError = true
             state.isLoading = false
-            state.data = null
+            state.data = []
           })
     }
 })

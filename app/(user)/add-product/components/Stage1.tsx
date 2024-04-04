@@ -9,11 +9,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchItemCategories } from "@/redux/slices/item-categories";
 import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 
-const Stage1 = ({ dataProducts, setDataProducts }: any) => {
+const Stage1 = ({ setDataProducts, dataProducts }: any) => {
     const dispatch = useAppDispatch()
     const {data: categories} = useAppSelector(state => state.categories)
     const {data: subcategories} = useAppSelector(state => state.subCategories)
     const [ categoryId, setCategoryId ] = useState<any>();
+  
     
     useEffect(() => {
         dispatch(fetchItemCategories())
@@ -33,6 +34,7 @@ const Stage1 = ({ dataProducts, setDataProducts }: any) => {
         })
     };
     
+
 
     return (
       <div className={ 'add-products-forms' }>
@@ -55,9 +57,9 @@ const Stage1 = ({ dataProducts, setDataProducts }: any) => {
                           ...dataProducts,
                           category: e
                       })
-                  }} value={dataProducts.category }>
+                  }} value={dataProducts?.category }>
                       <SelectTrigger>
-                          <SelectValue placeholder="Category"/>
+                          <SelectValue placeholder="Category" defaultValue={dataProducts?.category}/>
                       </SelectTrigger>
                       <SelectContent>
                           <SelectGroup>
