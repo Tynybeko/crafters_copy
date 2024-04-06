@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "../ui/input";
+import { Input, InputPassword } from "../ui/input";
 
 //styles
 import './auth.css'
@@ -14,6 +14,7 @@ import MiniLoading from "../mini-loading/MiniLoading";
 const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
     const dispatch = useAppDispatch()
     const [ userData, setUserData ] = useState({})
+    const [ showPassword, setShowPassword ] = useState<boolean>(false)
     const [ error, setError ] = useState({
         detail: ""
     })
@@ -77,8 +78,7 @@ const Login = ({ setIsForgotPassword, setIsLogin, setIsRegister } : any) => {
                                  placeholder="Email"/>
                       </div>
                       <div className="login-input">
-                          <Input onFocus={ onfocus } onChange={ handleChange } type="password" name="password"
-                                 placeholder="Password"/>
+                          <InputPassword visible={showPassword} hidden={setShowPassword} onFocus={ onfocus } onChange={ handleChange } type="password" name="password" placeholder="Password"/>
                       </div>
                       <div className="forgot-password mb-[40px]">
                           <span className='error m-0'>{ error ? error?.detail : '' }</span>

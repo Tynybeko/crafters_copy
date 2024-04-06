@@ -5,9 +5,11 @@ import './product.css';
 import { Button } from "@/components/ui/button";
 import { apiToken } from "@/axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
+    const router = useRouter()
     
     const handleDelete = (id : number) => {
         console.log(id)
@@ -21,7 +23,7 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
     }
     
     return (
-      <div className='card'>
+      <div onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)} className='card'>
           <div className="card-top">
               <div className='flex items-center gap-[2px]'>
                   { [...Array(5)].map((star : number) => (
@@ -35,7 +37,7 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
               </div>
           </div>
           <div className='card-img'>
-              <img src={ data.image } alt=""/>
+              <img src={ data.image } alt="Image"/>
               <div className={ 'status-product' }>
                   { data.isNew && <div className='card-img-new'>New</div> }
                   { data.popular && <div className='card-img-popular'>Popular</div> }

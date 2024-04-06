@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const InputFile = React.forwardRef<HTMLInputElement, { onChange: (file: File) => void; image?: string }>(
-  ({ onChange, image, ...props }, ref) => {
+const InputFile = React.forwardRef<HTMLInputElement, { onChange: (file: File) => void; name?: string; image?: string }>(
+  ({ onChange, image, name, ...props }, ref) => {
       const [previewImage, setPreviewImage] = useState<string | undefined>('');
       
       const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,7 @@ const InputFile = React.forwardRef<HTMLInputElement, { onChange: (file: File) =>
             backgroundSize: 'cover',
             backgroundImage: `url(${previewImage || '/images/no-photo.png'})`
         }} className={"border cursor-pointer w-[100%] h-[100%] border-input rounded-[32px] flex items-center gap-[12px]"}>
-            <input type="file" hidden ref={ref} onChange={handleFileChange} {...props} />
+            <input type="file" name={name} hidden ref={ref} onChange={handleFileChange} {...props} />
         </label>
       );
   }

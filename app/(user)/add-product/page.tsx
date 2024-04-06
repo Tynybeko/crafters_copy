@@ -8,10 +8,19 @@ import Stage3 from "@/app/(user)/add-product/components/Stage3";
 import { apiToken } from "@/axios";
 import { Button } from "@/components/ui/button";
 import { AlertThanks } from "@/components/ui/custom-alert";
+import Stages from "@/components/ui/Stages";
+
+
+const stageNames = [
+    'Stage 1',
+    'Stage 2',
+    'Stage 3'
+]
+
 
 const AddProducts = () => {
     const [ activeStage, setActiveStage ] = useState(1);
-    const itemId = (typeof window !== 'undefined') ? localStorage.getItem('itemId') : null
+    const itemId = (typeof window !== 'undefined') && localStorage.getItem('itemId')
     const [ isActiveAlert, setIsActiveAlert ] = useState<boolean>(false)
     const [ dataProducts, setDataProducts ] = useState({
         name         : '',
@@ -85,6 +94,8 @@ const AddProducts = () => {
               .then((res) => {
                   resetFormData()
                   setIsActiveAlert(true)
+                  !isActiveAlert && localStorage.removeItem('itemId')
+                  window.location.href = '/personal-cabinet/my-products'
               })
               .catch((error) => {
                   console.log(error)
@@ -93,31 +104,15 @@ const AddProducts = () => {
     }
     
     return (
-      
       <>
-          <AlertThanks isActiveAlert={isActiveAlert} setIsActiveAlert={setIsActiveAlert}/>
+          <AlertThanks isActiveAlert={ isActiveAlert } setIsActiveAlert={ setIsActiveAlert }/>
           <div className={ 'add-products' }>
               <div className={ 'globalContainer' }>
-                  <div className={ 'add-products-steps' }>
-                      <div
-                        onClick={ () => setActiveStage(1) }
-                        className={ activeStage === 1 ? 'add-products-step add-products-step-active' : 'add-products-step' }
-                      >
-                          Stage 1
-                      </div>
-                      <div
-                        onClick={ () => setActiveStage(2) }
-                        className={ activeStage === 2 ? 'add-products-step add-products-step-active' : 'add-products-step' }
-                      >
-                          Stage 2
-                      </div>
-                      <div
-                        onClick={ () => setActiveStage(3) }
-                        className={ activeStage === 3 ? 'add-products-step add-products-step-active' : 'add-products-step' }
-                      >
-                          Stage 3
-                      </div>
-                  </div>
+                  <Stages
+                    stageNames={stageNames}
+                    activeStage={ activeStage }
+                    setActiveStage={setActiveStage}
+                  />
                   <div className={ 'add-products-stages' }>
                       { activeStage === 1 && <Stage1 dataProducts={ dataProducts } setDataProducts={ setDataProducts }
                       /> }

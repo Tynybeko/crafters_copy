@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { InputFile } from "@/components/ui/InputFile";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { api } from "@/axios";
+import { apiToken } from "@/axios";
 
 const BoxAddProduct = ({ colors, currencies, setBoxes, boxes, item, index }: any) => {
     const [selectedColors, setSelectedColors] = useState<any[]>([]);
@@ -67,7 +67,7 @@ const BoxAddProduct = ({ colors, currencies, setBoxes, boxes, item, index }: any
         productImages.forEach((image) => {
             formData.append(`set_images`, image);
         });
-        api.post(`/items-models/`, formData, {
+        apiToken.post(`/items-models/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

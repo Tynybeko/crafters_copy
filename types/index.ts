@@ -30,6 +30,7 @@ export interface ICompany
         index : string
         site_url : string
         image : string
+        user: IUser
     }
 
 export interface ICategories {
@@ -80,4 +81,41 @@ export interface ICurrency {
     code : string
     id : number
     name : string
+}
+
+export interface ItemsTypes {
+    category : number
+    code : string
+    company : ICompany
+    description : string
+    id : number
+    main_features : string
+    models : IModels
+    name : string
+    payment : IPayment
+    subcategory : number
+}
+
+export interface IPayment {
+  id : number
+  created_at : string
+  updated_at : string
+  terms_of_payment : string
+  delivery_conditions : string
+}
+
+export interface IModels {
+    id : number
+    color : IColors
+    currency : ICurrency
+    images : ImagesTypes
+    item: number
+    price : number
+    name_model : string
+    quantity : number
+}
+
+export interface ImagesTypes {
+    id : number
+    image : string
 }

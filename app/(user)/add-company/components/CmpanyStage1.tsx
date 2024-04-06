@@ -4,7 +4,7 @@ import Box from "@/components/ui/Box";
 import { useCallback, useState } from "react";
 import { InputFile } from "@/components/ui/InputFile";
 
-const CompanyStage1 = ({handleChange, setIsChecked, dataCompany} : any) => {
+const CompanyStage1 = ({handleChange, setIsChecked, dataCompany, setDataCompany} : any) => {
     const [ isCheckedPayment, setIsCheckedPayment ] = useState(false)
    const { legal_name, phone, site_url, image, city, index, legal_address } = dataCompany
     
@@ -12,6 +12,11 @@ const CompanyStage1 = ({handleChange, setIsChecked, dataCompany} : any) => {
         const { name, value } = e.target;
         handleChange(name, value);
     };
+    
+    const handleChangeImage = (e: any) => {
+        setDataCompany((prev: any) => ({...prev, image: e}))
+    }
+    
     const handleCheck = useCallback(
         () => {
             setIsCheckedPayment(prevState => !prevState)
@@ -25,7 +30,7 @@ const CompanyStage1 = ({handleChange, setIsChecked, dataCompany} : any) => {
             <div className={'add-company-stage1-wrapper'}>
                 <div className={'add-company-stage1-boxes'}>
                     <div className={'add-company-stage1-box1'}>
-                        <InputFile onChange={handleInputChange} image={''} />
+                        <InputFile onChange={handleChangeImage} image={''} />
                     </div>
                     <Box className={'add-company-stage1-box2'}>
                         <h2 className={'add-company-stage1-title'}>

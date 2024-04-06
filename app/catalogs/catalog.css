@@ -13,6 +13,7 @@
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
 	}
+	margin-bottom: 24px;
 }
 
 .catalog-banner-content {
@@ -49,4 +50,57 @@
 	@media (max-width: 442px) {
 		height: 100px;
 	}
+}
+
+.catalog-items {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+
+.catalog-items > button:hover{
+	background: #1DBE60;
+	color: white;
+}
+
+.catalog-items-active  {
+	background: #1DBE60;
+	color: white;
+}
+
+.catalog-wrapper-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.catalog-wrapper-header > h1 {
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 32px;
+}
+
+.catalog-wrapper-header-btns {
+	display: flex;
+	gap: 24px;
+}
+
+.catalog-wrapper-header-btn {
+	color: #262D29;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	opacity: 0.4;
+}
+
+.catalog-wrapper-header-btn:hover {
+	opacity: 1;
+	text-decoration: underline;
+}
+
+.catalog-wrapper-header-btn-active {
+	opacity: 1;
+	text-decoration: underline;
 }

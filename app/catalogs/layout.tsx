@@ -12,7 +12,7 @@ export default function CatalogsLayout({ children } : Readonly<{
     children : ReactNode;
 }>) {
     return (
-      <main>
+      <main className={'mt-[40px]'}>
           <NextBreadcrumb
             homeElement={ 'Home' }
             separator={ <span className='breadcrumb-list'> \ </span> }

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from '../ui/input';
+import { Input, InputPassword } from '../ui/input';
 import { useAppDispatch } from "@/redux/hooks";
 import { api } from "@/axios";
 import { RegisterUser } from "@/redux/slices/user";
@@ -17,7 +17,9 @@ interface userType {
 const Register = ({ setIsLogin, setIsRegister } : any) => {
     const dispatch = useAppDispatch()
     const [ isChecked, setIsChecked ] = useState(false);
-    const [ isLoading, setIsLoading ] = useState(false)
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ showPassword, setShowPassword ] = useState<boolean>(false)
+    const [ showPasswordConfirm, setShowPasswordConfirm ] = useState<boolean>(false)
     const [ userData, setUserData ] = useState<userType>({
         email          : '',
         password       : '',
@@ -106,23 +108,29 @@ const Register = ({ setIsLogin, setIsRegister } : any) => {
                           {error.email && <span className='err'>{error.email}</span>}
                       </div>
                       <div className="login-input">
-                          <Input
+                          <InputPassword
+                            visible={showPassword}
+                            hidden={setShowPassword}
                             value={ userData.password }
                             onChange={ onInputChange }
                             onBlur={ validateInput }
                             type="password"
                             name="password"
-                            placeholder="Password"/>
+                            placeholder="Password"
+                          />
                           {error.password && <span className='err'>{error.password}</span>}
                       </div>
                       <div className="login-input !mb-[40px]">
-                          <Input
+                          <InputPassword
+                            visible={showPasswordConfirm}
+                            hidden={setShowPasswordConfirm}
                             value={ userData.confirmPassword }
                             onChange={ onInputChange }
                             onBlur={ validateInput }
                             type="password"
                             name="confirmPassword"
-                            placeholder="Confirm Password"/>
+                            placeholder="Confirm Password"
+                          />
                           {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                       </div>
                       <div className="checkbox-wrapper mb-[13px]">

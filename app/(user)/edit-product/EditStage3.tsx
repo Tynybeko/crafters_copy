@@ -1,27 +1,12 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@/components/ui/Box";
 import { Textarea } from "@/components/ui/textarea";
 
-const Stage3 = ({setDataPayment, dataPayment}: any) => {
+const EditStage3 = () => {
     const [ isChecked, setIsChecked ] = useState<boolean>(false)
     const itemId = (typeof window !== 'undefined') && localStorage.getItem('itemId')
-    useEffect(() => {
-        setDataPayment((prev: any) => (
-          {
-              ...prev,
-              item: Number(itemId),
-              use_mbank: isChecked
-          }))
-    }, [ isChecked, itemId ]);
-    
-    const handleDataPayment = (e: any) => {
-        setDataPayment({
-            ...dataPayment,
-            [e.target.name]: e.target.value
-        })
-    };
-    
+
     return (
       <>
           <div className={ 'add-products-forms-stage3' }>
@@ -32,7 +17,7 @@ const Stage3 = ({setDataPayment, dataPayment}: any) => {
                           <span>Terms of payment</span>
                       </h1>
                       <div className={"add-products-textarea"}>
-                          <Textarea value={dataPayment.terms_of_payment || ''} name={'terms_of_payment'} onChange={handleDataPayment} placeholder="This Privacy Policy describes how we collect, use, and protect the information you provide when using our website..."/>
+                          <Textarea  name={'terms_of_payment'} placeholder="This Privacy Policy describes how we collect, use, and protect the information you provide when using our website..."/>
                       </div>
                   </Box>
                   <Box className={'add-products-stage3-box'}>
@@ -41,7 +26,7 @@ const Stage3 = ({setDataPayment, dataPayment}: any) => {
                           <span>Terms of payment</span>
                       </h1>
                       <div className={"add-products-textarea"}>
-                          <Textarea value={dataPayment.delivery_conditions || ''} onChange={handleDataPayment} name={'delivery_conditions'} placeholder="This Privacy Policy describes how we collect, use, and protect the information you provide when using our website..."/>
+                          <Textarea name={'delivery_conditions'} placeholder="This Privacy Policy describes how we collect, use, and protect the information you provide when using our website..."/>
                       </div>
                   </Box>
               </div>
@@ -67,5 +52,5 @@ const Stage3 = ({setDataPayment, dataPayment}: any) => {
     );
 }
 
-export default Stage3;
+export default EditStage3;
 

@@ -89,7 +89,7 @@ const  Shop = () => {
                             </div>
                             <div className='user-info-item'>
                                 <p>Defendant's Person</p>
-                                <Input name={'legal_address'} value={inputData?.legal_address} onChange={onInputChange} disabled={!isDisabledCompany} />
+                                <Input name={'legal_address'} value={inputData?.user.get_full_name} onChange={onInputChange} disabled={!isDisabledCompany} />
                             </div>
                             <div className='user-info-item'>
                                 <p>Address site</p>

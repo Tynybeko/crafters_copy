@@ -23,13 +23,14 @@
 
 .card-img {
 	padding:  12px 24px 0;
+	height: 340px;
 }
 
 .card-img > img {
 	width: 100%;
 	object-fit: cover;
+	height: 100%;
 }
-
 
 .card-top-btn {
 	width: 40px;

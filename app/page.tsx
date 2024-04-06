@@ -1,3 +1,5 @@
+'use client';
+
 import Banner from "@/components/banner";
 import PopularCards from "@/components/cards/PopularCards";
 import { PopularData } from "@/fakeObj";
@@ -5,6 +7,7 @@ import Products from "@/components/products";
 
 
 export default function Home() {
+  
   return (
     <main>
       <Banner />

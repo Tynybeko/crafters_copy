@@ -18,7 +18,6 @@ const NextBreadcrumb = ({homeElement, separator, containerClasses, listClasses, 
     
     const paths = usePathname()
     const pathNames = paths.split('/').filter( path => path )
-    
     return (
       <div className='globalContainer'>
           <ul className={containerClasses}>
@@ -33,9 +32,11 @@ const NextBreadcrumb = ({homeElement, separator, containerClasses, listClasses, 
                       let href = `/${pathNames.slice(0, index + 1).join('/')}`
                       let itemClasses = paths === href ? `${listClasses} ${activeClasses}` : listClasses
                       let itemLink = capitalizeLinks ? link[0].toUpperCase() + link.slice(1, link.length) : link
+                      
                       return (
                         <React.Fragment key={index}>
                             <li className={itemClasses} >
+                                {itemLink === pathNames[2] && 'item #'}
                                 <Link href={href}>{itemLink}</Link>
                             </li>
                             {pathNames.length !== index + 1 && separator}

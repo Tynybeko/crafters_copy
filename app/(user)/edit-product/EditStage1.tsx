@@ -2,40 +2,36 @@
 
 import Box from "@/components/ui/Box";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchItemCategories } from "@/redux/slices/item-categories";
-import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 
-const Stage1 = ({ setDataProducts, dataProducts }: any) => {
+const EditStage1 = ({valueStage1, setValueStage1}: any) => {
     const dispatch = useAppDispatch()
     const {data: categories} = useAppSelector(state => state.categories)
-    const {data: subcategories} = useAppSelector(state => state.subCategories)
-    const [ categoryId, setCategoryId ] = useState<any>();
-  
-    
+    const [ category, setCategory ] = useState<any>();
     useEffect(() => {
         dispatch(fetchItemCategories())
     }, [dispatch]);
     
     useEffect(() => {
-        if(categoryId){
-            dispatch(fetchItemSubcategories({categoryId}))
+        console.log(categories)
+        if(valueStage1 && valueStage1?.category) {
+            const category = categories?.find((category : any) => category.id === valueStage1?.category)
+            setCategory(category)
         }
-    }, [categoryId, dispatch]);
-
-
-    const handleDataProducts = (e: any) => {
-        setDataProducts({
-            ...dataProducts,
+    }, [ valueStage1, categories ]);
+    
+    const handleValueStage1 = (e: any) => {
+        setValueStage1({
+            ...valueStage1,
             [e.target.name]: e.target.value
         })
     };
     
-
-
+   
     return (
       <div className={ 'add-products-forms' }>
           <div className={ 'add-products-form' }>
@@ -44,28 +40,22 @@ const Stage1 = ({ setDataProducts, dataProducts }: any) => {
                       <img src="/svg/user.svg" alt="User"/>
                       <span>Name</span>
                   </h1>
-                  <Input value={dataProducts.name} onChange={handleDataProducts} name={ 'name' } placeholder={ 'Product Name' }/>
+                  <Input value={valueStage1.name} name={ 'name' } placeholder={ 'Product Name' }/>
               </Box>
               <Box>
                   <h1>
                       <img src="/svg/category.svg" alt="User"/>
                       <span>Category</span>
                   </h1>
-                  <Select onValueChange={(e) => {
-                      setCategoryId(e)
-                      setDataProducts({
-                          ...dataProducts,
-                          category: e
-                      })
-                  }} value={dataProducts?.category }>
+                  <Select>
                       <SelectTrigger>
-                          <SelectValue placeholder="Category" defaultValue={dataProducts?.category}/>
+                          <SelectValue placeholder="Category"/>
                       </SelectTrigger>
                       <SelectContent>
                           <SelectGroup>
-                              {categories?.map( categories => (
-                                  <SelectItem key={ categories.id } value={ String(categories.id) }>{ categories.name }</SelectItem>
-                              ))}
+                              {/*{categories?.map( categories => (*/}
+                              {/*  <SelectItem key={ categories.id } value={ String(categories.id) }>{ categories.name }</SelectItem>*/}
+                              {/*))}*/}
                           </SelectGroup>
                       </SelectContent>
                   </Select>
@@ -75,15 +65,15 @@ const Stage1 = ({ setDataProducts, dataProducts }: any) => {
                       <img src="/svg/sub-category.svg" alt="User"/>
                       <span>Subcategory</span>
                   </h1>
-                  <Select onValueChange={(e) => setDataProducts({ ...dataProducts, subcategory: e })} value={dataProducts.subcategory}>
-                      <SelectTrigger disabled={!subcategories?.length}>
+                  <Select >
+                      <SelectTrigger>
                           <SelectValue placeholder="Subcategory"/>
                       </SelectTrigger>
                       <SelectContent>
                           <SelectGroup>
-                              {subcategories?.map( subcategories => (
-                                  <SelectItem key={ subcategories.id } value={ String(subcategories.id) }>{ subcategories.name }</SelectItem>
-                              ))}
+                              {/*{subcategories?.map( subcategories => (*/}
+                              {/*  <SelectItem key={ subcategories.id } value={ String(subcategories.id) }>{ subcategories.name }</SelectItem>*/}
+                              {/*))}*/}
                           </SelectGroup>
                       </SelectContent>
                   </Select>
@@ -96,7 +86,7 @@ const Stage1 = ({ setDataProducts, dataProducts }: any) => {
                       <span>Description</span>
                   </h1>
                   <div className={ 'mb-[16px]' }>
-                      <Textarea name={'description'} onChange={handleDataProducts} value={dataProducts.description} className={ 'resize-none w-full h-[155px]' } placeholder="Description"/>
+                      <Textarea name={'description'}  className={ 'resize-none w-full h-[155px]' } placeholder="Description"/>
                   </div>
                   <div className={ 'add-products-desc-footer' }>
                       <p>Enter at least 40 characters</p>
@@ -109,7 +99,7 @@ const Stage1 = ({ setDataProducts, dataProducts }: any) => {
                       <span>Main features</span>
                   </h1>
                   <div className={ 'mb-[16px]' }>
-                      <Textarea name={'main_features'} onChange={handleDataProducts} value={dataProducts.main_features} className={ 'resize-none w-full h-[155px]'} placeholder="Description"/>
+                      <Textarea name={'main_features'} className={ 'resize-none w-full h-[155px]'} placeholder="Description"/>
                   </div>
                   <div className={ 'add-products-desc-footer' }>
                       <p>Enter at least 40 characters</p>
@@ -121,4 +111,4 @@ const Stage1 = ({ setDataProducts, dataProducts }: any) => {
     );
 }
 
-export default Stage1;
+export default EditStage1;

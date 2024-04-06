@@ -1,10 +1,14 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { Eye, EyeOff } from "lucide-react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
     image?: string
+    types?: boolean
+    visible?: boolean
+    hidden?: any
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -52,30 +56,30 @@ const InputSearch = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = "InputSearch"
 
-// const InputFile = React.forwardRef<HTMLInputElement, InputProps>(
-//   ({ className, image, children, type, ...props }, ref) => {
-//       return (
-//         <label style={ {
-//             backgroundPosition: 'center',
-//             backgroundRepeat: 'no-repeat',
-//             backgroundSize: 'cover',
-//             backgroundImage: image ? `url(${ image })` : 'url("/images/no-photo.png")',
-//         }} className={ cn(
-//           "border cursor-pointer w-[100%] h-[100%] border-input rounded-[32px] flex items-center gap-[12px]",
-//           className
-//         ) }>
-//             <input
-//               type={ "file" }
-//               hidden
-//               ref={ ref }
-//               { ...props }
-//             />
-//             { children }
-//         </label>
-//
-//       )
-//   }
-// )
-// Input.displayName = "InputFile"
+const InputPassword = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, image, types, visible, hidden,  children, type, ...props }, ref) => {
+      return (
+        <label className={ cn(
+          "flex h-10 relative w-full overflow-hidden appearance-none rounded-[32px] bg-background border-primary border text-[16px] ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  focus-visible:ring-offset-2 disabled:cursor-text disabled:border-none",
+          className
+        ) } >
+            <input className={ cn(
+              "flex h-full w-full py-[12px] px-[24px] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              className
+            ) }
+              type={ visible ? 'text' : 'password' }
+              ref={ ref }
+              { ...props }
+            />
+            { children }
+            <div onClick={() => hidden(!visible)} className={'absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'}>
+                {visible ? <EyeOff color={'#1DBE60'}/> : <Eye color={'#1DBE60'}/>}
+            </div>
+            
+        </label>
+      )
+  }
+)
+Input.displayName = "InputFile"
 
-export { Input, InputSearch }
+export { Input, InputSearch, InputPassword }
