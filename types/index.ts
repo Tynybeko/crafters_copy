@@ -1,6 +1,6 @@
 export interface InitialStateType<T>
     {
-        data : T
+        data : T | null
         isLoading : boolean
         isError : boolean
         isAuth? : boolean

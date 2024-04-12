@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IMyItems, InitialStateType } from "@/types";
+import { IMyItems } from "@/types";
 import { apiToken } from "@/axios";
 
-const initialState : InitialStateType<IMyItems[]> = {
-    data     : [],
+const initialState = {
+    data     : [] as IMyItems[],
     isLoading: false,
     isError  : false
 };
