@@ -60,7 +60,7 @@ const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpen
                             ))}
                         </Accordion>
                     </div>
-                    <div className={'mobile-catalog-list-items'}>
+                    <div className={'mobile-mobile-catalog-list-items'}>
 
                     </div>
                 </div>

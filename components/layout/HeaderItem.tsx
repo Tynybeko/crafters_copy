@@ -1,5 +1,5 @@
 import React from "react";
-import { CatalogItems } from "@/app/catalogs/(components)/catalog-items";
+import { CatalogItems } from "@/components/desktop-catalog/catalog-items";
 import { InputSearch } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,6 @@ export function HeaderItem(
         openMenu,
         openCatalog,
         onClick1,
-        onMouseEnter,
         onMouseLeave,
         openDrop,
         isAuthUser,
@@ -64,7 +63,6 @@ export function HeaderItem(
             <div className="header-catalog max-w-[135px] w-full ">
                 <CatalogItems
                     onClick={onClick1}
-                    onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                     openDrop={openDrop} />
             </div>

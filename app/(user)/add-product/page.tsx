@@ -31,7 +31,7 @@ const AddProducts = () => {
     })
     
     const [ boxes, setBoxes ] = useState([ {
-        set_color : [],
+        color : null,
         name_model: '',
         quantity  : null,
         price     : null,
@@ -54,7 +54,7 @@ const AddProducts = () => {
         });
         
         setBoxes([{
-            set_color: [],
+            color: null,
             name_model: '',
             quantity: null,
             price: null,
@@ -91,7 +91,7 @@ const AddProducts = () => {
             setActiveStage(3)
         } else if ( activeStage === 3 ) {
             apiToken.post('/item-payments/', dataPayment)
-              .then((res) => {
+              .then(() => {
                   resetFormData()
                   setIsActiveAlert(true)
                   !isActiveAlert && localStorage.removeItem('itemId')

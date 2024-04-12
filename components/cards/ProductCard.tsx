@@ -23,11 +23,11 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
     }
     
     return (
-      <div onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)} className='card'>
+      <div className='card'>
           <div className="card-top">
               <div className='flex items-center gap-[2px]'>
-                  { [...Array(5)].map((star : number) => (
-                    <img key={ star }
+                  { [...Array(5)].map((star : number, index : number) => (
+                    <img key={ index }
                          src={ `/svg/star${ star <= data.raiting ? '' : '-outline' }.svg` }
                          alt=''/>
                   )) }
@@ -36,15 +36,15 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
                   <img className='object-cover' src="/svg/heart-cart-blue.svg" alt=""/>
               </div>
           </div>
-          <div className='card-img'>
+          <div onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)}  className='card-img'>
               <img src={ data.image } alt="Image"/>
               <div className={ 'status-product' }>
-                  { data.isNew && <div className='card-img-new'>New</div> }
-                  { data.popular && <div className='card-img-popular'>Popular</div> }
+                  { data.is_new && <div className='card-img-new'>New</div> }
+                  { data.is_popular && <div className='card-img-popular'>Popular</div> }
               </div>
           </div>
           <div className="card-bottom">
-              <h3>{ data.name }</h3>
+              <h3 onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)} >{ data.name }</h3>
               <div className='card-bottom-items'>
                   <p>${ data.price }<span>{ data.oldPrice }</span></p>
                   { owner ? (

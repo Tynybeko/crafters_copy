@@ -6,18 +6,32 @@ import { Button } from "@/components/ui/button";
 //style
 import './catalog.css'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchItemCategories } from "@/redux/slices/item-categories";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
+import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
+import { useRouter, useSearchParams } from "next/navigation";
+import { fetchItems } from "@/redux/slices/items";
 
 const Catalogs = () => {
-    const dispatch = useAppDispatch()
-    const { data: categories } = useAppSelector(state => state.categories)
-    const [ activeCatalog, setActiveCatalog ] = useState<number>(1);
-    useEffect(() => {
-        dispatch(fetchItemCategories())
-    }, [ dispatch ])
+    const dispatch = useAppDispatch();
+    const { data: subcategories } = useAppSelector(state => state.subCategories);
+    const { data: products } = useAppSelector(state => state.items);
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const category = searchParams.get('category');
+    const subcategory = searchParams.get('subcategory');
     
-    console.log(categories)
+    useEffect(() => {
+        dispatch(fetchItems({ params: { category, subcategory } }));
+        dispatch(fetchItemSubcategories({ categoryId: category, nameSubcategory: subcategory }));
+    }, [dispatch, category, subcategory]);
+    
+    const handleRoute = useCallback((category: any) => {
+        if (category) {
+            router.push(`/catalog/?category=${category.category}&subcategory=${category.id}`);
+        }
+    }, [router]);
+    
+    console.log(products)
     
     return (
       <section className='mt-[20px] md:mt-[40px]'>
@@ -33,17 +47,17 @@ const Catalogs = () => {
                   </div>
               </div>
               <div className={ 'catalog-items' }>
-                  { categories && categories.map((category : any) => (
-                    <Button onClick={ () => setActiveCatalog(category.id) }
-                            className={ activeCatalog === category.id ? 'catalog-items-active' : '' }
+                  { subcategories && subcategories.map((category : any) => (
+                    <Button onClick={ () => handleRoute(category) }
+                            className={ Number(subcategory) === category.id ? 'catalog-items-active' : '' }
                             key={ category.id } variant={ 'outline' }>
                         { category.name }
                     </Button>
                   )) }
               </div>
-              <div className={ 'catalog-wrapper' }>
+              <div className={ 'mobile-catalog-wrapper' }>
                   <div className={ 'catalog-wrapper-header' }>
-                      <h1>Soft toy</h1>
+                      <h1>{ 'All' }</h1>
                       <div className={ 'catalog-wrapper-header-btns' }>
                           <button className={ 'catalog-wrapper-header-btn catalog-wrapper-header-btn-active' }>New
                           </button>
@@ -60,7 +74,7 @@ const Catalogs = () => {
                       </div>
                   </div>
                   <div>
-                      
+                  
                   </div>
               </div>
           </div>

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { api } from "@/axios";
 import Loading from "@/components/loading";
 import Stages from "@/components/ui/Stages";
-import ItemStage1 from "@/app/catalogs/soft-toy/components/ItemStage1";
-import ItemStage2 from "@/app/catalogs/soft-toy/components/ItemStage2";
-import ItemStage3 from "@/app/catalogs/soft-toy/components/ItemStage3";
-import ItemStage4 from "@/app/catalogs/soft-toy/components/ItemStage4";
+import ItemStage1 from "@/app/catalog/subcategories/components/ItemStage1";
+import ItemStage2 from "@/app/catalog/subcategories/components/ItemStage2";
+import ItemStage3 from "@/app/catalog/subcategories/components/ItemStage3";
+import ItemStage4 from "@/app/catalog/subcategories/components/ItemStage4";
 import { ItemsTypes } from "@/types";
 
 
@@ -29,8 +29,6 @@ const ProductPage = ({ params } : any) => {
               console.log(err)
           })
     }, []);
-    
-    console.log(product)
     
     return (
       <>

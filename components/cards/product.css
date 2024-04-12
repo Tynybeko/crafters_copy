@@ -9,7 +9,13 @@
 	border-radius: 32px;
 	overflow: hidden;
 	border: 1px solid #262D291A;
+	transition: all 0.2s ease;
+}
+
+.card:hover {
 	box-shadow: 0 0 16px 0 #00000029;
+	transition: all 0.2s ease;
+	transform: scale(1.01);
 }
 
 .card-top {
@@ -24,6 +30,8 @@
 .card-img {
 	padding:  12px 24px 0;
 	height: 340px;
+	cursor: pointer;
+	position: relative;
 }
 
 .card-img > img {
@@ -60,6 +68,7 @@
 	line-height: 20px;
 	font-weight: 600;
 	color: #262D29;
+	cursor: pointer;
 }
 
 .card-bottom-items {
@@ -93,7 +102,11 @@
 	align-items: center;
 	gap: 4px;
 	margin-bottom: 12px;
+	position: absolute;
+	bottom: 0;
+	left: 24px;
 }
+
 
 .status-product > div {
 	font-size: 12px;
@@ -105,4 +118,5 @@
 	gap: 4px;
 	border-radius: 32px;
 	box-shadow: 4px 4px 12px 0 #00000033;
+	background: #FFFFFF;
 }

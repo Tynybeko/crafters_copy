@@ -31,6 +31,13 @@ export interface ICompany
         site_url : string
         image : string
         user: IUser
+        balance : {
+            balance : string
+            id : number
+            created_at : string
+            days_transaction_closing: number
+            amount : string
+        }
     }
 
 export interface ICategories {
@@ -90,7 +97,7 @@ export interface ItemsTypes {
     description : string
     id : number
     main_features : string
-    models : IModels
+    models_name : IModels
     name : string
     payment : IPayment
     subcategory : number

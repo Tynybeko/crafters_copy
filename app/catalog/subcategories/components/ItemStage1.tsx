@@ -9,12 +9,13 @@ const OPTIONS: EmblaOptionsType = {}
 
 
 const ItemStage1 = ({product} : {product : ItemsTypes}) => {
+    
     return (
       <div className={'globalContainer'}>
           <div className={'item-stage1'}>
               <div className={'item-stage1-header'}>
                   <div className={'item-stage1-header-img'}>
-                    <ImageCorusel images={product.models}  options={OPTIONS}/>
+                    <ImageCorusel images={product.models_name}  options={OPTIONS}/>
                   </div>
                   <div className={'item-stage1-header-contents'}>
                     <div className={'item-stage1-header-contents-title'}>
@@ -29,7 +30,7 @@ const ItemStage1 = ({product} : {product : ItemsTypes}) => {
                             </span>
                         </div>
                         <div className={'item-stage1-header-contents-code'}>
-                            Cod: 532453
+                            Code: { product.code }
                         </div>
                     </div>
                       <h1 className={'item-title'}>

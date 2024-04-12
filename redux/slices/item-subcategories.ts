@@ -11,7 +11,11 @@ const initialState : InitialStateType<ISubcategories[]> = {
 export const fetchItemSubcategories = createAsyncThunk(
     "itemSubcategories/fetchItemSubcategories",
     async ({categoryId} : any) => {
-        const response = await apiToken.get(`/item-subcategories/?category=${categoryId}`)
+        const response = await apiToken.get(`/item-subcategories/`, {
+            params: {
+                category: categoryId,
+            }
+        })
         try {
             return response.data
         }

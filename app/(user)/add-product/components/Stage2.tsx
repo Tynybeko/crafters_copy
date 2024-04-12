@@ -21,7 +21,7 @@ const Stage2 = ({ setBoxes, boxes } : any) => {
     
     const handleAddBox = () => {
         setBoxes([ ...boxes, {
-            set_color: [],
+            color: null,
             name_model: '',
             quantity  : null,
             price     : null,

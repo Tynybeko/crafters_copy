@@ -6,13 +6,11 @@ import { MobileMenu } from "../mobile-menu";
 import { HeaderItem } from "@/components/layout/HeaderItem";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUser } from "@/redux/slices/user";
-import Catalog from "../catalog/Catalog";
+import Catalog from "@/components/mobile-catalog/Catalog";
 
 //styles
 import '../../styles/header.css';
 import Auth from "@/components/auth/Auth";
-
-
 
 
 const Header = () => {

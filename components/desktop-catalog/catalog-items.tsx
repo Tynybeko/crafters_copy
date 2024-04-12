@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 
 
 import { Button } from "@/components/ui/button";
@@ -9,15 +8,15 @@ import './catalog-items.css'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchItemCategories } from "@/redux/slices/item-categories";
 import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
+import { useRouter } from "next/navigation";
 
 export function CatalogItems(props : {
     onClick : () => void,
-    onMouseEnter : () => void,
     onMouseLeave : () => void,
     openDrop : boolean
 }) {
     const dispatch = useAppDispatch()
-    const [ catalogData, setCatalogData ] = useState<string[]>([]);
+    const router = useRouter()
     const { data: categories } = useAppSelector(state => state.categories)
     const { data: subcategories } = useAppSelector(state => state.subCategories)
     const [ categoryId, setCategoryId ] = useState<any>();
@@ -27,35 +26,37 @@ export function CatalogItems(props : {
     }, [ dispatch ]);
     
     useEffect(() => {
-        if(categoryId){
+        if ( categoryId ) {
             dispatch(fetchItemSubcategories({ categoryId }))
         }
     }, [ dispatch, categoryId ]);
     
     const handleCatalogHover = (id : any) => setCategoryId(id)
+  
+    const handleRoute = (item: any) => {
+        router.push(`/catalog/?category=${item.category}&subcategory=${item.id}`);
+        props.onClick()
+    }
     
     return (
       <div>
-          <Link href={ '/catalogs' }>
-              <Button onClick={ props.onClick } onMouseEnter={ props.onMouseEnter }
-                      onMouseLeave={ props.onMouseLeave }>Catalog
-                  <svg className="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none"
-                       viewBox="0 0 10 6">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                            d="m1 1 4 4 4-4"/>
-                  </svg>
-              </Button>
-          </Link>
+          <Button onClick={ props.onClick }>Catalog
+              <svg className="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                   viewBox="0 0 10 6">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                        d="m1 1 4 4 4-4"/>
+              </svg>
+          </Button>
           <div className={ props.openDrop ? 'fonCatalog fonCatalog-active' : 'fonCatalog' }
                onMouseEnter={ props.onMouseLeave }/>
           <>
               <div
-                onMouseEnter={ props.onMouseEnter }
                 className={ props.openDrop ? "catalog-menu  catalog-menu-active" : "catalog-menu " }
                 onMouseLeave={ props.onMouseLeave }>
                   <div className='catalog-menu-lists'>
                       { categories?.map((item : any) => (
-                        <button className={'text-left'} key={ item.id } onMouseEnter={ () => handleCatalogHover(item.id) }>
+                        <button className={ 'text-left' } key={ item.id }
+                                onMouseEnter={ () => handleCatalogHover(item.id) }>
                             { item.name }
                         </button>
                       )) }
@@ -64,11 +65,11 @@ export function CatalogItems(props : {
                       <h3>
                           Catalog
                       </h3>
-                      <div className={'sub_catalog-cards'}>
-                          { subcategories?.map((item, index) => (
-                            <div className={'cart-subcategory'} key={ item.id }>
-                                <div className={'cart-subcategory-item'}>
-                                    <img src={item.image ? item.image : "/images/sub-category.png" } alt="Image"/>
+                      <div className={ 'sub_catalog-cards' }>
+                          { subcategories?.map((item) => (
+                            <div className={ 'cart-subcategory' } onClick={() => handleRoute(item)} key={ item.id }>
+                                <div className={ 'cart-subcategory-item' }>
+                                    <img src={ item.image ? item.image : "/images/sub-category.png" } alt="Image"/>
                                     <span>{ item.name }</span>
                                 </div>
                             </div>
