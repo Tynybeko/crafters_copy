@@ -13,8 +13,8 @@ export const fetchItems = createAsyncThunk(
     async ({ params }: any) => {
         const response = await apiToken.get('items/', {
             params: {
-                category: params.category,
-                subcategory: params.subcategory
+                category: params?.category,
+                subcategory: params?.subcategory
             }
         })
         try {

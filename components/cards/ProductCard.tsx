@@ -36,7 +36,7 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
                   <img className='object-cover' src="/svg/heart-cart-blue.svg" alt=""/>
               </div>
           </div>
-          <div onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)}  className='card-img'>
+          <div onClick={() => router.push(`/catalog/subcategories/${ data.code }`)}  className='card-img'>
               <img src={ data.image } alt="Image"/>
               <div className={ 'status-product' }>
                   { data.is_new && <div className='card-img-new'>New</div> }
@@ -44,7 +44,7 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
               </div>
           </div>
           <div className="card-bottom">
-              <h3 onClick={() => router.push(`/catalogs/soft-toy/${ data.code }`)} >{ data.name }</h3>
+              <h3 onClick={() => router.push(`/catalog/subcategories/${ data.code }`)} >{ data.name }</h3>
               <div className='card-bottom-items'>
                   <p>${ data.price }<span>{ data.oldPrice }</span></p>
                   { owner ? (

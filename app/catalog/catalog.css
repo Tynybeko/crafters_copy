@@ -73,6 +73,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 24px;
 }
 
 .catalog-wrapper-header > h1 {
@@ -103,4 +104,10 @@
 .catalog-wrapper-header-btn-active {
 	opacity: 1;
 	text-decoration: underline;
+}
+
+.card-wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+	gap: 24px;
 }

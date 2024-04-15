@@ -43,8 +43,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     }, [emblaMainApi, onSelect])
     
     useEffect(() => {
-        if(!images && images.length === 0) return
-        setImagesFilter(images[0].colors[0].images)
+        if(!images && images.length === 0) {
+            return
+        }else {
+            setImagesFilter(images[0].colors[0].images)
+        }
     }, []);
     
     return (

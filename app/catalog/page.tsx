@@ -10,6 +10,7 @@ import React, { useCallback, useEffect } from "react";
 import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 import { useRouter, useSearchParams } from "next/navigation";
 import { fetchItems } from "@/redux/slices/items";
+import ProductCard from "@/components/cards/ProductCard";
 
 const Catalogs = () => {
     const dispatch = useAppDispatch();
@@ -55,7 +56,7 @@ const Catalogs = () => {
                     </Button>
                   )) }
               </div>
-              <div className={ 'mobile-catalog-wrapper' }>
+              <div className={ 'catalog-wrapper' }>
                   <div className={ 'catalog-wrapper-header' }>
                       <h1>{ 'All' }</h1>
                       <div className={ 'catalog-wrapper-header-btns' }>
@@ -73,8 +74,10 @@ const Catalogs = () => {
                           </Button>
                       </div>
                   </div>
-                  <div>
-                  
+                  <div className={'card-wrapper'}>
+                      { products && products.map((product: any) => (
+                          <ProductCard data={product}/>
+                        ))}
                   </div>
               </div>
           </div>

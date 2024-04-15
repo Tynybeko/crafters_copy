@@ -10,6 +10,8 @@ const OPTIONS: EmblaOptionsType = {}
 
 const ItemStage1 = ({product} : {product : ItemsTypes}) => {
     
+    console.log(product)
+    
     return (
       <div className={'globalContainer'}>
           <div className={'item-stage1'}>

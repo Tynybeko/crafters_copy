@@ -2,27 +2,18 @@
 
 import Box from "@/components/ui/Box";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchItemCategories } from "@/redux/slices/item-categories";
 
 const EditStage1 = ({valueStage1, setValueStage1}: any) => {
     const dispatch = useAppDispatch()
-    const {data: categories} = useAppSelector(state => state.categories)
-    const [ category, setCategory ] = useState<any>();
-    useEffect(() => {
-        dispatch(fetchItemCategories())
-    }, [dispatch]);
+    const { data: categories } = useAppSelector(state => state.categories);
+    const { data: subcategories } = useAppSelector(state => state.subCategories);
+  
     
-    useEffect(() => {
-        console.log(categories)
-        if(valueStage1 && valueStage1?.category) {
-            const category = categories?.find((category : any) => category.id === valueStage1?.category)
-            setCategory(category)
-        }
-    }, [ valueStage1, categories ]);
+    
     
     const handleValueStage1 = (e: any) => {
         setValueStage1({
@@ -31,7 +22,6 @@ const EditStage1 = ({valueStage1, setValueStage1}: any) => {
         })
     };
     
-   
     return (
       <div className={ 'add-products-forms' }>
           <div className={ 'add-products-form' }>
@@ -40,22 +30,22 @@ const EditStage1 = ({valueStage1, setValueStage1}: any) => {
                       <img src="/svg/user.svg" alt="User"/>
                       <span>Name</span>
                   </h1>
-                  <Input value={valueStage1.name} name={ 'name' } placeholder={ 'Product Name' }/>
+                  <Input name={ 'name' } placeholder={ 'Product Name' }/>
               </Box>
               <Box>
                   <h1>
                       <img src="/svg/category.svg" alt="User"/>
                       <span>Category</span>
                   </h1>
-                  <Select>
-                      <SelectTrigger>
-                          <SelectValue placeholder="Category"/>
+                  <Select onValueChange={handleValueStage1}>
+                      <SelectTrigger  value={valueStage1?.category.id}>
+                          <SelectValue placeholder="Category" />
                       </SelectTrigger>
                       <SelectContent>
                           <SelectGroup>
-                              {/*{categories?.map( categories => (*/}
-                              {/*  <SelectItem key={ categories.id } value={ String(categories.id) }>{ categories.name }</SelectItem>*/}
-                              {/*))}*/}
+                              {categories && categories?.map( categories => (
+                                <SelectItem key={ categories.id }  value={ String(categories.id) }>{ categories.name }</SelectItem>
+                              ))}
                           </SelectGroup>
                       </SelectContent>
                   </Select>
