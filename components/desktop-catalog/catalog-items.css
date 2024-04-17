@@ -73,6 +73,12 @@
 	border-radius: 24px;
 	background: #1DBE601A;
 	cursor: pointer;
+	transition: all 0.1s ease;
+}
+
+.cart-subcategory:hover {
+	background: #1DBE6099;
+	box-shadow: 4px 4px 12px 0 #00000033;
 }
 
 .sub_catalog-cards {

@@ -22,46 +22,54 @@ export interface IUser
 
 export interface ICompany
     {
-        id : number
-        legal_name : string
-        legal_address : string
-        phone : string
         city : string
-        index : string
-        site_url : string
+        created_at : string
+        id : number
         image : string
-        user: IUser
-        balance : {
-            balance : string
-            id : number
-            created_at : string
-            days_transaction_closing: number
-            amount : string
-        }
+        index : number
+        legal_address : string
+        legal_name : string
+        owner: IUser
+        phone : string
+        rate : number | null
+        site_url : string
+        updated_at : string
     }
 
-export interface ICategories {
+export interface ICategories
+    {
         id : number
         name : string
         description : string
         created_at : string
         updated_at : string
     }
-    
+
 export interface ISubcategories
     {
+        category : number
         id : number
         name : string
         description : string
-        image : string
-        category : number
+        image : string | null
+    }
+
+export interface IColor
+    {
+        color : string
+        id : number
+        name : string
     }
 
 export interface IColors
     {
+        color : IColor
+        currency : ICurrency
+        discount : number | null
         id : number
-        color : string
-        name : string
+        images : ImagesTypes[]
+        price : number
+        quantity : number
     }
 
 export interface ICurrency
@@ -84,45 +92,45 @@ export interface IMyItems
         currency : ICurrency
     }
 
-export interface ICurrency {
-    code : string
-    id : number
-    name : string
-}
+export interface ICurrency
+    {
+        code : string
+        id : number
+        name : string
+    }
 
-export interface ItemsTypes {
-    category : number
-    code : string
-    company : ICompany
-    description : string
-    id : number
-    main_features : string
-    models_name : IModels
-    name : string
-    payment : IPayment
-    subcategory : number
-}
+export interface ItemsTypes
+    {
+        category : ICategories
+        code : string
+        company : ICompany
+        description : string
+        id : number
+        is_new : boolean
+        is_popular : boolean
+        main_features : string
+        models_name : IModels[]
+        name : string
+        payment : IPayment | null
+        subcategory : ISubcategories
+    }
 
-export interface IPayment {
-  id : number
-  created_at : string
-  updated_at : string
-  terms_of_payment : string
-  delivery_conditions : string
-}
+export interface IPayment
+    {
+        id : number
+        created_at : string
+        updated_at : string
+        terms_of_payment : string
+        delivery_conditions : string
+    }
 
-export interface IModels {
-    id : number
-    color : IColors
-    currency : ICurrency
-    images : ImagesTypes
-    item: number
-    price : number
-    name_model : string
-    quantity : number
-}
+export interface IModels
+    {
+        colors : IColors[]
+    }
 
-export interface ImagesTypes {
-    id : number
-    image : string
-}
+export interface ImagesTypes
+    {
+        id : number
+        image : string
+    }

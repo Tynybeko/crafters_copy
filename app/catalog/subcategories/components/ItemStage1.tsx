@@ -17,7 +17,9 @@ const ItemStage1 = ({product} : {product : ItemsTypes}) => {
           <div className={'item-stage1'}>
               <div className={'item-stage1-header'}>
                   <div className={'item-stage1-header-img'}>
-                    <ImageCorusel images={product.models_name}  options={OPTIONS}/>
+                      { product.models_name.length !== 0 ? <ImageCorusel images={product.models_name}  options={OPTIONS}/> : (
+                        <img src={product.company.image} alt=""/>
+                      ) }
                   </div>
                   <div className={'item-stage1-header-contents'}>
                     <div className={'item-stage1-header-contents-title'}>

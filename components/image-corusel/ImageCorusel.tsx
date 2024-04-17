@@ -7,74 +7,71 @@ import './corusel.css'
 import { Thumb } from "@/components/image-corusel/ImageCoriselThumb";
 
 type PropType = {
-    options?: EmblaOptionsType
-    images?: any
+    options? : EmblaOptionsType
+    images? : any
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel : React.FC<PropType> = (props) => {
     const { options, images } = props
-    const [selectedIndex, setSelectedIndex] = useState(0)
-    const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
-    const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
+    const [ selectedIndex, setSelectedIndex ] = useState(0)
+    const [ emblaMainRef, emblaMainApi ] = useEmblaCarousel(options)
+    const [ emblaThumbsRef, emblaThumbsApi ] = useEmblaCarousel({
         containScroll: 'keepSnaps',
-        dragFree: true
+        dragFree     : true
     })
     const [ imagesFilter, setImagesFilter ] = useState<any[]>();
     
     const onThumbClick = useCallback(
-      (index: number) => {
-          if (!emblaMainApi || !emblaThumbsApi) return
+      (index : number) => {
+          if ( !emblaMainApi || !emblaThumbsApi ) return
           emblaMainApi.scrollTo(index)
       },
-      [emblaMainApi, emblaThumbsApi]
+      [ emblaMainApi, emblaThumbsApi ]
     )
     
     const onSelect = useCallback(() => {
-        if (!emblaMainApi || !emblaThumbsApi) return
+        if ( !emblaMainApi || !emblaThumbsApi ) return
         setSelectedIndex(emblaMainApi.selectedScrollSnap())
         emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
-    }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
+    }, [ emblaMainApi, emblaThumbsApi, setSelectedIndex ])
     
     useEffect(() => {
-        if (!emblaMainApi) return
+        if ( !emblaMainApi ) return
         onSelect()
         emblaMainApi.on('select', onSelect)
         emblaMainApi.on('reInit', onSelect)
-    }, [emblaMainApi, onSelect])
+    }, [ emblaMainApi, onSelect ])
     
     useEffect(() => {
-        if(!images && images.length === 0) {
-            return
-        }else {
-            setImagesFilter(images[0].colors[0].images)
-        }
+        if ( !images && images.length === 0 ) return
+        setImagesFilter(images[0].colors[0].images)
     }, []);
     
     return (
       <div className="embla">
-          <div className="embla__viewport" ref={emblaMainRef}>
+          <div className="embla__viewport" ref={ emblaMainRef }>
               <div className="embla__container">
-                  {imagesFilter && imagesFilter.map((image: any, index: any) => (
-                    <div className="embla__slide" key={index}>
+                  { imagesFilter && imagesFilter.map((image : any, index : any) => (
+                    <div className="embla__slide" key={ index }>
                         <div className="embla__slide__number">
-                            <img src={image.image} alt=""/>
+                            <img src={ image.image } alt=""/>
                         </div>
                     </div>
-                  ))}
+                  )) }
               </div>
           </div>
           
           <div className="embla-thumbs">
-              <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+              <div className="embla-thumbs__viewport" ref={ emblaThumbsRef }>
                   <div className="embla-thumbs__container">
-                      {imagesFilter && imagesFilter.map(( item: any,index: any) => (
+                      { imagesFilter && imagesFilter.map((item : any, index : any) => (
                         <Thumb
-                          key={index}
-                          onClick={() => onThumbClick(index)}
-                          selected={index === selectedIndex}
-                          item={item}
+                          key={ index }
+                          onClick={ () => onThumbClick(index) }
+                          selected={ index === selectedIndex }
+                          item={ item }
                         />
-                      ))}
+                      )) }
                   </div>
               </div>
           </div>
