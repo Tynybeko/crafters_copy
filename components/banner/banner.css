@@ -2,7 +2,7 @@
 	background: linear-gradient(110.67deg, #1DBE60 -1.99%, #05A748 106.83%);
 	border-radius: 32px;
 	overflow: hidden;
-	margin-top: 40px;
+	margin: 40px 0 60px;
 	@media (max-width: 1024px) {
 		margin-top: 19px;
 	}

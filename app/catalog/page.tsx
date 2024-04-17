@@ -76,7 +76,7 @@ const Catalogs = () => {
                   </div>
                   <div className={'card-wrapper'}>
                       { products && products.map((product: any) => (
-                          <ProductCard data={product}/>
+                          <ProductCard key={product.id} data={product}/>
                         ))}
                   </div>
               </div>

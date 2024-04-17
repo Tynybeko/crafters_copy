@@ -2,27 +2,39 @@
 
 import Banner from "@/components/banner";
 import PopularCards from "@/components/cards/PopularCards";
-import { PopularData } from "@/fakeObj";
-import ProductCard from "@/components/cards/ProductCard";
 import { Button } from "@/components/ui/button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchItems } from "@/redux/slices/items";
+import { fetchItemCategories } from "@/redux/slices/item-categories";
+import ProductCard from "@/components/cards/ProductCard";
 
 
 export default function Home() {
     const dispatch = useAppDispatch();
     const { data: items } = useAppSelector(state => state.items);
+    const { data: categories } = useAppSelector(state => state.categories);
+    const [popularItems, setPopularItems] = useState([]);
     
     useEffect(() => {
-        dispatch(fetchItems({}))
-    }, [ dispatch ]);
+        dispatch(fetchItems({}));
+    }, [dispatch]);
     
-    console.log(items)
+    useEffect(() => {
+        dispatch(fetchItemCategories());
+    }, [dispatch]);
+    
+    useEffect(() => {
+        if (items && items.length > 0) {
+            const sortedItems = items.slice().sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+            setPopularItems(sortedItems.slice(0, 3));
+        }
+    }, [items]);
+    
     return (
       <main>
           <Banner/>
-          <section className="popular">
+          <section className="popular mb-[80px]">
               <div className="globalContainer">
                   <div className="popular-title">
                       <h2>Popular category</h2>
@@ -32,7 +44,7 @@ export default function Home() {
                       </div>
                   </div>
                   <div className="popular-cards">
-                      { PopularData.map((item, index) =>
+                      {popularItems && popularItems.length > 0 && popularItems.map((item, index) =>
                         <PopularCards key={ index } data={ item }/>
                       ) }
                   </div>
@@ -40,18 +52,26 @@ export default function Home() {
           </section>
           <section className='popular'>
               <div className='globalContainer'>
-                  <div className='popular-title'>
-                      <h2>Soft toy</h2>
-                      <div className='popular-title-btns'>
-                          <button> New</button>
-                          <button> Popular</button>
-                      </div>
-                  </div>
-                  <div className='cards'>
-                      { items && items.map((item : any) => (
-                        <ProductCard key={ item.id } data={ item }/>
-                      )) }
-                  </div>
+                  {categories && categories.map((category: any) => (
+                    <>
+                        <div key={category.id} className='popular-title'>
+                            <h2>{category.name}</h2>
+                            <div className='popular-title-btns'>
+                                <button> New</button>
+                                <button> Popular</button>
+                            </div>
+                        </div>
+                        <div className='cards'>
+                            {items && items
+                              .filter((item: any) => item.category.id === category.id)
+                              .sort((a: { rating: number }, b: { rating: number }) => b.rating - a.rating)
+                              .slice(0, 4)
+                              .map((filteredItem: any) => (
+                                <ProductCard key={filteredItem.id} data={filteredItem} />
+                              ))}
+                        </div>
+                    </>
+                  ))}
               </div>
           </section>
           <div className='text-center mt-[43px] mb-[120px]'>

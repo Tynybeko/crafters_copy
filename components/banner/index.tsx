@@ -13,7 +13,7 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 const Banner = () => {
     return (
       <section className='globalContainer'>
-          <div className='banner mb-[36px]'>
+          <div className='banner'>
               <div className='banner-item'>
                   <div className='banner-content'>
                       <EmblaCarousel slides={ SLIDES } options={ OPTIONS }/>

@@ -111,6 +111,7 @@ export interface ItemsTypes
         main_features : string
         models_name : IModels[]
         name : string
+        raiting : number
         payment : IPayment | null
         subcategory : ISubcategories
     }
@@ -127,6 +128,7 @@ export interface IPayment
 export interface IModels
     {
         colors : IColors[]
+        name: string
     }
 
 export interface ImagesTypes
