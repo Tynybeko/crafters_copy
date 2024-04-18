@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemsTypes } from "@/types";
 import { EmblaOptionsType } from "embla-carousel";
 import ImageCorusel from "@/components/image-corusel/ImageCorusel";
@@ -15,7 +15,8 @@ const OPTIONS : EmblaOptionsType = {}
 
 const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
     const [ copied, setCopied ] = useState(false);
-    
+    const [ modelIndex, setModelIndex ] = useState<number>( 0 )
+    const [ modelType, setModelType ] = useState<any>({});
     const handleCopy = () => {
         navigator.clipboard.writeText(product.code);
         setCopied(true);
@@ -24,7 +25,14 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
         }, 2000);
     };
     
-    console.log(product)
+    useEffect(() => {
+        const model = product.models_name.find((item, index) => index === modelIndex)
+        setModelType(model)
+    }, [modelIndex])
+    
+    
+    
+    console.log(modelType)
     
     return (
       <div className={ 'globalContainer' }>
@@ -81,8 +89,7 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
                               </p>
                               <div className={ 'flex items-center gap-2' }>
                                   <span className={ 'text-[16px] text-[#262D29]/40 font-[500] leading-[16px]' }>
-                                      Vendor: <span
-                                    className={ ' text-[#262D29] underline ml-[4px]' }> { product.company.legal_name }</span>
+                                      Vendor: <span className={ ' text-[#262D29] underline ml-[4px]' }> { product.company.legal_name }</span>
                                   </span>
                                   <div className={ 'w-[24px] h-[24px] rounded-full overflow-hidden' }>
                                       <img className={ 'w-full h-full object-cover object-center' }
@@ -92,51 +99,50 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
                               </div>
                           </div>
                           <Separator orientation='horizontal' className={ 'mb-[24px]' }/>
-                          <div className={ 'flex gap-[24px]' }>
-                              <div className={ 'max-w-[292px] w-full' }>
-                                  <span
-                                    className={ 'text-[16px] text-[#262D29] font-[500] leading-[16px]' }>
+                          <div className={ 'flex gap-[24px]  mb-[24px]' }>
+                              <div className={' w-1/2'}>
+                                  <div className={'mb-2'}>
                                       Color:
-                                  </span>
-                                  <div className={ 'flex items-center gap-2' }>
-                                      { product.models_name[0] && product.models_name[0].colors.map((item) => (
-                                        <div
-                                          className={ 'flex items-center justify-center' }
-                                          key={ item.id }
-                                          style={ {
-                                              width       : '24px',
-                                              height      : '24px',
-                                              borderRadius: '50%',
-                                              cursor      : 'pointer',
-                                              border      : '1px solid #262D29',
-                                          } }><span style={ {
-                                            width          : '16px',
-                                            height         : '16px',
-                                            display        : 'block',
-                                            borderRadius   : '50%',
-                                            backgroundColor: item.color.color
-                                        } }></span>
-                                        </div>)) }
+                                  </div>
+                                  <div className={'flex items-center gap-1'}>
+                                      { modelType && modelType.colors && modelType?.colors.length !== 0 && modelType?.colors.map((item: any) => (
+                                        <div className={'flex items-center justify-center'}>
+                                        <span
+                                          className={'w-[24px] h-[24px] block p-[2px] rounded-full'}
+                                          style={{ border: '1px solid green' }}>
+                                          <span style={{borderRadius: '50%', background: item.color.color, display: 'block', width: '100%', height: '100%'}}></span>
+                                        </span>
+                                        </div>
+                                      )) }
                                   </div>
                               </div>
                               <Separator orientation='vertical' className={ 'h-auto block' }/>
-                              <div className={ 'max-w-[292px] w-full' }>
-                               <span
-                                 className={ 'text-[16px] text-[#262D29] font-[500] leading-[16px]' }>
+                              <div className={ 'w-1/2' }>
+                                  <span className={ 'text-[16px] block text-[#262D29] font-[500] leading-[16px] mb-2' }>
                                       Model:
                                   </span>
                                   <div className={ 'flex items-center gap-2' }>
                                       { product.models_name.map((item, index) => (
-                                        <Button variant={'outline'}
-                                          key={ index }
-                                         >{ item.name }
+                                        <Button onClick={() => setModelIndex(index)} variant={ 'outline' }
+                                                key={ index }
+                                        >{ item.name }
                                         </Button>)) }
                                   </div>
                               </div>
                           </div>
                           <Separator orientation='horizontal' className={ 'mb-[24px]' }/>
                           <div>
-                            
+                              <label htmlFor="" className={ 'flex items-center' }>
+                                  <Button variant={ 'outline' } className={ 'w-[40px] h-[40px] rounded-[50%] p-0 ' }>
+                                      <img src="/svg/chevron-left.svg" alt="Left"/>
+                                  </Button>
+                                  <input
+                                    className={ 'w-[40px] text-center text-[16px] text-[#262D29] font-[500] leading-[16px] focus:outline-none' }
+                                    type="number" value={ 1 }/>
+                                  <Button variant={ 'outline' } className={ 'w-[40px] h-[40px] rounded-[50%] p-0' }>
+                                      <img src="/svg/chevron-right.svg" alt="Right"/>
+                                  </Button>
+                              </label>
                           </div>
                       </Box>
                   </div>

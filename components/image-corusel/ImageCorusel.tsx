@@ -15,6 +15,7 @@ const EmblaCarousel : React.FC<PropType> = (props) => {
     const { options, images } = props
     const [ selectedIndex, setSelectedIndex ] = useState(0)
     const [ emblaMainRef, emblaMainApi ] = useEmblaCarousel(options)
+    const [ isCart, setIsCart ] = useState(false)
     const [ emblaThumbsRef, emblaThumbsApi ] = useEmblaCarousel({
         containScroll: 'keepSnaps',
         dragFree     : true
@@ -54,6 +55,17 @@ const EmblaCarousel : React.FC<PropType> = (props) => {
                   { imagesFilter && imagesFilter.map((image : any, index : any) => (
                     <div className="embla__slide" key={ index }>
                         <div className="embla__slide__number">
+                            <div
+                              onClick={ () => setIsCart(!isCart) }
+                              style={ {
+                                  background: isCart ? '#1DBE60' : 'white',
+                                  position : 'absolute',
+                                  top      : '30px',
+                                  right    : '30px',
+                              } }
+                              className='btn-heart'>
+                                <img src={ `/svg/heart-cart${ isCart ? '-white' : '-blue' }.svg` } alt=""/>
+                            </div>
                             <img src={ image.image } alt=""/>
                         </div>
                     </div>
