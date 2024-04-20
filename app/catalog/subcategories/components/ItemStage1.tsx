@@ -30,6 +30,7 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
         setModelType(model)
     }, [modelIndex])
 
+    console.log(product)
     
     return (
       <div className={ 'globalContainer' }>

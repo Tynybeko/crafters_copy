@@ -22,8 +22,7 @@ const PopularCards = ({ data } : {
 }) : React.ReactElement => {
     
     const [ isCart, setIsCart ] = useState(false)
-    console.log(data);
-    
+
     return (
       <>
           <div
