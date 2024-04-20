@@ -8,11 +8,10 @@ import { Thumb } from "@/components/image-corusel/ImageCoriselThumb";
 
 type PropType = {
     options? : EmblaOptionsType
-    images? : any
+    model? : any
 }
 
-const EmblaCarousel : React.FC<PropType> = (props) => {
-    const { options, images } = props
+const EmblaCarousel = ({model, options} : any) => {
     const [ selectedIndex, setSelectedIndex ] = useState(0)
     const [ emblaMainRef, emblaMainApi ] = useEmblaCarousel(options)
     const [ isCart, setIsCart ] = useState(false)
@@ -42,12 +41,12 @@ const EmblaCarousel : React.FC<PropType> = (props) => {
         emblaMainApi.on('select', onSelect)
         emblaMainApi.on('reInit', onSelect)
     }, [ emblaMainApi, onSelect ])
-    
+
     useEffect(() => {
-        if ( !images && images.length === 0 ) return
-        setImagesFilter(images[0].colors[0].images)
-    }, []);
-    
+        if (!model || !model.colors || model.colors.length === 0) return;
+        setImagesFilter(model.colors[0].images);
+    }, [model]);
+
     return (
       <div className="embla">
           <div className="embla__viewport" ref={ emblaMainRef }>

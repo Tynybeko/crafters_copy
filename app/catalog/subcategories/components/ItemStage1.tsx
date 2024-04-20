@@ -29,10 +29,7 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
         const model = product.models_name.find((item, index) => index === modelIndex)
         setModelType(model)
     }, [modelIndex])
-    
-    
-    
-    console.log(modelType)
+
     
     return (
       <div className={ 'globalContainer' }>
@@ -40,7 +37,7 @@ const ItemStage1 = ({ product } : { product : ItemsTypes }) => {
               <div className={ 'item-stage1-header' }>
                   <div className={ 'item-stage1-header-img' }>
                       { product.models_name.length !== 0 ?
-                        <ImageCorusel images={ product.models_name } options={ OPTIONS }/> : (
+                        <ImageCorusel model={ modelType } options={ OPTIONS }/> : (
                           <img src={ product.company.image } alt=""/>
                         ) }
                   </div>
