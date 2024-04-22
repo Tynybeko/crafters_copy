@@ -52,9 +52,9 @@ export default function Home() {
           </section>
           <section className='popular'>
               <div className='globalContainer'>
-                  {categories && categories.map((category: any) => (
-                    <>
-                        <div key={category.id} className='popular-title'>
+                  {categories && categories.map((category: any, index: number) => (
+                    <div  key={category.id}>
+                        <div  className='popular-title'>
                             <h2>{category.name}</h2>
                             <div className='popular-title-btns'>
                                 <button> New</button>
@@ -70,7 +70,7 @@ export default function Home() {
                                 <ProductCard key={filteredItem.id} data={filteredItem} />
                               ))}
                         </div>
-                    </>
+                    </div>
                   ))}
               </div>
           </section>

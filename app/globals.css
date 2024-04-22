@@ -180,3 +180,9 @@ body::-webkit-scrollbar {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

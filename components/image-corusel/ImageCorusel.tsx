@@ -43,8 +43,8 @@ const EmblaCarousel = ({model, options} : any) => {
     }, [ emblaMainApi, onSelect ])
 
     useEffect(() => {
-        if (!model || !model.colors || model.colors.length === 0) return;
-        setImagesFilter(model.colors[0].images);
+        if (!model || !model.images || model.images.length === 0) return;
+        setImagesFilter(model.images);
     }, [model]);
 
     return (
