@@ -39,8 +39,7 @@ const Shop = () => {
     if ( !data || Object.keys(data).length === 0 ) {
         return <div>Data is an empty object</div>;
     }
-    
-    console.log(inputData)
+
     
     return (
       <div className='shop'>
@@ -61,7 +60,7 @@ const Shop = () => {
                       <div className='shop-card-body'>
                         <div className={'shop-balance'}>
                             <h3 className={'text-[#1DBE60]'}>
-                                { data.balance.amount }
+                                { data.balance?.amount }
                                 <span>Sold in the amount of</span>
                             </h3>
                             <h3 className={'text-[#F83427]'}>

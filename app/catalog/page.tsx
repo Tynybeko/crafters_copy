@@ -32,8 +32,6 @@ const Catalogs = () => {
         }
     }, [router]);
     
-    console.log(products)
-    
     return (
       <section className='mt-[20px] md:mt-[40px]'>
           <div className={ 'globalContainer' }>

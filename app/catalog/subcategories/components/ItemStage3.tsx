@@ -2,9 +2,9 @@ import React from 'react';
 
 const ItemStage3 = () => {
     return (
-      <div>
+      <section className={'main-features'}>
           ItemStage3
-      </div>
+      </section>
     );
 };
 

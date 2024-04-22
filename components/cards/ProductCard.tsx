@@ -21,7 +21,7 @@ const ProductCard = ({ data, owner } : { data :any , owner? : boolean }) => {
                 console.log(error)
             })
     }
-    
+
     return (
       <div className='card'>
           <div className="card-top">

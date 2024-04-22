@@ -34,6 +34,8 @@ export interface ICompany
         rate : number | null
         site_url : string
         updated_at : string
+        balance: any
+        user: IUser
     }
 
 export interface ICategories

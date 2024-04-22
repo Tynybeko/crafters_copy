@@ -14,7 +14,7 @@ import Link from "next/link";
 const OPTIONS: EmblaOptionsType = {}
 
 
-const ItemStage1 = ({product}: { product: ItemsTypes }) => {
+const ItemStage1 = ({product, setActiveStage, setColorModels}: { product: ItemsTypes,setColorModels: any, setActiveStage: (e: number) => void }) => {
     const [copied, setCopied] = useState<boolean>(false);
     const [modelIndex, setModelIndex] = useState<number>(0);
     const [modelType, setModelType] = useState<any | null>(null);
@@ -42,6 +42,7 @@ const ItemStage1 = ({product}: { product: ItemsTypes }) => {
     useEffect(() => {
         const color = modelType?.colors?.find((color: any) => color.id === colorId) || null;
         setColorModel(color);
+        setColorModels(color)
     }, [colorId, modelType]);
 
     const incrementQuantity = () => {
@@ -56,10 +57,8 @@ const ItemStage1 = ({product}: { product: ItemsTypes }) => {
         }
     }
 
-    console.log(product)
-
     return (
-        <div className={'globalContainer'}>
+        <section className={'globalContainer'}>
             <div className={'item-stage1'}>
                 <div className={'item-stage1-header'}>
                     <div className={'item-stage1-header-img'}>
@@ -97,7 +96,8 @@ const ItemStage1 = ({product}: { product: ItemsTypes }) => {
                         <p className={'item-description'}> Description <span> {product.description} </span></p>
                         <p className={'item-description item-description-features'}> Main
                             features <span>  {product.main_features}</span></p>
-                        <Link href={'#'}
+                        <Link  href={'#'}
+                               onClick={() => setActiveStage(2)}
                               className={'flex items-center gap-3 cursor-pointer underline item-description-all'}>
                             All features
                             <img src="/svg/Icon-down.svg" alt="Icon"/>
@@ -281,7 +281,7 @@ const ItemStage1 = ({product}: { product: ItemsTypes }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

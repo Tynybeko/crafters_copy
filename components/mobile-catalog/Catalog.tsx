@@ -14,21 +14,22 @@ import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
 const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpenMenu: any, isOpenCatalog: boolean, setIsOpenCatalog: any }) => {
     const dispatch = useAppDispatch()
     const { screenWidth } = useScreenWidth()
-    const [categoryId, setCategoryId] = useState<number>();
+    const [categoryId, setCategoryId] = useState<number>(1);
     const { data: categories } = useAppSelector(state => state.categories)
     const { data: subcategories } = useAppSelector(state => state.subCategories)
     const handleCatalogHover = (id : any) => setCategoryId(id)
     useEffect(() => {
         dispatch(fetchItemCategories())
     }, [ dispatch ]);
-    
-    
+
     useEffect(() => {
         if(categoryId){
-            dispatch(fetchItemSubcategories({ categoryId }))
+            dispatch(fetchItemSubcategories({  }))
         }
-    }, [categoryId, dispatch]);
-    
+    }, [dispatch]);
+
+    console.log(subcategories)
+
     return (
         <>
             <div
@@ -47,12 +48,13 @@ const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpen
                         ) : null}
                         <Accordion type="single" collapsible className="w-full">
                             {categories?.map((item : any) => (
-                                <AccordionItem onMouseEnter={() => handleCatalogHover(item.id)} value={item.id} key={item.id}>
+                                <AccordionItem onClick={() => handleCatalogHover(item.id)} value={item.id} key={item.id}>
                                     <AccordionTrigger>{item.name}</AccordionTrigger>
-                                    {subcategories?.map((item : any) => (
+                                    {subcategories?.filter(item => item.category === categoryId).map((item : any) => (
                                         <AccordionContent key={item.id}>
-                                           <div>
-                                               {item.name}
+                                           <div className={'mobile-subcategories-card'}>
+                                               <img src={item.image ? item.image : '/images/sub-category.png'} alt="image"/>
+                                              <span>{item.name}</span>
                                            </div>
                                         </AccordionContent>
                                     ))}
