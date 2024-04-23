@@ -7,6 +7,8 @@ import colorsSlice from "@/redux/slices/colors";
 import currencySlice from "@/redux/slices/currency";
 import myItemsSlice from "@/redux/slices/my-items";
 import itemsSlice from "@/redux/slices/items";
+import myPurchases from "@/redux/slices/my-purchases";
+import favorites from "@/redux/slices/favorites";
 
 export const makeStore = () => {
     return configureStore({
@@ -18,7 +20,9 @@ export const makeStore = () => {
             colors: colorsSlice,
             currency: currencySlice,
             myItems: myItemsSlice,
-            items: itemsSlice
+            items: itemsSlice,
+            myPurchases: myPurchases,
+            favorites: favorites
         },
         devTools  : true,
         middleware: (getDefaultMiddleware) => {

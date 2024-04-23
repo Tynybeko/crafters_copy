@@ -80,7 +80,6 @@ const AddProducts = () => {
                 subcategory  : Number(dataProducts.subcategory)
             })
               .then((res) => {
-                  console.log(res.data)
                   localStorage.setItem('itemId', JSON.stringify(res.data.id))
                   setActiveStage(2)
               })

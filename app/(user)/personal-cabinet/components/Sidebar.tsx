@@ -12,24 +12,28 @@ import { fetchCompany } from "@/redux/slices/company";
 
 //styles
 import '../personal-cabinet.css'
+import {fetchFavorites} from "@/redux/slices/favorites";
 
 export function PersonalSidebar() {
     const dispatch = useAppDispatch()
     const pathName = usePathname()
     const router = useRouter();
     const { data} = useAppSelector(state => state.user)
-    
+    const favorites = useAppSelector(state => state.favorites.data)
     const handleLogout = () => {
         dispatch(LogoutUser())
         window.location.href = '/'
     }
     useEffect(() => {
-        if(data && data.role !== 'client'){
+        if(data && data?.role !== 'client'){
             dispatch(fetchCompany());
         }
     }, [dispatch, data]);
-    
-    
+
+    useEffect(() => {
+        dispatch(fetchFavorites())
+    }, [dispatch]);
+
     return (
       <>
         <aside className="cabinet-sidebar">
@@ -77,7 +81,7 @@ export function PersonalSidebar() {
                                   </svg>
                                   Favorites
                               </Link>
-                              <span>2</span>
+                              <span>{favorites?.length}</span>
                           </div>
                           <div className={ 'flex items-center justify-between' }>
                               <Link className={ pathName === "/personal-cabinet/my-purchases" ? "active" : "" }
@@ -104,7 +108,7 @@ export function PersonalSidebar() {
                                   </svg>
                                   My feedback
                               </Link>
-                              <span>21</span>
+                              <span>0</span>
                           </div>
                       </li>
                       {data?.role !== "client" && (

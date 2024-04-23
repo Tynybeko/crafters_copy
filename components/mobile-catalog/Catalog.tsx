@@ -28,8 +28,6 @@ const Catalog = ({ setIsOpenMenu, isOpenCatalog, setIsOpenCatalog }: { setIsOpen
         }
     }, [dispatch]);
 
-    console.log(subcategories)
-
     return (
         <>
             <div

@@ -81,8 +81,8 @@ export function MobileMenu({ close, setIsLogin, isAuthUser, open, setIsOpenCatal
 
                             </li>
                             <li>
-                                <CustomLink active={pathName === '/personal-cabinet/my-purchases'}
-                                    href={'/personal-cabinet/my-purchases'}>
+                                <CustomLink active={pathName === '/personal-cabinet/my-purchases.ts'}
+                                    href={'/personal-cabinet/my-purchases.ts'}>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

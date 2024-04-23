@@ -11,6 +11,7 @@ import Catalog from "@/components/mobile-catalog/Catalog";
 //styles
 import '../../styles/header.css';
 import Auth from "@/components/auth/Auth";
+import {fetchFavorites} from "@/redux/slices/favorites";
 
 
 const Header = () => {
@@ -40,6 +41,10 @@ const Header = () => {
             setIsOpenDrop(false);
         }, 150);
     };
+
+    useEffect(() => {
+        dispatch(fetchFavorites());
+    }, [dispatch]);
 
     useEffect(() => {
         function handleClick(event: any) {

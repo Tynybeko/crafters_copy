@@ -39,11 +39,9 @@ const AddCompany = () => {
     const handleSubmit = (e : any) => {
         setIsLoading(true)
         e.preventDefault()
-        console.log(dataCompany)
         apiToken.post('/send-aplication-compancy/', dataCompany, { headers: { 'Content-Type': 'multipart/form-data' } })
           .then((res) => {
               setIsOpenAlert(true)
-              console.log(res.data)
               setIsLoading(false)
           })
           .catch((error) => {

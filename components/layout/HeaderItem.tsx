@@ -56,7 +56,7 @@ export function HeaderItem(
                         </svg>
                     )}
                 </button>
-                <Link href={'/'} className={'h-auto'}>
+                <Link href={'/'}>
                     <Image src='/logo.svg' alt="/" width={132} height={24} />
                 </Link>
             </div>

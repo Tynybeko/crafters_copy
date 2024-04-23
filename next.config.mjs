@@ -1,27 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
     images: {
-        formats: ['image/avif', 'image/webp'],
+        formats: ['image/webp', 'image/avif'],
         remotePatterns: [
-            { protocol: "https", hostname: "*" },
-            { protocol: "http", hostname: "*" },
+            { protocol: "https", hostname: "localhost:3000" },
+            { protocol: "http", hostname: "localhost:3000" },
         ],
-    },
-    experimental: {
-        turbo: {
-            rules: {
-                '*.md': [
-                    {
-                        loader: '@mdx-js/loader',
-                        options: {
-                            format: 'md',
-                        },
-                    },
-                ],
-                '*.mdx': ['@mdx-js/loader'],
-            },
-        },
     },
 };
 

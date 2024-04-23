@@ -1,12 +1,21 @@
 import Box from "@/components/ui/Box";
 import {Button} from "@/components/ui/button";
-import React from "react";
+import React, {useState} from "react";
 
-export const CardItem = ({ colorModels, product, } : {colorModels: any, product: any}) => {
+export const CardItem = ({button, setIsActiveAlert, colorModels, product, title}: {
+    button?: any,
+    setIsActiveAlert: any,
+    colorModels: any,
+    product: any,
+    title?: any
+}) => {
+    const handleCopy = () =>  navigator.clipboard.writeText(product.code);
+
+
     return (
-        <div className={"product-card"}>
+        <div className={!title ? "product-card-width" : "product-card"}>
             <div className={"product-card-item"}>
-                <h1>Your product</h1>
+                {title && <h1>{title}</h1>}
                 <div className={"flex items-center justify-between mb-[24px]"}>
                     <div className={"flex items-center"}>
                         {[1, 2, 3, 4, 5].map((star: number) => (
@@ -18,17 +27,18 @@ export const CardItem = ({ colorModels, product, } : {colorModels: any, product:
                                        {colorModels.raiting !== 0 && colorModels.raiting ? colorModels.raiting : 0} reviews
                                     </span>
                     </div>
-                    <div className={"item-stage1-header-contents-code"}>
-                        Code: #{colorModels.code}
+                    <div className={'item-stage1-header-contents-code'}>
+                        Code: #{product.code}
                         <img
                             src="/svg/copy.svg"
                             alt="Copy Code"
-                            style={{cursor: "pointer"}}
+                            onClick={handleCopy}
+                            style={{cursor: 'pointer'}}
                         />
                     </div>
                 </div>
                 <div className={"rounded-[32px] overflow-hidden mb-[24px]"}>
-                    <img className={"w-full h-full object-cover"} src={colorModels.images[0].image}
+                    <img className={"w-full h-[300px] object-cover"} src={colorModels.images[0].image}
                          alt="Image"/>
                 </div>
                 <Box className={"p-[24px]"}>
@@ -54,18 +64,22 @@ export const CardItem = ({ colorModels, product, } : {colorModels: any, product:
                         {colorModels?.price}
                         {colorModels?.discount !== null &&
                             <span className={"font-[500] text-[16px] line-through opacity-40"}>
-                                            <span>{colorModels?.currency?.code} {colorModels?.discount} </span>
-                                        </span>}
+                                <span>{colorModels?.currency?.code} {colorModels?.discount} </span>
+                            </span>
+                        }
                     </p>
-                    <div className={"flex items-center gap-2"}>
-                        <Button variant={"default"} className={"flex items-center gap-1 w-[142px]"}>
-                            <img src="/svg/shopping.svg" alt="Cart"/>
-                            Buy
-                        </Button>
-                        <Button variant={"outline"} className={"flex items-center gap-1 w-[142px]"}>
-                            Fast buy
-                        </Button>
-                    </div>
+                    {button && (
+                        <div className={"flex items-center gap-2"}>
+                            <Button variant={"default"} className={"flex items-center gap-1 w-[142px]"}>
+                                <img src="/svg/shopping.svg" alt="Cart"/>
+                                Buy
+                            </Button>
+                            <Button onClick={() => setIsActiveAlert(true)} variant={"outline"}
+                                    className={"flex items-center gap-1 w-[142px]"}>
+                                Fast buy
+                            </Button>
+                        </div>
+                    )}
                 </Box>
             </div>
         </div>

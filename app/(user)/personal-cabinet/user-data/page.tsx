@@ -78,8 +78,7 @@ import { apiToken } from "@/axios";
           })
     }
      
-     console.log(data);
-    
+
     return (
       <div className='personal-cabinet'>
           <Box className='user'>

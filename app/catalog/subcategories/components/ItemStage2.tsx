@@ -9,7 +9,6 @@ const ItemStage2 = ({colorModels, product}: { colorModels: any, product: ItemsTy
     const handleCopy = () => navigator.clipboard.writeText(colorModels.code);
 
 
-    console.log(product)
 
     return (
         <section className={'main-features'}>

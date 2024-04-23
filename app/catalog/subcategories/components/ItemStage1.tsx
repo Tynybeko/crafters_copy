@@ -14,7 +14,7 @@ import Link from "next/link";
 const OPTIONS: EmblaOptionsType = {}
 
 
-const ItemStage1 = ({product, setActiveStage, setColorModels}: { product: ItemsTypes,setColorModels: any, setActiveStage: (e: number) => void }) => {
+const ItemStage1 = ({product, setActiveStage, setColorModels, setIsActiveAlert }: {setIsActiveAlert: any, product: ItemsTypes,setColorModels: any, setActiveStage: (e: number) => void }) => {
     const [copied, setCopied] = useState<boolean>(false);
     const [modelIndex, setModelIndex] = useState<number>(0);
     const [modelType, setModelType] = useState<any | null>(null);
@@ -191,11 +191,11 @@ const ItemStage1 = ({product, setActiveStage, setColorModels}: { product: ItemsT
                                         </span>}
                                     </p>
                                     <div className={'flex items-center gap-2'}>
-                                        <Button variant={'default'} className={'flex items-center gap-1 w-[142px]'}>
+                                        <Button onClick={() => setIsActiveAlert(true)} variant={'default'} className={'flex items-center gap-1 w-[142px]'}>
                                             <img src="/svg/shopping.svg" alt="Cart"/>
                                             Buy
                                         </Button>
-                                        <Button variant={'outline'} className={'flex items-center gap-1 w-[142px]'}>
+                                        <Button onClick={() => setIsActiveAlert(true)} variant={'outline'} className={'flex items-center gap-1 w-[142px]'}>
                                             Fast buy
                                         </Button>
                                     </div>

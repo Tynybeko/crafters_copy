@@ -1,6 +1,6 @@
 .cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(279px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
 	gap: 12px 20px;
 }
 
@@ -38,23 +38,6 @@
 	width: 100%;
 	object-fit: cover;
 	height: 100%;
-}
-
-.card-top-btn {
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-	transition: all 0.2s ease;
-	border: 1px solid #1DBE60;
-	border-radius: 50%;
-	position: relative;
-}
-
-.card-top-btn > img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 
 .card-bottom {

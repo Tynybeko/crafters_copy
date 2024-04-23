@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import NextBreadcrumb from "@/components/utils/Breascrumb";
-import { PersonalSidebar } from "@/app/(user)/personal-cabinet/(components)/Sidebar";
+import { PersonalSidebar } from "@/app/(user)/personal-cabinet/components/Sidebar";
 
 
 //styles

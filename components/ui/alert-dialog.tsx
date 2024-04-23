@@ -59,10 +59,7 @@ const AlertDialogHeader = ({
 )
 AlertDialogHeader.displayName = "AlertDialogHeader"
 
-const AlertDialogFooter = ({
-                               className,
-                               ...props
-                           } : React.HTMLAttributes<HTMLDivElement>) => (
+const AlertDialogFooter = ({ className,  ...props } : React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={ cn(
       "flex w-full justify-center",
