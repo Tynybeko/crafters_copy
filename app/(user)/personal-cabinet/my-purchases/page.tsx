@@ -15,7 +15,6 @@ import {Separator} from "@/components/ui/separator";
 
 //styles
 import './my-purchases.css'
-import Loading from "@/components/loading";
 
 
 function MyPurchases() {
@@ -25,7 +24,6 @@ function MyPurchases() {
     useEffect(() => {
         dispatch(fetchMyPurchases())
     }, [dispatch]);
-
 
     return (
         <section>
