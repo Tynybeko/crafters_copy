@@ -1,6 +1,6 @@
 import Box from "@/components/ui/Box";
 import {Button} from "@/components/ui/button";
-import React, {useState} from "react";
+import React from "react";
 
 export const CardItem = ({button, setIsActiveAlert, colorModels, product, title}: {
     button?: any,

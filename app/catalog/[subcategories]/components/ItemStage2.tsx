@@ -1,14 +1,8 @@
-'use client';
-
-import React, {useState} from 'react';
+import React from 'react';
 import {ItemsTypes} from "@/types";
-import Box from "@/components/ui/Box";
-import {Button} from "@/components/ui/button";
 
 const ItemStage2 = ({colorModels, product}: { colorModels: any, product: ItemsTypes }) => {
     const handleCopy = () => navigator.clipboard.writeText(colorModels.code);
-
-
 
     return (
         <section className={'main-features'}>
