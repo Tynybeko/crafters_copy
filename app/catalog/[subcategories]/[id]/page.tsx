@@ -3,23 +3,18 @@ import React, {useEffect, useState} from 'react';
 import {api, apiToken} from "@/axios";
 import Loading from "@/components/loading";
 import Stages from "@/components/ui/Stages";
-import ItemStage1 from "@/app/catalog/subcategories/components/ItemStage1";
-import ItemStage2 from "@/app/catalog/subcategories/components/ItemStage2";
-import ItemStage3 from "@/app/catalog/subcategories/components/ItemStage3";
-import ItemStage4 from "@/app/catalog/subcategories/components/ItemStage4";
+import ItemStage1 from "@/app/catalog/[subcategories]/components/ItemStage1";
+import ItemStage2 from "@/app/catalog/[subcategories]/components/ItemStage2";
+import ItemStage3 from "@/app/catalog/[subcategories]/components/ItemStage3";
+import ItemStage4 from "@/app/catalog/[subcategories]/components/ItemStage4";
 import {ItemsTypes} from "@/types";
-import {Button} from "@/components/ui/button";
-import {CardItem} from "@/app/catalog/subcategories/components/CardItem";
+import {CardItem} from "@/app/catalog/[subcategories]/components/CardItem";
 import {
     Dialog,
     DialogContent,
 } from "@/components/ui/dialog"
-import {Input} from "@/components/ui/input";
-import {Label} from "@radix-ui/react-select";
-import {Copy, X} from "lucide-react";
-import {Textarea} from "@/components/ui/textarea";
+import { X} from "lucide-react";
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
-import {fetchUser} from "@/redux/slices/user";
 import {AddToOrder} from "@/components/add-to-order";
 
 
@@ -33,7 +28,6 @@ const stageNames = [
 
 
 const ProductPage = ({params}: any) => {
-    const dispatch = useAppDispatch();
     const [product, setProduct] = useState<ItemsTypes | null>(null);
     const [activeStage, setActiveStage] = useState(1);
     const [colorModels, setColorModels] = useState<any>(null);

@@ -21,19 +21,17 @@ export function CatalogItems(props: {
     const { data: subcategories } = useAppSelector(state => state.subCategories)
     const [categoryId, setCategoryId] = useState<any>();
 
-    useEffect(() => {
-        dispatch(fetchItemCategories())
-    }, [dispatch]);
+    useEffect(() => { dispatch(fetchItemCategories())}, [dispatch]);
 
     useEffect(() => {
-        if (categoryId) {
-            dispatch(fetchItemSubcategories({ categoryId }))
-        }
+        if (categoryId) dispatch(fetchItemSubcategories({ categoryId }))
     }, [dispatch, categoryId]);
 
     const handleCatalogHover = (id: any) => setCategoryId(id)
 
     const handleRoute = (item: any) => {
+        localStorage.setItem('category', item.category)
+        localStorage.setItem('subcategory', item.id)
         router.push(`/catalog/?category=${item.category}&subcategory=${item.id}`);
         props.onClick()
     }
@@ -65,16 +63,18 @@ export function CatalogItems(props: {
                         <h3>
                             Catalog
                         </h3>
-                        <div className={'sub_catalog-cards'}>
-                            {subcategories?.map((item) => (
-                                <div className={'cart-subcategory'} onClick={() => handleRoute(item)} key={item.id}>
-                                    <div className={'cart-subcategory-item'}>
-                                        <img src={item.image ? item.image : "/images/sub-category.png"} alt="Image" />
-                                        <span>{item.name}</span>
+                        {
+                            categoryId && <div className={'sub_catalog-cards'}>
+                                {subcategories?.map((item) => (
+                                    <div className={'cart-subcategory'} onClick={() => handleRoute(item)} key={item.id}>
+                                        <div className={'cart-subcategory-item'}>
+                                            <img src={item.image ? item.image : "/images/sub-category.png"} alt="Image" />
+                                            <span>{item.name}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        }
                     </div>
                 </div>
 

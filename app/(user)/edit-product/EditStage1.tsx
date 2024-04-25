@@ -8,13 +8,8 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const EditStage1 = ({valueStage1, setValueStage1}: any) => {
-    const dispatch = useAppDispatch()
     const { data: categories } = useAppSelector(state => state.categories);
-    const { data: subcategories } = useAppSelector(state => state.subCategories);
-  
-    
-    
-    
+
     const handleValueStage1 = (e: any) => {
         setValueStage1({
             ...valueStage1,
@@ -61,8 +56,8 @@ const EditStage1 = ({valueStage1, setValueStage1}: any) => {
                       </SelectTrigger>
                       <SelectContent>
                           <SelectGroup>
-                              {/*{subcategories?.map( subcategories => (*/}
-                              {/*  <SelectItem key={ subcategories.id } value={ String(subcategories.id) }>{ subcategories.name }</SelectItem>*/}
+                              {/*{[subcategories]?.map( [subcategories] => (*/}
+                              {/*  <SelectItem key={ [subcategories].id } value={ String([subcategories].id) }>{ [subcategories].name }</SelectItem>*/}
                               {/*))}*/}
                           </SelectGroup>
                       </SelectContent>

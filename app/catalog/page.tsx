@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +8,7 @@ import './catalog.css'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import React, { useCallback, useEffect } from "react";
 import { fetchItemSubcategories } from "@/redux/slices/item-subcategories";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { fetchItems } from "@/redux/slices/items";
 import ProductCard from "@/components/cards/ProductCard";
 
@@ -16,11 +16,10 @@ const Catalogs = () => {
     const dispatch = useAppDispatch();
     const { data: subcategories } = useAppSelector(state => state.subCategories);
     const { data: products } = useAppSelector(state => state.items);
-    const searchParams = useSearchParams();
     const router = useRouter();
-    const category = searchParams.get('category');
-    const subcategory = searchParams.get('subcategory');
-    
+    const category = typeof window !== 'undefined' ? localStorage.getItem('category') : '';
+    const subcategory = typeof window !== 'undefined' ? localStorage.getItem('subcategory') : '';
+
     useEffect(() => {
         dispatch(fetchItems({ params: { category, subcategory } }));
         dispatch(fetchItemSubcategories({ categoryId: category, nameSubcategory: subcategory }));
@@ -28,10 +27,13 @@ const Catalogs = () => {
     
     const handleRoute = useCallback((category: any) => {
         if (category) {
-            router.push(`/catalog/?category=${category.category}&subcategory=${category.id}`);
+            localStorage.setItem('category', category.category)
+            localStorage.setItem('subcategory', category.id)
+            router.push(`/catalog/subcategory/?category=${category.category}&subcategory=${category.id}`);
         }
     }, [router]);
-    
+
+
     return (
       <section className='mt-[20px] md:mt-[40px]'>
           <div className={ 'globalContainer' }>
@@ -56,7 +58,11 @@ const Catalogs = () => {
               </div>
               <div className={ 'catalog-wrapper' }>
                   <div className={ 'catalog-wrapper-header' }>
-                      <h1>{ 'All' }</h1>
+                      {subcategories && subcategories.map((category: any) => (
+                          Number(subcategory) === category.id && (
+                              <h1 key={category.id}>{category.name}</h1>
+                          )
+                      ))}
                       <div className={ 'catalog-wrapper-header-btns' }>
                           <button className={ 'catalog-wrapper-header-btn catalog-wrapper-header-btn-active' }>New
                           </button>

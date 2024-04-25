@@ -1,14 +1,12 @@
-"use client";
+import React from 'react';
 
 
-import React, {useState} from 'react';
+import {Button} from "@/components/ui/button";
+import {AddFavorite} from "@/components/ui/add-favorite";
+
+
 //STYLES
 import './popular.css'
-import {Button} from "@/components/ui/button";
-import {addToFavorites} from "@/redux/slices/favorites";
-import {apiToken} from "@/axios";
-import {useAppDispatch} from "@/redux/hooks";
-import {AddFavorite} from "@/components/ui/add-favorite";
 
 interface IPropsPopularCard {
     id: number
@@ -23,11 +21,6 @@ interface IPropsPopularCard {
 const PopularCards = ({data}: {
     data: IPropsPopularCard
 }): React.ReactElement => {
-    const dispatch = useAppDispatch()
-
-    const [isCart, setIsCart] = useState(false)
-
-
 
     return (
         <>

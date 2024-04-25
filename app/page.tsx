@@ -30,6 +30,9 @@ export default function Home() {
             setPopularItems(sortedItems.slice(0, 3));
         }
     }, [items]);
+
+    console.log(items)
+
     
     return (
       <main>
@@ -52,7 +55,7 @@ export default function Home() {
           </section>
           <section className='popular'>
               <div className='globalContainer'>
-                  {categories && categories.map((category: any, index: number) => (
+                  {categories && categories.map((category: any) => (
                     <div  key={category.id}>
                         <div  className='popular-title'>
                             <h2>{category.name}</h2>
@@ -62,8 +65,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className='cards'>
-                            {items && items
-                              .filter((item: any) => item.category.id === category.id)
+                            {items && items.filter((item: any) => item.category.id === category.id)
                               .sort((a: { rating: number }, b: { rating: number }) => b.rating - a.rating)
                               .slice(0, 4)
                               .map((filteredItem: any) => (

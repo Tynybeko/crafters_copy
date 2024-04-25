@@ -107,6 +107,22 @@ export interface ItemsTypes {
     subcategory: ISubcategories
 }
 
+export interface ItemsTypes2 {
+    category: ICategories
+    code: string
+    company: ICompany
+    description: string
+    id: number
+    is_new: boolean
+    is_popular: boolean
+    main_features: string
+    image: string
+    name: string
+    price: number
+    raiting: number
+    subcategory: ISubcategories
+}
+
 export interface IPayment {
     id: number
     created_at: string
