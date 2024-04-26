@@ -4,16 +4,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the repository code
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Install dependencies and build application
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Git Pull
         run: |
-          npm ci
-          npm run build
+          cd ${{ github.workspace }}
+          ssh-keyscan -t rsa ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "cd ${{ secrets.REPO_PATH }} && git pull origin main"
+          echo "Successfully pulled repo."
 
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2
+      - name: Check Nginx configuration
+        run: |
+          echo "Checking nginx config"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo /usr/sbin/nginx -t 2>&1"
+          echo "Nginx configuration check completed."
+
+      - name: Restart Nginx service
+        if: success()
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo /bin/systemctl restart nginx"
+          echo "Nginx service restarted successfully"
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
