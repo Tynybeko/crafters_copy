@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import '../../styles/header.css'
 import Link from "next/link";
 import Image from "next/image";
+import {useAppSelector} from "@/redux/hooks";
 
 interface HeaderItemProps {
     onClick: () => void,
@@ -37,6 +38,8 @@ export function HeaderItem(
 
     const path = useRouter()
     const localStorage = typeof window !== 'undefined' ? window.localStorage.getItem('token') : null;
+    const myPurchases = useAppSelector(state => state.myPurchases.data)
+    const favorites = useAppSelector(state => state.favorites.data)
 
     return (
         <>
@@ -101,13 +104,13 @@ export function HeaderItem(
                     <li>
                         <Link href={'/#'}>
                             <img src="/svg/heart.svg" alt="Image" />
-                            <Counter count={0} />
+                            <Counter count={favorites?.length} />
                         </Link>
                     </li>
                     <li>
                         <Link href={'/#'}>
                             <img src="/svg/shopping-bag.svg" alt="Image" />
-                            <Counter count={0} />
+                            <Counter count={myPurchases?.length} />
                         </Link>
                     </li>
                     <li>

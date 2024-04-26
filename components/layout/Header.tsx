@@ -1,17 +1,18 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Link from "next/link";
 
-import { MobileMenu } from "../mobile-menu";
-import { HeaderItem } from "@/components/layout/HeaderItem";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchUser } from "@/redux/slices/user";
+import {MobileMenu} from "../mobile-menu";
+import {HeaderItem} from "@/components/layout/HeaderItem";
+import {useAppDispatch, useAppSelector} from "@/redux/hooks";
+import {fetchUser} from "@/redux/slices/user";
 import Catalog from "@/components/mobile-catalog/Catalog";
 
 //styles
 import '../../styles/header.css';
 import Auth from "@/components/auth/Auth";
 import {fetchFavorites} from "@/redux/slices/favorites";
+import {fetchMyPurchases} from "@/redux/slices/my-purchases";
 
 
 const Header = () => {
@@ -22,10 +23,14 @@ const Header = () => {
     const [isOpenDrop, setIsOpenDrop] = useState(false);
     let timer: any;
     const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const { isAuth: isAuthUser } = useAppSelector(state => state.user);
+    const { isAuth: isAuthUser} = useAppSelector(state => state.user);
 
+    useEffect(() => {
+        dispatch(fetchUser())
+        dispatch(fetchMyPurchases())
+        dispatch(fetchFavorites());
+    }, [dispatch]);
 
-    useEffect(() => { dispatch(fetchUser()) }, []);
 
 
     const closeCatalog = () => setIsOpenCatalog(false);
@@ -43,15 +48,12 @@ const Header = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchFavorites());
-    }, [dispatch]);
-
-    useEffect(() => {
         function handleClick(event: any) {
             if (!event.target.closest('.header')) {
                 setIsOpenMenu(prev => !prev);
             }
         }
+
         if (isOpenMenu) {
             document.addEventListener('click', handleClick);
             closeCatalog();
@@ -61,15 +63,16 @@ const Header = () => {
         };
     }, [isOpenMenu]);
 
+
     return (
         <>
             <MobileMenu setIsLogin={setIsLogin} isAuthUser={isAuthUser} setIsOpenCatalog={setIsOpenCatalog}
-                close={() => setIsOpenMenu(false)} open={isOpenMenu} />
+                        close={() => setIsOpenMenu(false)} open={isOpenMenu}/>
             <Catalog setIsOpenMenu={setIsOpenMenu} setIsOpenCatalog={setIsOpenCatalog}
-                isOpenCatalog={isOpenCatalog} />
-            <Auth isLogin={isLogin} setIsLogin={setIsLogin} />
+                     isOpenCatalog={isOpenCatalog}/>
+            <Auth isLogin={isLogin} setIsLogin={setIsLogin}/>
             <header className='header'>
-                <HeaderTop />
+                <HeaderTop/>
                 <div className='globalContainer'>
                     <div className='header-item'>
                         <HeaderItem

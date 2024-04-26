@@ -105,6 +105,9 @@ export interface ItemsTypes {
     raiting: number
     payment: IPayment | null
     subcategory: ISubcategories
+    image: string
+    price: number
+    company_owner: ICompany
 }
 
 export interface ItemsTypes2 {
@@ -150,22 +153,22 @@ export interface IPurchases {
     comment: string,
     status: string,
     total: number,
-    items: [
-        {
-            id: number,
-            created_at: string,
-            updated_at: string,
-            quantity: number,
-            item: number,
-            item_model: number,
-            item_data: ItemsTypes,
-            item_totals: number,
-            status: string,
-            company: number,
-            item_price: {
-                price: number,
-                currency: string
-            }
-        }
-    ]
+    items:  IPurchasesItem[]
+}
+
+export interface IPurchasesItem {
+    id: number,
+    created_at: string,
+    updated_at: string,
+    quantity: number,
+    item: number,
+    item_model: number,
+    item_data: ItemsTypes,
+    item_totals: number,
+    status: string,
+    company: number,
+    item_price: {
+        price: number,
+        currency: string
+    }
 }

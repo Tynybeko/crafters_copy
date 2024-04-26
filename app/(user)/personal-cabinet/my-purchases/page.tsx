@@ -15,6 +15,7 @@ import {Separator} from "@/components/ui/separator";
 
 //styles
 import './my-purchases.css'
+import {IPurchasesItem} from "@/types";
 
 
 function MyPurchases() {
@@ -42,6 +43,8 @@ export default MyPurchases
 
 function PurchasesItem({item}: any) {
 
+    console.log(item)
+
     return (
         <Box className={"p-[24px] rounded-[32px]"}>
             <Accordion type="single" collapsible>
@@ -63,14 +66,14 @@ function PurchasesItem({item}: any) {
                             <p className={"!text-[#F83427]"}>{item.total}</p>
                         </div>
                     </AccordionTrigger>
-                    {item.items.map((product: any) => (
+                    {item.items.map((product: IPurchasesItem) => (
                         <AccordionContent className={"purchases-content"}>
                             <Box key={product.id} className={"p-[24px]"}>
                                 <div className={"purchases-content-title"}>
                                     <div className={"purchases-content-title-img"}>
-                                        <img src={product.item_data.image} alt=""/>
+                                        <img src={product.item_data.company_owner.image} alt=""/>
                                     </div>
-                                    <h2>BRAVOLUX seller</h2>
+                                    <h2>{product.item_data.company_owner.legal_name}</h2>
                                 </div>
                                 <div className={"purchases-content-items"}>
                                     <div className={" purchases-content-item1"}>
