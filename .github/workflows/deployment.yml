@@ -15,9 +15,9 @@ jobs:
       - name: Deploy
         uses: easingthemes/ssh-deploy@v2
         with:
-          server_ip: ${{ secrets.SERVER_IP }}
-          server_port: ${{ secrets.SERVER_PORT }}
-          server_username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build/"
-          target: "/var/www/crafters_front"
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          SOURCE: "build/"
+          TARGET: "/var/www/crafters_front"
