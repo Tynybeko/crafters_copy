@@ -157,3 +157,18 @@
 .message-screen-lists::-webkit-scrollbar {
 	width: 0;
 }
+
+.img-get-message {
+	transition: all .3s linear;
+}
+
+.img-get-message:hover {
+	scale: 1.3;
+	cursor: pointer;
+	transition: all .3s linear;
+}
+
+.img-get-message:hover g path {
+	stroke: #1dbe60;
+	transition: all .3s linear;
+}

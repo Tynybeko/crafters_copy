@@ -1,12 +1,54 @@
-import React from 'react'
+'use client';
+import { useEffect, useState } from 'react';
+
+
+import Box from "@/components/ui/Box";
+import { InputSearch } from "@/components/ui/input";
+
 
 
 //styles
 import './message.css'
-import Box from "@/components/ui/Box";
-import { InputSearch } from "@/components/ui/input";
+import {apiToken} from "@/axios";
 
 function Message() {
+    const [message, setMessage] = useState("");
+    const [messagePerson, setMessagePerson] = useState('')
+
+
+
+
+    useEffect(() => {
+        const socket = new WebSocket("ws://back.crafters.asia/api/v1/chat/messages/");
+
+        socket.onopen = () => {
+            console.log("WebSocket connected");
+        };
+
+        socket.onmessage = (event) => {
+            const receivedMessage = event.data;
+            setMessage(receivedMessage);
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket disconnected");
+        };
+
+        socket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
+        return () => {
+            socket.close();
+        };
+    }, []);
+
+    const sendMessage = () => {
+        apiToken.post(`/chat/create-chat/`)
+    };
+
+    console.log(messagePerson)
+
     return (
       <Box className='message'>
           <div className='message-wrapper'>
@@ -29,97 +71,6 @@ function Message() {
                             <span>22/01/24</span>
                         </div>
                     </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
-                      <div className='message-people-list'>
-                          <div className='message-people-list-img'>
-                              <img src="/images/avatar.jpeg" alt="Avatar"/>
-                          </div>
-                          <div className='message-people-list-info'>
-                              <h3>Ivan Ivanov Ivanovich</h3>
-                              <p>Заказ №352352435</p>
-                          </div>
-                          <div className='message-people-list-date'>
-                              <div>0</div>
-                              <span>22/01/24</span>
-                          </div>
-                      </div>
                   </div>
               </div>
               <div className='message-separator-vertical'></div>
@@ -141,11 +92,14 @@ function Message() {
                           <input type="file" id="file" hidden/>
                       </label>
                       <div className='w-full'>
-                          <InputSearch className='w-full' type="text" placeholder='Напишите сообщение' >
-                              <img className='cursor-pointer' src="/svg/send.svg" alt="Image"/>
+                          <InputSearch onChange={(e) => setMessagePerson(e.target.value)} className='w-full' type="text" placeholder='Напишите сообщение' >
+                              <svg className={'img-get-message'} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g opacity="0.6">
+                                      <path d="M6.99833 7.99986H3.33166M3.27523 8.19419L1.71861 12.844C1.59632 13.2093 1.53518 13.3919 1.57906 13.5044C1.61717 13.6021 1.69901 13.6761 1.8 13.7043C1.91629 13.7368 2.09193 13.6577 2.44322 13.4997L13.5842 8.48622C13.9271 8.33192 14.0985 8.25477 14.1515 8.1476C14.1976 8.05449 14.1976 7.94524 14.1515 7.85212C14.0985 7.74495 13.9271 7.6678 13.5842 7.5135L2.43934 2.49834C2.08911 2.34074 1.91399 2.26194 1.79782 2.29426C1.69692 2.32234 1.61509 2.39619 1.57685 2.49369C1.53282 2.60595 1.59331 2.7882 1.7143 3.15271L3.27566 7.85688C3.29644 7.91948 3.30683 7.95079 3.31093 7.9828C3.31457 8.01121 3.31453 8.03997 3.31082 8.06837C3.30664 8.10037 3.29617 8.13164 3.27523 8.19419Z" stroke="#262D29" strokeLinecap="round" strokeLinejoin="round"/>
+                                  </g>
+                              </svg>
                           </InputSearch>
                       </div>
-                     
                   </div>
               </div>
           </div>

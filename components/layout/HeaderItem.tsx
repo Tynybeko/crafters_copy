@@ -102,19 +102,19 @@ export function HeaderItem(
                 )}
                 <ul>
                     <li>
-                        <Link href={'/#'}>
+                        <Link href={'/personal-cabinet/favorites'}>
                             <img src="/svg/heart.svg" alt="Image" />
                             <Counter count={favorites?.length} />
                         </Link>
                     </li>
                     <li>
-                        <Link href={'/#'}>
+                        <Link href={'/personal-cabinet/my-purchases'}>
                             <img src="/svg/shopping-bag.svg" alt="Image" />
                             <Counter count={myPurchases?.length} />
                         </Link>
                     </li>
                     <li>
-                        <Link href={'/#'}>
+                        <Link href={'/personal-cabinet/message'}>
                             <img src="/svg/message.svg" alt="Image" />
                             <Counter count={0} />
                         </Link>
