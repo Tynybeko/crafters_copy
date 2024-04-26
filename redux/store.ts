@@ -9,6 +9,7 @@ import myItemsSlice from "@/redux/slices/my-items";
 import itemsSlice from "@/redux/slices/items";
 import myPurchases from "@/redux/slices/my-purchases";
 import favorites from "@/redux/slices/favorites";
+import chatRoomsSlice from "@/redux/slices/chatRooms";
 
 export const makeStore = () => {
     return configureStore({
@@ -22,7 +23,8 @@ export const makeStore = () => {
             myItems: myItemsSlice,
             items: itemsSlice,
             myPurchases: myPurchases,
-            favorites: favorites
+            favorites: favorites,
+            chatRooms: chatRoomsSlice,
         },
         devTools  : true,
         middleware: (getDefaultMiddleware) => {

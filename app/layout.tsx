@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 import type { ReactNode } from "react";
 import StoreProvider from "@/providers/storeProvider";
 import localFont from 'next/font/local';
-import { Suspense } from "react";
+import {Suspense} from "react";
 import Loading from "@/app/loading";
 
 
@@ -58,6 +58,8 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <StoreProvider>
