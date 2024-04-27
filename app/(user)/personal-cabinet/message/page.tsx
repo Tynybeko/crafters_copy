@@ -1,5 +1,5 @@
 'use client';
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 
 import Box from "@/components/ui/Box";
@@ -11,7 +11,9 @@ import './message.css'
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
 import {fetchChatRooms} from "@/redux/slices/chatRooms";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {sendMessage} from "next/dist/client/dev/error-overlay/websocket";
+
+import {IMessages} from "@/types/message";
+import {fetchChatMessages} from "@/redux/slices/chatMessages";
 
 function Message() {
     const wsRef = useRef<WebSocket | null>(null)
@@ -22,24 +24,23 @@ function Message() {
     const chatRoom = useAppSelector(state => state.chatRooms.data);
     const [uuid, setUuid] = useState(params.get('uuid') || null)
     const [connected, setConnected] = useState(false)
-
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState<IMessages>()
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : '';
-
     const queries = new URLSearchParams({Authorization: `Token ${token}`}).toString();
-
     const ws: any = new WebSocket(`ws://back.crafters.asia/chat-room/${uuid}/?${queries}`);
+    const [messageToSend, setMessageToSend] = useState({})
+    const chatMessages = useAppSelector(state => state.chatMessages.data)
 
 
     useEffect(() => {
         dispatch(fetchChatRooms());
     }, [dispatch]);
 
-
     const WSRoomConnection = () => {
         ws.onopen = () => {
             setConnected(true);
             console.log('WebSocket connection established.');
+            dispatch(fetchChatMessages({uuid}))
         };
 
         ws.onclose = () => {
@@ -55,25 +56,20 @@ function Message() {
             }
         }
 
+
         wsRef.current = ws;
         return () => {
             ws.close();
             if (wsRef.current) wsRef.current?.close()
         };
-
-
     }
 
-
-    console.log(messages)
-
+    console.log(ws)
 
     useEffect(() => {
         if (!connected) {
             WSRoomConnection();
         }
-
-
     }, [uuid]);
 
     const handleOpenRoom = (uuid: string) => {
@@ -115,7 +111,17 @@ function Message() {
                     </div>
                     <span className='message-separator-horizontal'/>
                     <div className='message-screen-lists'>
-
+                        <div className={'flex flex-col gap-[24px]'}>
+                            {chatMessages && chatMessages.results.length ? chatMessages.results.map((item) => (
+                                <div key={item.id} className={'message-screen-list'}>
+                                    <h3>{item.chat_user.name}</h3>
+                                    <Box className={'max-w-max py-[12px] px-[24px] border border-[#1DBE6033]'}>
+                                        {item.body}
+                                    </Box>
+                                    <p>16:04 18.17.23</p>
+                                </div>
+                            )): null}
+                        </div>
                     </div>
                     <div className='flex items-center gap-[24px]'>
                         <label htmlFor="file" className='cursor-pointer'>

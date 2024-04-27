@@ -11,9 +11,9 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import './auth.css'
 
 interface IForgotPassword {
-  setIsForgotPassword: (value: boolean) => void
-  setIsLogin: (value: boolean) => void
-  setIsRegister: (value: boolean) => void
+  setIsForgotPassword: (value: boolean) => void;
+  setIsLogin: (value: boolean) => void;
+  setIsRegister: (value: boolean) => void;
 }
 export const ForgotPassword = ({ setIsForgotPassword, setIsRegister }: IForgotPassword) => {
     const [ inputValue, setInputValue ] = useState({

@@ -154,6 +154,26 @@
 	overflow-y: scroll;
 }
 
+.message-screen-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	& h3 {
+		color: #262D29;
+		font-size: 16px;
+		font-weight: 400 !important;
+		line-height: 16px;
+
+	}
+	& p {
+		color: #262D2999;
+		font-size: 16px;
+		font-weight: 400 !important;
+		line-height: 16px;
+	}
+
+}
+
 .message-screen-lists::-webkit-scrollbar {
 	width: 0;
 }

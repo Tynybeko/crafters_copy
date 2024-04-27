@@ -10,6 +10,7 @@ import itemsSlice from "@/redux/slices/items";
 import myPurchases from "@/redux/slices/my-purchases";
 import favorites from "@/redux/slices/favorites";
 import chatRoomsSlice from "@/redux/slices/chatRooms";
+import chatMessagesSlice from "@/redux/slices/chatMessages";
 
 export const makeStore = () => {
     return configureStore({
@@ -25,6 +26,7 @@ export const makeStore = () => {
             myPurchases: myPurchases,
             favorites: favorites,
             chatRooms: chatRoomsSlice,
+            chatMessages: chatMessagesSlice
         },
         devTools  : true,
         middleware: (getDefaultMiddleware) => {
