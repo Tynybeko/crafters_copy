@@ -6,6 +6,7 @@ import StoreProvider from "@/providers/storeProvider";
 import localFont from 'next/font/local';
 import {Suspense} from "react";
 import Loading from "@/app/loading";
+import ToastifyRoot from "@/components/toastify";
 
 
 const myFont = localFont({
@@ -65,6 +66,7 @@ export default function RootLayout({
       <StoreProvider>
         <body className={myFont.className}>
           <Header />
+          <ToastifyRoot />
           <Suspense fallback={<Loading/>}>
             {children}
           </Suspense>

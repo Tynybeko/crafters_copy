@@ -1,4 +1,4 @@
-import {IUser} from "@/types/index";
+import { IUser } from "@/types/index";
 
 export interface IMessages {
     count: number
@@ -7,13 +7,15 @@ export interface IMessages {
     results: IMessageResults[]
 }
 
+
 export interface IMessageResults {
-    body:  string
+    body: string
     chat_user: IChatUser
     avatar: string | null
     created_at: string
     file: null
     id: number
+    name: string
     is_read: false
     photo: string | null
     room: IRoom

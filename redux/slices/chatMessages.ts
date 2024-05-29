@@ -13,8 +13,9 @@ const initialState: InitialStateType<IMessages> = {
 
 export const fetchChatMessages = createAsyncThunk(
     'chatMessage/fetchChatMessages',
-    async ({uuid}: any) => {
-        const response = await apiToken.get(`/chat/messages/room/${uuid}`)
+    async ({uuid, query}: any) => {
+        const myQuery = new URLSearchParams(query)
+        const response = await apiToken.get(`/chat/messages/room/${uuid}/?${myQuery}`)
         try{
             return response.data
         }

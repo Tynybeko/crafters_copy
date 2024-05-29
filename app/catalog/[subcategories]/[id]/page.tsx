@@ -1,21 +1,21 @@
 'use client';
-import React, {useEffect, useState} from 'react';
-import {api, apiToken} from "@/axios";
+import React, { useEffect, useState } from 'react';
+import { api, apiToken } from "@/axios";
 import Loading from "@/components/loading";
 import Stages from "@/components/ui/Stages";
 import ItemStage1 from "@/app/catalog/[subcategories]/components/ItemStage1";
 import ItemStage2 from "@/app/catalog/[subcategories]/components/ItemStage2";
 import ItemStage3 from "@/app/catalog/[subcategories]/components/ItemStage3";
 import ItemStage4 from "@/app/catalog/[subcategories]/components/ItemStage4";
-import {ItemsTypes} from "@/types";
-import {CardItem} from "@/app/catalog/[subcategories]/components/CardItem";
+import { ItemsTypes } from "@/types";
+import { CardItem } from "@/app/catalog/[subcategories]/components/CardItem";
 import {
     Dialog,
     DialogContent,
 } from "@/components/ui/dialog"
-import { X} from "lucide-react";
-import {useAppDispatch, useAppSelector} from "@/redux/hooks";
-import {AddToOrder} from "@/components/add-to-order";
+import { X } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { AddToOrder } from "@/components/add-to-order";
 
 
 const stageNames = [
@@ -27,7 +27,7 @@ const stageNames = [
 
 
 
-const ProductPage = ({params}: any) => {
+const ProductPage = ({ params }: any) => {
     const [product, setProduct] = useState<ItemsTypes | null>(null);
     const [activeStage, setActiveStage] = useState(1);
     const [colorModels, setColorModels] = useState<any>(null);
@@ -68,6 +68,7 @@ const ProductPage = ({params}: any) => {
         api.get(`/items/${params.id}`)
             .then((res) => {
                 setProduct(res.data);
+
             })
             .catch((err) => {
                 console.log(err);
@@ -98,7 +99,7 @@ const ProductPage = ({params}: any) => {
             <Dialog open={sentOrder}>
                 <DialogContent className={'max-w-[539px]'}>
                     <span>
-                        <X width={24} height={24} onClick={() => setSentOrder(false)}/>
+                        <X width={24} height={24} onClick={() => setSentOrder(false)} />
                     </span>
                     <h1>
                         The seller will contact
@@ -107,9 +108,9 @@ const ProductPage = ({params}: any) => {
                 </DialogContent>
             </Dialog>
             <AddToOrder open={isActiveAlert} onOpenChange={setIsActiveAlert} onSubmit={handleOrder}
-                        onChange={handleChange} dataOrder={dataOrder}
-                        onChange1={(e) => setDataOrder({...dataOrder, comment: e.target.value})}
-                        colorModels={colorModels} product={product}/>
+                onChange={handleChange} dataOrder={dataOrder}
+                onChange1={(e) => setDataOrder({ ...dataOrder, comment: e.target.value })}
+                colorModels={colorModels} product={product} />
             {product ? (
                 <section className={'mt-[16px] md:mt-[36px]'}>
                     <div className={'globalContainer'}>
@@ -148,13 +149,13 @@ const ProductPage = ({params}: any) => {
                             )}
                             {colorModels && activeStage !== 1 && (
                                 <CardItem setIsActiveAlert={setIsActiveAlert} title={'Your product'}
-                                          colorModels={colorModels} product={product} button={true}/>
+                                    colorModels={colorModels} product={product} button={true} />
                             )}
                         </div>
                     </div>
                 </section>
             ) : (
-                <Loading/>
+                <Loading />
             )}
         </>
     );

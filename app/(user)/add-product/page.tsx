@@ -121,7 +121,7 @@ const AddProducts = () => {
               </div>
               
               <div className={ 'add-products-btn' }>
-                  <Button className={ 'max-w-[416px] w-full' } onClick={ handleItems }>
+                  <Button type='button' className={ 'max-w-[416px] w-full' } onClick={ handleItems }>
                       { activeStage === 3 ? 'Publish' : 'Continued' }
                   </Button>
               </div>

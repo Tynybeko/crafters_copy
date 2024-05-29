@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import {useAppSelector} from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 
 // styles
 import './favorites.css'
 import ProductCard from "@/components/cards/ProductCard";
 
 function Favorites() {
-    const {data: favorites} = useAppSelector(state => state.favorites)
+    const { data: favorites } = useAppSelector(state => state.favorites)
 
     return (
         <>
@@ -17,9 +17,11 @@ function Favorites() {
                     <div className={'favorites-items'}>
                         {favorites && favorites.length ? (
                             favorites.map((item: any) => (
-                                <ProductCard key={item.id} data={item.item_data}/>
+                                <ProductCard key={item.id} data={item.item_data} />
                             ))
-                        ) : ( 'none' )
+                        ) : <div className='w-full justify-center flex'>
+                            Пока пусто
+                        </div>
                         }
                     </div>
                 </div>

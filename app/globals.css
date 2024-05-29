@@ -76,18 +76,32 @@
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);
 }
 
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+  appearance: none !important;
+  -moz-appearance: textfield !important;
+}
+
 .globalContainer {
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+
   @media (max-width: 1024px) {
     max-width: 887px;
   }
-  
+
 }
 
-body{
+body {
   background-color: #FDFDFD;
 }
 
@@ -129,14 +143,20 @@ body::-webkit-scrollbar {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .add-products-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 40px;
+
   @media (max-width: 386px) {
     grid-template-columns: repeat(1, 1fr) !important;
   }
@@ -149,7 +169,8 @@ body::-webkit-scrollbar {
   text-align: center;
   cursor: pointer;
 }
-.add-products-step:after{
+
+.add-products-step:after {
   content: '';
   display: block;
   width: 100%;
@@ -164,6 +185,42 @@ body::-webkit-scrollbar {
   height: 2px;
 }
 
+/* toastify styles */
+
+.toastify_items {
+  max-width: 300px;
+  animation: toastify 3s linear both;
+}
+
+.toastify_items p {
+  font-size: 18px;
+  padding: 10px;
+}
+
+
+@keyframes toastify {
+  0% {
+    transform: translateX(100%);
+  }
+
+  39% {
+    transform: translateX(0);
+  }
+
+  86% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* toastify styles */
+
+
+
 .btn-heart {
   width: 40px;
   height: 40px;
@@ -176,7 +233,7 @@ body::-webkit-scrollbar {
   box-shadow: 2px 2px 4px 0 #00000033 !important;
 }
 
-.btn-heart > img {
+.btn-heart>img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -201,7 +258,7 @@ input::-webkit-inner-spin-button {
   position: relative;
 }
 
-.card-top-btn > img {
+.card-top-btn>img {
   position: absolute;
   top: 50%;
   left: 50%;

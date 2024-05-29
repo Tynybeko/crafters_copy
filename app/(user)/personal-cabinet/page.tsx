@@ -4,19 +4,12 @@ import React, { useEffect } from 'react';
 
 
 import UserData from '@/app/(user)/personal-cabinet/user-data/page';
-import { useRouter } from "next/navigation";
 
 
 function PersonalCabinet() {
-    const router = useRouter();
 
 
-    useEffect(() => {
-        const token = window.localStorage.getItem('token');
-        if (!token) {
-            router.push('/');
-        }
-    }, [router]);
+   
     return <UserData />
 }
 

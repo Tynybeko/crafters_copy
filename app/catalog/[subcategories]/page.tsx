@@ -1,10 +1,10 @@
 'use client'
 
 
-import {useAppDispatch, useAppSelector} from "@/redux/hooks";
-import React, {useEffect, useState} from "react";
-import {fetchItems} from "@/redux/slices/items";
-import {ItemsTypes, ItemsTypes2} from "@/types";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import React, { useEffect, useState } from "react";
+import { fetchItems } from "@/redux/slices/items";
+import { ItemsTypes, ItemsTypes2 } from "@/types";
 import ProductCard from "@/components/cards/ProductCard";
 
 
@@ -21,7 +21,7 @@ const SoftToys = () => {
 
 
     useEffect(() => {
-        dispatch(fetchItems({params: params}))
+        dispatch(fetchItems({ params: params }))
     }, []);
 
     return (
@@ -34,17 +34,17 @@ const SoftToys = () => {
                         </h1>
                     </div>
                     <div className={'catalog-banner-img'}>
-                        <img src={"/images/catalog1.jpeg"} alt={"Image"}/>
+                        <img src={"/images/catalog1.jpeg"} alt={"Image"} />
                     </div>
                 </div>
                 <div className={'subcategory_title'}>
                     <h1>
-                        {products[0]?.name}
+                        {products && products[0]?.name}
                     </h1>
                 </div>
                 <div className={'cards'}>
                     {products && products.length ? products.map((item) => (
-                        <ProductCard key={item.id} data={item}/>
+                        <ProductCard key={item.id} data={item} />
                     )) : <div
                         className={'w-full h-[75vh] flex items-center justify-center text-red-500 font-bold text-[24px]'}>Пока
                         Пустой</div>}

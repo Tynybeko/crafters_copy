@@ -11,11 +11,12 @@ import myPurchases from "@/redux/slices/my-purchases";
 import favorites from "@/redux/slices/favorites";
 import chatRoomsSlice from "@/redux/slices/chatRooms";
 import chatMessagesSlice from "@/redux/slices/chatMessages";
+import ToastifiReducer from '@/redux/slices/toastiSlice';
 
 export const makeStore = () => {
     return configureStore({
-        reducer   : {
-            user   : userSlice,
+        reducer: {
+            user: userSlice,
             company: companySlice,
             categories: itemCategoriesSlice,
             subCategories: itemSubcategoriesSlice,
@@ -26,9 +27,10 @@ export const makeStore = () => {
             myPurchases: myPurchases,
             favorites: favorites,
             chatRooms: chatRoomsSlice,
-            chatMessages: chatMessagesSlice
+            chatMessages: chatMessagesSlice,
+            toastify: ToastifiReducer
         },
-        devTools  : true,
+        devTools: true,
         middleware: (getDefaultMiddleware) => {
             return getDefaultMiddleware({
                 serializableCheck: false

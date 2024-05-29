@@ -1,10 +1,11 @@
 import React from "react";
-import {ItemsTypes} from "@/types";
-import {Dialog, DialogContent} from "@/components/ui/dialog";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
-import {Button} from "@/components/ui/button";
-import {CardItem} from "@/app/catalog/[subcategories]/components/CardItem";
+import { ItemsTypes } from "@/types";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { CardItem } from "@/app/catalog/[subcategories]/components/CardItem";
+import Loading from "@/app/loading";
 
 export function AddToOrder(props: {
     open: boolean,
@@ -16,6 +17,11 @@ export function AddToOrder(props: {
     colorModels: any,
     product: ItemsTypes | null
 }) {
+
+
+
+
+
     return <Dialog open={props.open} onOpenChange={props.onOpenChange}>
         <DialogContent className="max-w-[720px]">
             <div className="flex gap-x-[40px]">
@@ -24,16 +30,16 @@ export function AddToOrder(props: {
                     <div className={"my-[24px]  flex flex-col gap-2"}>
                         <div>
                             <Input name={"name"} onChange={props.onChange} value={props.dataOrder.name}
-                                   placeholder={"Your name*"}/>
+                                placeholder={"Your name*"} />
                         </div>
                         <div>
                             <Input name={"phone"} onChange={props.onChange} value={props.dataOrder.phone}
-                                   placeholder={"Your phone*"}/>
+                                placeholder={"Your phone*"} />
                         </div>
                         <div>
                             <Textarea name={"comment"} onChange={props.onChange1}
-                                      value={props.dataOrder.comment}
-                                      className={"resize-none h-[226px] p-[10px] rounded-[24px]"}/>
+                                value={props.dataOrder.comment}
+                                className={"resize-none h-[226px] p-[10px] rounded-[24px]"} />
                         </div>
                     </div>
                     <Button type={"submit"} className={"w-full"}>
@@ -41,10 +47,11 @@ export function AddToOrder(props: {
                     </Button>
                 </form>
                 <div className="grid flex-1 gap-2">
-                    {props.colorModels && (
+                    {props.colorModels ? (
                         <CardItem setIsActiveAlert={props.onOpenChange}
-                                  colorModels={props.colorModels} product={props.product}/>
-                    )}
+                            colorModels={props.colorModels} product={props.product} />
+                    ) :
+                        <Loading />}
                 </div>
             </div>
         </DialogContent>

@@ -1,7 +1,9 @@
 import axios from "axios";
 
 
-const URL = 'https://back.crafters.asia/api/v1'
+const URL = process.env.NEXT_PUBLIC_BASE_URL
+
+
 
 
 export const api = axios.create({
