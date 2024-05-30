@@ -17,7 +17,6 @@ COPY . .
 RUN npm run build
 
 # Указываем порт, который будет использоваться приложением (значение по умолчанию 3000)
-ARG PORT=3000
 ENV PORT=$PORT
 EXPOSE $PORT
 
