@@ -22,11 +22,10 @@ function Message() {
     const router = useRouter();
     const pathname = usePathname();
     const params = useSearchParams();
-
+    const [connectWs, setConnectWs] = useState<boolean>(false)
     const chatBoxRef = useRef<HTMLDivElement | null>(null);
     const lastMessageRef = useRef<HTMLDivElement | null>(null);
     const wsRef = useRef<WebSocket | null>(null);
-
     const [uuid, setUuid] = useState(params.get('uuid') || null);
     const [messageLimit, setMessageLimit] = useState(30);
     const [loading, setLoading] = useState<boolean>(false);
@@ -50,12 +49,12 @@ function Message() {
 
     useEffect(() => {
         if (messageLimit === 30) scrollToBottom();
-
         const unreadMessages = chatMessages?.results.filter(item => item.chat_user.user.id !== myUser?.data?.id && !item.is_read) || [];
+        if (!connectWs) return;
         unreadMessages.forEach(message => {
             wsRef.current?.send(JSON.stringify({ type: 'MAKE_READ_MESSAGE', message_id: message.id }));
         });
-    }, [chatMessages]);
+    }, [chatMessages, connectWs]);
 
     useEffect(() => {
         scrollToBottom();
@@ -66,6 +65,7 @@ function Message() {
         const ws = new WebSocket(`ws://back.crafters.asia/chat-room/${uuid}/?${queries}`);
 
         ws.onopen = () => {
+            setConnectWs(true)
             setLoading(false);
             console.log('WebSocket connection established.');
         };
@@ -73,10 +73,12 @@ function Message() {
         ws.onerror = (e) => {
             dispatch(setToastiState([{ type: 'error', data: 'Не удалось установить соединение!' }]));
             setLoading(false);
+            setConnectWs(false)
             console.log(e);
         };
 
         ws.onclose = () => {
+            setConnectWs(false)
             setMessages([]);
             setMessageLimit(30);
             console.log('WebSocket connection closed.');
@@ -190,7 +192,7 @@ function Message() {
                                     <h3>{item.chat_user.name}</h3>
                                     <Box className={'max-w-max py-[12px] px-[24px] border border-[#1DBE6033]'}>
                                         {item.body}
-                                        {item.photo && <img src={item.photo} alt="file" />}
+                                        {item.photo && <img src={item.photo} alt="Img" />}
                                         {item.file && <a className='bg-blue-500 rounded-lg px-4 py-2 flex text-white' href={item.file} download={true} >File <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="https://www.w3.org/2000/svg">
                                             <g opacity="0.6">
@@ -208,7 +210,7 @@ function Message() {
                                     <h3>{item?.name}</h3>
                                     <Box className={'max-w-max py-[12px] px-[24px] border border-[#1DBE6033]'}>
                                         {item.body}
-                                        {item.photo && <img src={item.photo} alt="file" />}
+                                        {item.photo && <img src={item.photo} alt="Img" />}
                                         {item.file && <a className='bg-blue-500 rounded-lg px-3 py-2 flex gap-2 text-white ' href={item.file} download={true} >File <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="https://www.w3.org/2000/svg">
                                             <g opacity="0.6">
