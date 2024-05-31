@@ -2,7 +2,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Box from "@/components/ui/Box";
 import { InputSearch } from "@/components/ui/input";
-
 // styles
 import './message.css'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -193,7 +192,7 @@ function Message() {
                                         {item.body}
                                         {item.photo && <img src={item.photo} alt="file" />}
                                         {item.file && <a className='bg-blue-500 rounded-lg px-4 py-2 flex text-white' href={item.file} download={true} >File <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                            xmlns="https://www.w3.org/2000/svg">
                                             <g opacity="0.6">
                                                 <path
                                                     d="M17.5 5.25581V16.5C17.5 19.5376 15.0376 22 12 22C8.96243 22 6.5 19.5376 6.5 16.5V5.66667C6.5 3.64162 8.14162 2 10.1667 2C12.1917 2 13.8333 3.64162 13.8333 5.66667V16.4457C13.8333 17.4583 13.0125 18.2791 12 18.2791C10.9875 18.2791 10.1667 17.4583 10.1667 16.4457V6.65116"
@@ -211,7 +210,7 @@ function Message() {
                                         {item.body}
                                         {item.photo && <img src={item.photo} alt="file" />}
                                         {item.file && <a className='bg-blue-500 rounded-lg px-3 py-2 flex gap-2 text-white ' href={item.file} download={true} >File <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                            xmlns="https://www.w3.org/2000/svg">
                                             <g opacity="0.6">
                                                 <path
                                                     d="M17.5 5.25581V16.5C17.5 19.5376 15.0376 22 12 22C8.96243 22 6.5 19.5376 6.5 16.5V5.66667C6.5 3.64162 8.14162 2 10.1667 2C12.1917 2 13.8333 3.64162 13.8333 5.66667V16.4457C13.8333 17.4583 13.0125 18.2791 12 18.2791C10.9875 18.2791 10.1667 17.4583 10.1667 16.4457V6.65116"
@@ -227,7 +226,7 @@ function Message() {
                     <div className='flex items-center gap-[24px]'>
                         <label htmlFor="file" className='cursor-pointer'>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                                xmlns="https://www.w3.org/2000/svg">
                                 <g opacity="0.6">
                                     <path
                                         d="M17.5 5.25581V16.5C17.5 19.5376 15.0376 22 12 22C8.96243 22 6.5 19.5376 6.5 16.5V5.66667C6.5 3.64162 8.14162 2 10.1667 2C12.1917 2 13.8333 3.64162 13.8333 5.66667V16.4457C13.8333 17.4583 13.0125 18.2791 12 18.2791C10.9875 18.2791 10.1667 17.4583 10.1667 16.4457V6.65116"
@@ -249,7 +248,7 @@ function Message() {
                                 type="text"
                                 placeholder='Напишите сообщение'>
                                 <svg onClick={handleSendMessage} className={'img-get-message'} width="16" height="16" viewBox="0 0 16 16"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    fill="none" xmlns="https://www.w3.org/2000/svg">
                                     <g opacity="0.6">
                                         <path
                                             d="M6.99833 7.99986H3.33166M3.27523 8.19419L1.71861 12.844C1.59632 13.2093 1.53518 13.3919 1.57906 13.5044C1.61717 13.6021 1.69901 13.6761 1.8 13.7043C1.91629 13.7368 2.09193 13.6577 2.44322 13.4997L13.5842 8.48622C13.9271 8.33192 14.0985 8.25477 14.1515 8.1476C14.1976 8.05449 14.1976 7.94524 14.1515 7.85212C14.0985 7.74495 13.9271 7.6678 13.5842 7.5135L2.43934 2.49834C2.08911 2.34074 1.91399 2.26194 1.79782 2.29426C1.69692 2.32234 1.61509 2.39619 1.57685 2.49369C1.53282 2.60595 1.59331 2.7882 1.7143 3.15271L3.27566 7.85688C3.29644 7.91948 3.30683 7.95079 3.31093 7.9828C3.31457 8.01121 3.31453 8.03997 3.31082 8.06837C3.30664 8.10037 3.29617 8.13164 3.27523 8.19419Z"
