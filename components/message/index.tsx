@@ -55,6 +55,8 @@ function Message() {
             wsRef.current?.send(JSON.stringify({ type: 'MAKE_READ_MESSAGE', message_id: message.id }));
         });
     }, [chatMessages, connectWs]);
+    console.log(chatRoom);
+    
 
     useEffect(() => {
         scrollToBottom();

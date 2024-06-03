@@ -1,0 +1,48 @@
+.my-feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.my-feedback_head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-feedback_head>h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    color: black;
+}
+
+.my-feedback_head>div>p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    opacity: .8;
+    color: black;
+    cursor: pointer;
+    text-decoration: underline 1px transparent;
+    transition: all .2s ease-in-out;
+}
+
+.my-feedback_head>div>p.active {
+    opacity: 1;
+    text-decoration: underline 1px black;
+
+}
+
+.my-feedback_head>div>p:hover {
+    opacity: 1;
+}
+
+.feedback-card {
+    border: 1px solid rgba(0, 0, 0, 0.203);
+    border-radius: 32px;
+    padding: 24px;
+    width: 100%;
+    max-width: 1080px;
+}

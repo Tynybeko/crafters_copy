@@ -153,7 +153,7 @@ export interface IPurchases {
     comment: string,
     status: string,
     total: number,
-    items:  IPurchasesItem[]
+    items: IPurchasesItem[]
 }
 
 export interface IPurchasesItem {
@@ -173,3 +173,27 @@ export interface IPurchasesItem {
     }
 }
 
+
+
+export interface IReviewType {
+    id: number;
+    order: number;
+    company: ICompany;
+    item: ItemsTypes;
+    user: IUser;
+    delivery: number;
+    quality: number;
+    price_relevance: number;
+    advantages: string;
+    disadvantages: string;
+    comment: string
+}
+
+
+
+export interface IResponseInit<T> {
+    data: T;
+    next: string | null;
+    prev: string | null;
+    count: number
+}

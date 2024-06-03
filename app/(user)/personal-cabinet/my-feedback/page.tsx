@@ -1,9 +1,11 @@
+import MyFeedbackPage from '@/components/myFeedback'
 import React from 'react'
 
+
 function MyFeedback() {
-    return (
-      <div>MyFeedback</div>
-    )
+  return (
+    <MyFeedbackPage />
+  )
 }
 
 export default MyFeedback

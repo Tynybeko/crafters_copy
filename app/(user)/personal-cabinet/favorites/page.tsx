@@ -6,6 +6,7 @@ import { useAppSelector } from "@/redux/hooks";
 // styles
 import './favorites.css'
 import ProductCard from "@/components/cards/ProductCard";
+import EmptyBox from '@/components/empty-box';
 
 function Favorites() {
     const { data: favorites } = useAppSelector(state => state.favorites)
@@ -19,9 +20,7 @@ function Favorites() {
                             favorites.map((item: any) => (
                                 <ProductCard key={item.id} data={item.item_data} />
                             ))
-                        ) : <div className='w-full justify-center flex'>
-                            Пока пусто
-                        </div>
+                        ) : <EmptyBox />
                         }
                     </div>
                 </div>
