@@ -56,7 +56,7 @@ export function AddFavorite({ data }: { data: any }) {
             onClick={addToFavoritesAction}
             className={`card-top-btn shadow-custom ${isFavorite ? 'favorite' : ''}`}
         >
-            <img className="object-cover" src={`/svg/heart-cart${isFavorite ? '-white' : '-blue'}.svg`} alt=""/>
+            <img className="object-cover" src={`/svg/heart-cart${isFavorite ? '-white' : '-blue'}.svg`} alt="" />
         </div>
     );
 }

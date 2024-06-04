@@ -9,6 +9,7 @@ import { AddToOrder } from '../add-to-order';
 import { api, apiToken } from '@/axios';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { ItemsTypes } from '@/types';
+import AddCart from '../ui/add-cart';
 
 interface IPropsPopularCard {
     id: number
@@ -21,7 +22,7 @@ interface IPropsPopularCard {
 }
 
 const PopularCards = ({ data }: {
-    data: IPropsPopularCard
+    data: ItemsTypes
 }): React.ReactElement => {
     const dispatch = useAppDispatch();
     const [product, setProduct] = useState<ItemsTypes | null>(null);
@@ -130,14 +131,12 @@ const PopularCards = ({ data }: {
                             <p>${data.price}<span>{data.oldPrice}</span></p>
                             <div className='popular-card-bottom-btns'>
                                 <Button onClick={() => setIsActiveAlert(prev => !prev)} className='w-[137px] shadow-custom'>Fast buy</Button>
-                                <div className='btn-heart'>
-                                    <img src={`/svg/shopping-green.svg`} alt="" />
-                                </div>
+                                <AddCart item={data} />
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

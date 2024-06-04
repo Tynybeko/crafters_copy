@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { ItemsTypes } from "@/types";
 import { setToastiState } from '@/redux/slices/toastiSlice';
+import AddCart from '../ui/add-cart';
 
 
 const ProductCard = ({ data, owner }: { data: any, owner?: boolean }) => {
@@ -158,9 +159,7 @@ const ProductCard = ({ data, owner }: { data: any, owner?: boolean }) => {
                                 <Button onClick={() => {
                                     setIsActiveAlert(true)
                                 }} className='w-[129px] p-0 shadow-custom'>Fast buy</Button>
-                                <div className='card-top-btn'>
-                                    <img className='object-cover' src="/svg/shopping-green.svg" alt="" />
-                                </div>
+                                <AddCart item={data} />
                             </div>
                         )}
                     </div>

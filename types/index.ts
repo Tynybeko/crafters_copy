@@ -106,9 +106,12 @@ export interface ItemsTypes {
     payment: IPayment | null
     subcategory: ISubcategories
     image: string
+    oldPrice: number
     price: number
     company_owner: ICompany
+    currency: ICurrency
 }
+
 
 export interface ItemsTypes2 {
     category: ICategories

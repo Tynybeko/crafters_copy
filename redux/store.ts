@@ -12,6 +12,8 @@ import favorites from "@/redux/slices/favorites";
 import chatRoomsSlice from "@/redux/slices/chatRooms";
 import chatMessagesSlice from "@/redux/slices/chatMessages";
 import ToastifiReducer from '@/redux/slices/toastiSlice';
+import CartReducer from '@/redux/slices/cart'
+
 
 export const makeStore = () => {
     return configureStore({
@@ -28,7 +30,8 @@ export const makeStore = () => {
             favorites: favorites,
             chatRooms: chatRoomsSlice,
             chatMessages: chatMessagesSlice,
-            toastify: ToastifiReducer
+            toastify: ToastifiReducer,
+            cart: CartReducer
         },
         devTools: true,
         middleware: (getDefaultMiddleware) => {

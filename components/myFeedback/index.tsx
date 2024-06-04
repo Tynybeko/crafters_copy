@@ -6,10 +6,12 @@ import { useAppDispatch } from '@/redux/hooks'
 import { setToastiState } from '@/redux/slices/toastiSlice'
 import { IReviewType } from '@/types'
 import React, { useEffect, useState } from 'react'
+import FeedbackCard from './card'
+import EmptyBox from '../ui/empty-box'
 
 
 type IDataResState = {
-    data: IReviewType[],
+    data: IReviewType[] | null,
     loading: boolean,
     error: string
 }
@@ -23,7 +25,7 @@ export default function MyFeedbackPage() {
     const dispatch = useAppDispatch()
     const [mainPath, setMainPath] = useState<{ text: string, path: string }>({ text: 'My', path: '/item-reviews/' })
     const [dataRes, setDataRes] = useState<IDataResState>({
-        data: [],
+        data: null,
         loading: false,
         error: ''
     })
@@ -34,7 +36,7 @@ export default function MyFeedbackPage() {
         response
             .then(data => {
                 if (data.data) {
-                    setDataRes(prev => ({ ...prev, data: data.data, loading: false }))
+                    setDataRes(prev => ({ ...prev, data: data.data, loading: false, error: '' }))
                 }
             })
             .catch(err => {
@@ -45,8 +47,6 @@ export default function MyFeedbackPage() {
                 }
             })
     }, [mainPath])
-
-
 
     return (
         <div className='my-feedback'>
@@ -59,7 +59,21 @@ export default function MyFeedbackPage() {
                             <p onClick={() => setMainPath(item)} className={`${item.text == mainPath.text && 'active'}`}>{item.text}</p>
                         ))
                     }
+
                 </div>
+            </div>
+            <div className='flex flex-col gap-3'>
+                {
+                    dataRes.data && dataRes.data.map(item => (
+                        <FeedbackCard item={item} />
+                    ))
+                }
+                {
+                    dataRes.data && dataRes.data.length == 0 ?
+                        <EmptyBox />
+                        : null
+                }
+
             </div>
             <div>
             </div>

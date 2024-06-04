@@ -25,7 +25,6 @@ const Header = () => {
     let timer: any;
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const { isAuth: isAuthUser } = useAppSelector(state => state.user);
-
     useEffect(() => {
         dispatch(fetchUser())
         dispatch(fetchMyPurchases())

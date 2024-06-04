@@ -133,6 +133,24 @@ body::-webkit-scrollbar {
   backdrop-filter: blur(5px);
 }
 
+
+.cart-btn {
+  background: #fbfbfb;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #1DBE60;
+  border-radius: 50%;
+  position: relative;
+}
+
+.cart-btn.active {
+  background-color: hsl(var(--primary)) !important;
+  color: white;
+}
+
+
 .loader {
   border-radius: 50%;
   border: 6px solid white;
@@ -247,23 +265,6 @@ input::-webkit-inner-spin-button {
 }
 
 
-.card-top-btn {
-  background: #fbfbfb;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid #1DBE60;
-  border-radius: 50%;
-  position: relative;
-}
-
-.card-top-btn>img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .favorite {
   background: #1DBE60;
