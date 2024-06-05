@@ -1,0 +1,31 @@
+.cart-page {
+    padding: 36px 0;
+}
+
+.cart-page_head .line-outer {
+    width: 100%;
+    margin-top: 15px;
+    position: relative;
+    height: 3px;
+    background-color: rgba(38, 45, 41, 0.2);
+}
+
+.cart-page_head .line-inner {
+    width: 70%;
+    height: 3px;
+}
+
+.cart-card {
+    max-width: 1040px;
+}
+
+
+
+.cart-page_head h3 {
+    color: rgb(38, 45, 41);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: left;
+}

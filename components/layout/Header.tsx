@@ -9,11 +9,10 @@ import { fetchUser } from "@/redux/slices/user";
 import Catalog from "@/components/mobile-catalog/Catalog";
 
 //styles
-import '../../styles/header.css';
+import '@/styles/header.css'
 import Auth from "@/components/auth/Auth";
 import { fetchFavorites } from "@/redux/slices/favorites";
 import { fetchMyPurchases } from "@/redux/slices/my-purchases";
-import ToastifyRoot from '../toastify';
 
 
 const Header = () => {

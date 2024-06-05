@@ -9,6 +9,9 @@ import { fetchItems } from "@/redux/slices/items";
 import { fetchItemCategories } from "@/redux/slices/item-categories";
 
 import ProductCard from "@/components/cards/ProductCard";
+import { cartHistory } from "@/redux/slices/cart";
+
+
 
 
 export default function Home() {
@@ -18,6 +21,7 @@ export default function Home() {
     const [popularItems, setPopularItems] = useState([]);
 
     useEffect(() => {
+        dispatch(cartHistory())
         dispatch(fetchItems({}));
     }, [dispatch]);
 

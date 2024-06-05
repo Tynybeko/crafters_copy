@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import { CatalogItems } from "@/components/desktop-catalog/catalog-items";
 import { InputSearch } from "@/components/ui/input";
@@ -6,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 //styles
-import '../../styles/header.css'
+import '@/styles/header.css'
 import Link from "next/link";
 import Image from "next/image";
 import { useAppSelector } from "@/redux/hooks";
@@ -108,7 +110,7 @@ export function HeaderItem(
                         </Link>
                     </li>
                     <li>
-                        <Link href={'/personal-cabinet/my-purchases'}>
+                        <Link href={'/cart'}>
                             <img src="/svg/shopping-bag.svg" alt="Image" />
                             <Counter count={cart?.length} />
                         </Link>

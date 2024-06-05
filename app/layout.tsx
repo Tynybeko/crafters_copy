@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import type { ReactNode } from "react";
 import StoreProvider from "@/providers/storeProvider";
 import localFont from 'next/font/local';
-import {Suspense} from "react";
+import '@/app/globals.css'
+import { Suspense } from "react";
 import Loading from "@/app/loading";
 import ToastifyRoot from "@/components/toastify";
+import { Metadata } from "next";
 
 
 const myFont = localFont({
@@ -67,7 +68,7 @@ export default function RootLayout({
         <body className={myFont.className}>
           <Header />
           <ToastifyRoot />
-          <Suspense fallback={<Loading/>}>
+          <Suspense fallback={<Loading />}>
             {children}
           </Suspense>
         </body>
@@ -75,4 +76,3 @@ export default function RootLayout({
     </html>
   );
 }
-         
