@@ -1,6 +1,6 @@
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CatalogItems } from "@/components/desktop-catalog/catalog-items";
 import { InputSearch } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -42,6 +42,18 @@ export function HeaderItem(
     const localStorage = typeof window !== 'undefined' ? window.localStorage.getItem('token') : null;
     const favorites = useAppSelector(state => state.favorites.data)
     const cart = useAppSelector(state => state.cart.data)
+    const [state, setState] = useState(false)
+
+    useEffect(() => {
+        const handle__Target = (e: any) => {
+            if (!e.target.closest("#searcheBarModal")) {
+                setState(false)
+            }
+        }
+
+        document.addEventListener("click", handle__Target)
+        return () => document.removeEventListener("click", handle__Target)
+    }, [])
 
     return (
         <>
@@ -71,11 +83,18 @@ export function HeaderItem(
                     onMouseLeave={onMouseLeave}
                     openDrop={openDrop} />
             </div>
-            <div className="max-w-[520px] w-full header-search">
-                <InputSearch>
+            <div className="max-w-[520px] w-full header-search relative" id="searcheBarModal">
+                <InputSearch onClick={() => setState(true)}>
                     <span className="opacity-10">|</span>
                     <img src="/svg/search-green.svg" alt="Search" />
                 </InputSearch>
+                {
+                    state
+                    &&
+                    <div className=" absolute bottom-[0] left-[0] w-[100%] bg-[white] border border-solid h-[200px] translate-y-[102%] rounded-[16px] p-[10px]">
+                        dasdasddssdadds
+                    </div>
+                }
             </div>
             <div className="max-w-max w-full header-lang">
                 <Select>

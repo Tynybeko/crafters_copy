@@ -14,8 +14,8 @@ export default function OrderStage1() {
     return (
         <div className='order-stage-one'>
             {
-                cart.map(item => (
-                    <CartItemCard item={item} />
+                cart.map((item, index) => (
+                    <CartItemCard item={item} index={index} />
                 ))
             }
             {

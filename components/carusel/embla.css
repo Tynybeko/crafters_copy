@@ -1,6 +1,3 @@
-
-
-
 .embla {
 	width: 100%;
 	margin: auto;
@@ -24,24 +21,26 @@
 	min-width: 0;
 }
 
-.embla__slide > h1 {
+.embla__slide>h1 {
 	color: white;
 	font-weight: 600;
 	line-height: 110%;
 	font-size: calc(36.6px + (32 - 18)*(100vw - 657px) /(1440 - 580));
 	margin-bottom: 20px;
+
 	@media (max-width: 1024px) {
 		margin-bottom: 8px;
 	}
 }
 
-.embla__slide > p {
+.embla__slide>p {
 	font-size: 20px;
 	line-height: 140%;
 	color: white;
 	font-weight: 300;
 	margin-bottom: 20px;
 	min-height: 104px;
+
 	@media (max-width: 1024px) {
 		font-size: 18px;
 	}
@@ -57,6 +56,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 8px;
+
 	@media (max-width: 767px) {
 		width: 100%;
 	}
@@ -109,4 +109,24 @@
 	display: block;
 	border-radius: 4px;
 	content: '';
+}
+
+.embla__button--prev:hover {
+	background-color: white;
+}
+
+.embla__button--prev:hover path {
+	stroke: #1DBE60;
+}
+
+.embla__button--next:hover {
+	background-color: white;
+}
+
+.embla__button--next:hover path {
+	stroke: #1DBE60;
+}
+
+.embla__dot.embla__dot--selected {
+	background-color: white;
 }
