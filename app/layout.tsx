@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import ToastifyRoot from "@/components/toastify";
 import { Metadata } from "next";
+import { Footer } from "@/components/layout/Footer";
 
 
 const myFont = localFont({
@@ -71,6 +72,7 @@ export default function RootLayout({
           <Suspense fallback={<Loading />}>
             {children}
           </Suspense>
+          <Footer />
         </body>
       </StoreProvider>
     </html>

@@ -1,7 +1,8 @@
 import axios from "axios";
 
 
-const URL = process.env.NEXT_PUBLIC_BASE_URL
+// const URL = process.env.NEXT_PUBLIC_BASE_URL
+const URL = "https://back.crafters.asia/api/v1"
 
 
 
@@ -10,18 +11,18 @@ export const api = axios.create({
   baseURL: URL,
 });
 export const apiToken = axios.create({
-    baseURL: URL,
+  baseURL: URL,
 });
 
 apiToken.interceptors.request.use(
   config => {
-      const token = localStorage.getItem('token');
-      if (token) {
-          config.headers['Authorization'] = `Token ${token}`;
-      }
-      return config
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Token ${token}`;
+    }
+    return config
   },
   error => {
-      Promise.reject(error)
+    Promise.reject(error)
   }
 )

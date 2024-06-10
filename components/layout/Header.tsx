@@ -13,6 +13,7 @@ import '@/styles/header.css'
 import Auth from "@/components/auth/Auth";
 import { fetchFavorites } from "@/redux/slices/favorites";
 import { fetchMyPurchases } from "@/redux/slices/my-purchases";
+import { apiToken } from '@/axios';
 
 
 const Header = () => {
@@ -60,8 +61,21 @@ const Header = () => {
         return () => {
             document.removeEventListener('click', handleClick);
         };
-    }, [isOpenMenu]);
+    }, [isOpenMenu])
 
+    // useEffect(() => {
+    //     apiToken.post("send-aplication-compancy/", {
+    //         legal_name: "dior",
+    //         legal_address: "toktogul kocho",
+    //         phone: "+996556696460",
+    //         city: "osh city",
+    //         index: 1223,
+    //         site_url: "https://github.com/Dior9054/"
+    //     })
+    //         .then(res => {
+    //             console.log(res);
+    //         })
+    // }, [])
 
     return (
         <>
@@ -117,5 +131,5 @@ function HeaderTop() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

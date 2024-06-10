@@ -44,14 +44,25 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
     }, [modelIndex, product.models_name]);
 
     useEffect(() => {
-        const color = modelType?.colors?.find((color: any) => color.id === colorId) || null;
-        setColorModel(color);
-        setColorModels(color)
-    }, [colorId, modelType]);
+        let a1 = colorModel
+        const color = modelType?.colors?.find((color: any) => color.id === colorId) || null
+        if (color) {
+            let { images, ...fuck } = color
+            if (!a1) {
+                fuck.images = images
+            }
+            setColorModel({ ...fuck })
+            setColorModels({ ...fuck })
+        } else {
+            setColorModel(color)
+            setColorModels(color)
+        }
+    }, [colorId, modelType])
 
     const incrementQuantity = () => {
         if (colorModel && colorModel.quantity > productQuantity) {
             setProductQuantity(prevState => prevState + 1)
+            console.log("false");
         }
     }
 
@@ -60,6 +71,10 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
             setProductQuantity(prevState => prevState - 1)
         }
     }
+
+    useEffect(() => {
+        console.log(productQuantity);
+    }, [productQuantity])
 
 
     const addToCartItem = () => {
@@ -80,8 +95,9 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
             <div className={'item-stage1'}>
                 <div className={'item-stage1-header'}>
                     <div className={'item-stage1-header-img'}>
+                        {/* {console.log(product, "product")} */}
                         {colorModel?.images?.length !== 0 ?
-                            <ImageCorusel model={colorModel} options={OPTIONS} /> : (
+                            <ImageCorusel model={colorModel} options={OPTIONS} product={product} /> : (
                                 <div className={'default-image'}>
                                     <img src={product.company.image} alt="" />
                                 </div>
@@ -174,12 +190,17 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
                                         Model:
                                     </span>
                                     <div className={'flex items-center gap-2'}>
-                                        {product.models_name.map((item, index) => (
-                                            <Button onClick={() => setModelIndex(index)}
-                                                variant={modelType?.name === item.name ? 'default' : 'outline'}
-                                                key={index}
-                                            >{item.name}
-                                            </Button>))}
+                                        {
+                                            product.models_name.map((item, index) => (
+                                                <Button
+                                                    onClick={() => setModelIndex(index)}
+                                                    variant={modelType?.name === item.name ? 'default' : 'outline'}
+                                                    key={index}
+                                                >
+                                                    {item.name}
+                                                </Button>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +222,8 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
                                 </label>
                                 <div className={'flex items-center gap-[24px]'}>
                                     <p className={'text-[32px] font-[700] text-[#F83427] flex items-center gap-1'}>
-                                        <span>{colorModel?.currency?.code} </span>
-                                        {colorModel?.price}
+                                        <span>{colorModel?.currency?.code}</span>
+                                        {colorModel?.price * productQuantity}
                                         {colorModel?.discount !== null &&
                                             <span className={'font-[500] text-[16px] line-through opacity-40'}>
                                                 <span>{colorModel?.currency?.code} {colorModel?.discount} </span>

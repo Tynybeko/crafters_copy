@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -9,9 +10,9 @@ import { RegisterUser } from "@/redux/slices/user";
 import MiniLoading from "@/components/mini-loading/MiniLoading";
 
 interface userType {
-    email: string
-    password: string
-    confirmPassword: string
+    email: string,
+    password: string,
+    confirmPassword: string,
 }
 
 const Register = ({ setIsLogin, setIsRegister }: any) => {
@@ -20,67 +21,56 @@ const Register = ({ setIsLogin, setIsRegister }: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [showPasswordConfirm, setShowPasswordConfirm] = useState<boolean>(false)
-    const [userData, setUserData] = useState<userType>({
-        email: '',
+    const [userPassword, setUserPassword] = useState({
         password: '',
         confirmPassword: ''
     });
     const [error, setError] = useState<userType>({
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
     })
 
-    const onInputChange = (e: any) => {
-        const { name, value } = e.target;
-        setUserData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-        validateInput(e);
-    }
+    const handle__ConfPassword = (e: any) => {
+        const { name, value } = e.target
+        setUserPassword(prev => {
+            return { ...prev, [name]: value }
+        })
 
-    const validateInput = (e: any) => {
-        let { name, value } = e.target;
-        setError(prev => {
-            const stateObj = { ...prev, [name]: "" };
-            switch (name) {
-                case "email":
-                    if (!value) {
-                        stateObj.email = "Please enter Email.";
-                    }
-                    break;
-                case "confirmPassword":
-                    if (!value) {
-                        stateObj.confirmPassword = "Please enter Confirm Password.";
-                    } else if (userData.password && value !== userData.password) {
-                        stateObj.confirmPassword = "Password and Confirm Password does not match.";
-                    }
-                    break;
-                default:
-                    break;
+        if (name == "confirmPassword") {
+            if (!value) {
+                setError(prev => ({ ...prev, confirmPassword: "Please enter Confirm Password." }))
+            } else if (userPassword.password && value !== userPassword.password) {
+                setError(prev => ({ ...prev, confirmPassword: "Password and Confirm Password does not match." }))
+            } else {
+                setError(prev => ({ ...prev, confirmPassword: "" }))
             }
-            return stateObj;
-        });
+        }
     }
 
     const handleSubmit = (e: any) => {
         setIsLoading(true)
         e.preventDefault()
-        api.post('/accounts/register/', {
-            email: userData.email,
-            password: userData.password,
-        })
+
+        let a1 = new FormData(e.target)
+        let a2 = Object.fromEntries(a1.entries())
+
+        api.post('/accounts/register/', a2)
             .then(res => {
                 dispatch(RegisterUser(res.data))
                 localStorage.setItem('token', res.data.token)
-                setIsRegister(false);
+                setIsRegister(false)
                 setIsLogin(false);
                 setIsLoading(false)
             })
             .catch(err => {
                 console.log(err)
                 setIsLoading(false)
+                setError(prev => ({
+                    ...prev,
+                    password: err?.response?.data?.password?.[0],
+                    email: err?.response?.data?.email?.[0]
+                }))
             })
     }
 
@@ -99,43 +89,38 @@ const Register = ({ setIsLogin, setIsRegister }: any) => {
                     <form onSubmit={handleSubmit}>
                         <div className="login-input">
                             <Input
-                                value={userData.email}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                                className={(error.confirmPassword || error.password || error.email) && "border-[red]"}
                                 type="email"
                                 required
                                 name="email"
                                 placeholder="Email" />
-                            {error.email && <span className='err'>{error.email}</span>}
                         </div>
                         <div className="login-input">
                             <InputPassword
                                 visible={showPassword}
                                 hidden={setShowPassword}
-                                value={userData.password}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                                className={(error.confirmPassword || error.password || error.email) && "border-[red]"}
+                                onChange={handle__ConfPassword}
                                 required
-
                                 type="password"
                                 name="password"
                                 placeholder="Password"
                             />
-                            {error.password && <span className='err'>{error.password}</span>}
                         </div>
                         <div className="login-input !mb-[40px]">
                             <InputPassword
+                                className={(error.confirmPassword || error.password || error.email) && "border-[red]"}
                                 visible={showPasswordConfirm}
                                 hidden={setShowPasswordConfirm}
-                                value={userData.confirmPassword}
                                 required
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                                onChange={handle__ConfPassword}
                                 type="password"
                                 name="confirmPassword"
                                 placeholder="Confirm Password"
                             />
-                            {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
+                            <span className='err text-[14px] leading-[16px] mt-[10px] text-[#F83427] font-[300] block'>{error.email}</span>
+                            <span className='err text-[14px] leading-[16px] mt-[10px] text-[#F83427] font-[300] block'>{error.password}</span>
+                            <span className='err text-[14px] leading-[16px] mt-[10px] text-[#F83427] font-[300] block'>{error.confirmPassword}</span>
                         </div>
                         <div className="checkbox-wrapper mb-[13px]">
                             <label>
@@ -174,11 +159,11 @@ const Register = ({ setIsLogin, setIsRegister }: any) => {
                             <p>or</p>
                         </div>
                         <div className="flex items-center gap-[12px]">
-                            <Button variant={'outline'} className="flex items-center gap-[4px]">
+                            <Button variant={'outline'} type="button" className="flex items-center gap-[4px]">
                                 <img src="/svg/google.svg" alt="Google" />
                                 Google
                             </Button>
-                            <Button className="flex items-center gap-[4px]">
+                            <Button className="flex items-center gap-[4px]" type='button'>
                                 <img src="/svg/facebook.svg" alt="Google" />
                                 Facebook
                             </Button>
@@ -189,6 +174,5 @@ const Register = ({ setIsLogin, setIsRegister }: any) => {
         </div>
     );
 };
-
 
 export default Register;

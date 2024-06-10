@@ -37,8 +37,6 @@ const ProductCard = ({ data, owner }: { data: any, owner?: boolean }) => {
         ]
     });
 
-
-
     useEffect(() => {
         if (product && colorModels && profile) {
             setDataOrder((prevState: any) => ({

@@ -75,6 +75,8 @@ const ProductPage = ({ params }: any) => {
             });
     }, []);
 
+    console.log(product, "product")
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setDataOrder((prevState: any) => ({
@@ -130,7 +132,7 @@ const ProductPage = ({ params }: any) => {
                                 setIsActiveAlert={setIsActiveAlert}
                             />
                         )}
-                        <div className={'flex gap-8'}>
+                        <div className={'flex gap-8 globalContainer'}>
                             {activeStage === 2 && (
                                 <ItemStage2
                                     colorModels={colorModels}
@@ -139,12 +141,14 @@ const ProductPage = ({ params }: any) => {
                             )}
                             {activeStage === 3 && (
                                 <ItemStage3
-
+                                    colorModels={colorModels}
+                                    product={product}
                                 />
                             )}
                             {activeStage === 4 && (
                                 <ItemStage4
-
+                                    colorModels={colorModels}
+                                    product={product}
                                 />
                             )}
                             {colorModels && activeStage !== 1 && (
