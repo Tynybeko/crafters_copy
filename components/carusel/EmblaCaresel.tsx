@@ -10,6 +10,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import "./embla.css";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type PropType = {
   slides: number[];
@@ -46,9 +47,11 @@ const EmblaCarousel: React.FC<PropType> = props => {
           )}
         </div>
       </div>
-      <Button className="mb-5 md:w-[166px] w-full" variant="secondary">
-        View catalog
-      </Button>
+      <Link href="/catalog">
+        <Button className="mb-5 md:w-[166px] w-full" variant="secondary">
+          View catalog
+        </Button>
+      </Link>
       <div className="embla__controls">
         <div className="embla__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />

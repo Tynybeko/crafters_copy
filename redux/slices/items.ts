@@ -2,15 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { InitialStateType } from "@/types";
 import { apiToken } from "@/axios";
 
-const initialState : InitialStateType<any> = {
-    data     : null,
+const initialState: InitialStateType<any> = {
+    data: null,
     isLoading: false,
-    isError  : false,
+    isError: false,
 };
 
 export const fetchItems = createAsyncThunk(
     "items/fetchItems",
-    async ({ params, id }: {params?: any,  id?: number}) => {
+    async ({ params, id }: { params?: any, id?: number }) => {
         const response = await apiToken.get(`items/${id ? id : ''}`, {
             params: {
                 category: params?.category,
@@ -28,7 +28,7 @@ export const fetchItems = createAsyncThunk(
 
 
 const itemsSlice = createSlice({
-    name    : 'items',
+    name: 'items',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -48,6 +48,6 @@ const itemsSlice = createSlice({
     },
 })
 
-export const {} = itemsSlice.actions
+export const { } = itemsSlice.actions
 
 export default itemsSlice.reducer

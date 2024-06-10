@@ -123,6 +123,7 @@ const PopularCards = ({ data }: {
                                     alt='' />
                             ))}
                         </div>
+                        {/* {console.log(data, "data")} */}
                         <AddFavorite data={data} />
                     </div>
                     <div className='popular-card-bottom'>

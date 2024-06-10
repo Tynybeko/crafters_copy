@@ -2,6 +2,7 @@
   border-bottom: 1px solid #1dbe60;
   position: relative;
   background: white;
+
   @media (max-width: 768px) {
     z-index: 15;
   }
@@ -20,6 +21,7 @@
   line-height: 20px;
   color: white;
   padding: 8px 0;
+
   @media (max-width: 710px) {
     justify-content: center;
   }
@@ -29,6 +31,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+
   @media (max-width: 710px) {
     display: none;
   }
@@ -38,6 +41,7 @@
   display: flex;
   align-items: center;
   gap: 64px;
+
   @media (max-width: 710px) {
     width: 100%;
     gap: 4px;
@@ -52,9 +56,11 @@
   padding: 27px 0;
 
   gap: 20px;
+
   @media (max-width: 705px) {
     flex-wrap: wrap;
   }
+
   @media (max-width: 768px) {
     padding: 16px 0;
   }
@@ -64,6 +70,7 @@
   display: flex;
   align-items: center;
   gap: 48px;
+
   @media (max-width: 768px) {
     gap: 24px;
   }
@@ -74,7 +81,7 @@
   gap: 24px;
 }
 
-.logo > img {
+.logo>img {
   width: 100%;
   height: 100%;
 }
@@ -86,7 +93,7 @@
   gap: 21px;
 }
 
-.header-icons > span {
+.header-icons>span {
   width: 1px;
   height: 100%;
   background: #262d291a;
@@ -153,21 +160,26 @@
 }
 
 @media (max-width: 768px) {
+
   .header-catalog,
   .header-lang,
   .header-search,
   .header-icons {
     display: none;
   }
+
   .burger-menu {
     display: block;
   }
+
   .header-icons-mobil {
     display: flex !important;
   }
+
   .shop-bag {
     display: none !important;
   }
+
   .bag-line {
     display: none !important;
   }
@@ -180,7 +192,7 @@
   gap: 20px;
 }
 
-.header-icons-mobil > span {
+.header-icons-mobil>span {
   width: 1px;
   height: 100%;
   background: #262d291a;
@@ -200,7 +212,7 @@
   padding: 20px 15px 0;
 }
 
-.mobile-menu > button {
+.mobile-menu>button {
   box-shadow: 4px 4px 12px 0 #00000033;
 }
 
@@ -216,30 +228,31 @@
   gap: 4px;
 }
 
-.mobile-lists > li:hover > a > svg > path {
+.mobile-lists>li:hover>a>svg>path {
   stroke: #1dbe60;
   transition: all 0.2s ease;
 }
 
-.mobile-lists > li:hover,
-.mobile-lists > li > a.active {
+.mobile-lists>li:hover,
+.mobile-lists>li>a.active {
   color: #1dbe60;
 }
-.mobile-lists > li:hover svg path,
-.mobile-lists > li > a.active svg path {
+
+.mobile-lists>li:hover svg path,
+.mobile-lists>li>a.active svg path {
   stroke: #1dbe60;
 }
 
-.mobile-lists > li:hover {
+.mobile-lists>li:hover {
   color: #1dbe60;
 }
 
-.mobile-lists > li {
+.mobile-lists>li {
   padding: 8px 0;
   color: #262d2999;
 }
 
-.mobile-lists > li > a {
+.mobile-lists>li>a {
   font-size: 16px;
   line-height: 16px;
   font-weight: 400;

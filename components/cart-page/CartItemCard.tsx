@@ -3,12 +3,12 @@ import { ICartItemsType, counterCartItem, removeCartItem } from '@/redux/slices/
 import { setToastiState } from '@/redux/slices/toastiSlice'
 import React, { useCallback } from 'react'
 
-
 interface ICartItemCardProps {
-    item: ICartItemsType
+    item: ICartItemsType,
+    index: number
 }
 
-export default function CartItemCard({ item }: ICartItemCardProps) {
+export default function CartItemCard({ item, index }: ICartItemCardProps) {
     const dispatch = useAppDispatch()
 
     const handleCopy = () => {
@@ -16,18 +16,18 @@ export default function CartItemCard({ item }: ICartItemCardProps) {
         dispatch(setToastiState([{ type: 'succes', data: 'Скопировано' }]))
     }
 
-
     const handleRemoveItemCart = () => dispatch(removeCartItem(item))
     const increment = useCallback(() => (item.quantity ?? 1) < item.maxCount ? dispatch(counterCartItem({ ...item, quantity: (item.quantity ?? 1) + 1 })) : null, [item.quantity])
     const decrement = useCallback(() => (item.quantity ?? 1) > 1 ? dispatch(counterCartItem({ ...item, quantity: (item.quantity ?? 1) - 1 })) : null, [item.quantity])
 
-
-
+    console.log(item);
 
     return (
         <div className='cart-card'>
+            {/* {console.log(item.models_name[index].colors[index].images[index].image, index)} */}
             <div className='cart-card-img'>
-                <img src={item.image} alt="Img" />
+                {/* <img src={item.image} alt="Img" /> */}
+                <img src={item.models_name[0].colors[0].images[0].image} alt="Img" />
             </div>
             <div className='cart-card-content'>
                 <div className="title">
@@ -80,7 +80,7 @@ export default function CartItemCard({ item }: ICartItemCardProps) {
                             </svg>
                         </button>
                     </div>
-                    <p className='text-[32px] text-orange-500 font-bold'>{item?.currency?.code ?? '$'}{item.price}</p>
+                    <p className='text-[32px] text-orange-500 font-bold'>{item?.currency?.code ?? '$'}{item?.price * (item?.quantity || 1)}</p>
                 </div>
             </div>
         </div>
