@@ -5,12 +5,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 
-export const FetchReviews = createAsyncThunk('items-reviews/FetchReviews', async (payload: { query: { [key: string]: any },  }, { rejectWithValue }) => {
-    const query = new URLSearchParams(payload.query)
+export const FetchReviews = createAsyncThunk('items-reviews/FetchReviews', async (_, { rejectWithValue }) => {
+    const response = await apiToken.get("my-reviews/")
     try {
-        const { data } = await apiToken.get('')
-    } catch (err) {
-
+        return response.data
+    }
+    catch (e) {
+        console.log(e)
     }
 })
 
@@ -18,7 +19,8 @@ export const FetchReviews = createAsyncThunk('items-reviews/FetchReviews', async
 
 
 interface IReviewInitialState {
-    data: IResponseInit<IReviewType[]> | null,
+    // data: IResponseInit<IReviewType[]> | [],
+    data: any,
     loading: boolean,
     error: string
 }
@@ -27,7 +29,7 @@ interface IReviewInitialState {
 
 
 const initialState: IReviewInitialState = {
-    data: null,
+    data: [],
     loading: false,
     error: ''
 }
@@ -37,7 +39,24 @@ const initialState: IReviewInitialState = {
 const ReviewSlice = createSlice({
     name: 'reviews',
     initialState,
-    reducers: {
-
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(FetchReviews.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(FetchReviews.fulfilled, (state, action) => {
+                state.data = action.payload;
+                state.loading = false;
+                state.error = "false";
+            })
+            .addCase(FetchReviews.rejected, (state) => {
+                state.loading = false;
+                state.error = "true";
+            })
     },
 })
+
+export const { } = ReviewSlice.actions
+
+export default ReviewSlice.reducer

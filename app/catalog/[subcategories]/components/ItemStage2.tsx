@@ -11,11 +11,12 @@ const ItemStage2 = ({ colorModels, product }: { colorModels: any, product: Items
     const dispatch = useDispatch()
     const [popularItems, setPopularItems] = useState([]);
 
-    // console.log(popularItems, "fuck");
-
     useEffect(() => {
         dispatch(fetchItems({}) as any)
     }, [])
+
+    console.log(product, "ivan");
+
 
     useEffect(() => {
         if (items && items.length > 0) {
@@ -31,7 +32,8 @@ const ItemStage2 = ({ colorModels, product }: { colorModels: any, product: Items
                     <div>
                         <h2 className='text-[#262D29] text-[24px] leading-[26px] font-[500] mb-[24px]'>Main characteristics about the soft toy of large size brown color</h2>
                         <p className='text-[#262D2999] leading-[22px] text-[16px] font-[400] mb-[80px]'>
-                            In front of you naykruhest phone of all existing, on my favorite Android.
+                            {product?.main_features}
+                            {/* In front of you naykruhest phone of all existing, on my favorite Android.
                             <br /><br />
                             The smartphone is sealed and completely new, even in the factory film.
                             <br /><br />
@@ -90,7 +92,7 @@ const ItemStage2 = ({ colorModels, product }: { colorModels: any, product: Items
                             Finally installed 5.3 latest bluetooth
                             And the latest version of wi-fi.
                             <br /><br />
-                            Translated with www.DeepL.com/Translator (free version)
+                            Translated with www.DeepL.com/Translator (free version) */}
                         </p>
                     </div>
                     <div>

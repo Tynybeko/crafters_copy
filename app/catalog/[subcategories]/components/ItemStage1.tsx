@@ -10,9 +10,12 @@ import Box from "@/components/ui/Box";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { addCartItem } from '@/redux/slices/cart';
 import { setToastiState } from '@/redux/slices/toastiSlice';
+import { FetchReviews } from '@/redux/slices/review';
+import ProductCard from '@/components/cards/ProductCard';
+import { fetchItems } from '@/redux/slices/items';
 
 const OPTIONS: EmblaOptionsType = {}
 
@@ -25,6 +28,9 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
     const [colorId, setColorId] = useState<number | null>(null);
     const [colorModel, setColorModel] = useState<any | null>(null);
     const [productQuantity, setProductQuantity] = useState(1)
+    const { data: reviews } = useAppSelector(state => state.review);
+    // const [popularItems, setPopularItems] = useState([]);
+    // const { data: items } = useAppSelector(state => state.items);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(product.code);
@@ -33,6 +39,22 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
             setCopied(false);
         }, 2000);
     };
+
+    useEffect(() => {
+        // dispatch(fetchItems({}) as any)
+        dispatch(FetchReviews() as any)
+    }, [])
+
+    // useEffect(() => {
+    //     if (items && items.length > 0) {
+    //         const sortedItems = items.slice().sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+    //         setPopularItems(sortedItems.slice(0, 3));
+    //     }
+    // }, [items]);
+
+    // useEffect(() => {
+    //     dispatch(FetchReviews() as any)
+    // }, [])
 
     useEffect(() => {
         setColorId(modelType?.colors?.[0]?.id || null);
@@ -95,7 +117,6 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
             <div className={'item-stage1'}>
                 <div className={'item-stage1-header'}>
                     <div className={'item-stage1-header-img'}>
-                        {/* {console.log(product, "product")} */}
                         {colorModel?.images?.length !== 0 ?
                             <ImageCorusel model={colorModel} options={OPTIONS} product={product} /> : (
                                 <div className={'default-image'}>
@@ -246,53 +267,68 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
                 <div className={'flex items-start justify-between gap-[10px] info'}>
                     <div className={'reviews'}>
                         <h3>Reviews</h3>
-                        <Box className={'reviews-box'}>
-                            <div className={'reviews-header'}>
-                                <div className={'flex items-center gap-3'}>
-                                    <span className={'w-[24px] h-[24px] rounded-full block'}>
-                                        <img className={'w-full h-full object-cover'} src={product.company.image}
-                                            alt="Image" />
-                                    </span>
-                                    <p>Ivan Ivanov Ivanovich</p>
-                                </div>
-                                <div className={'flex items-center gap-1 flex-wrap'}>
-                                    <div className={'item-stage1-header-contents-stars'}>
-                                        {[1, 2, 3, 4, 5].map((star: number) => (
-                                            <img key={star}
-                                                src={`/svg/star${star <= product.raiting ? '' : '-outline'}.svg`}
-                                                alt='' />
-                                        ))}
-                                        <span> Quality </span>
-                                    </div>
-                                    <div className={'item-stage1-header-contents-stars'}>
-                                        {[1, 2, 3, 4, 5].map((star: number) => (
-                                            <img key={star}
-                                                src={`/svg/star${star <= product.raiting ? '' : '-outline'}.svg`}
-                                                alt='' />
-                                        ))}
-                                        <span> Price </span>
-                                    </div>
-                                    <div className={'item-stage1-header-contents-stars'}>
-                                        {[1, 2, 3, 4, 5].map((star: number) => (
-                                            <img key={star}
-                                                src={`/svg/star${star <= product.raiting ? '' : '-outline'}.svg`}
-                                                alt='' />
-                                        ))}
-                                        <span>Delivery</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p>This Privacy Policy describes how we collect, use, and protect the information you
-                                    provide when using our website policy describes how we collect, use, and protect the
-                                    information you provide when using our website</p>
-                                <Separator orientation={'horizontal'} className={'my-[20px]'} />
-                                <p>This Privacy Policy describes how we collect, use, and protect the information you
-                                    provide when using our website policy describes how we collect, use, and protect the
-                                    information you provide when using our website</p>
-                                <Separator orientation={'horizontal'} className={'my-[20px]'} />
-                            </div>
-                        </Box>
+                        {
+                            (!!reviews && reviews?.find((val: any) => val.item?.id != product.id))
+                            &&
+                            <h2>You don't have any reviews yet</h2>
+                        }
+                        {
+                            reviews && reviews?.map((item: any) => {
+                                if (item.item.id == product.id) {
+                                    return (
+                                        <Box className={'reviews-box mb-[24px]'}>
+                                            <div className={'reviews-header'}>
+                                                <div className={'flex items-center gap-3'}>
+                                                    <span className={'w-[24px] h-[24px] rounded-full block'}>
+                                                        <img className={'w-full h-full object-cover'} src={item.company.image}
+                                                            alt="Image" />
+                                                    </span>
+                                                    <p className='text-[#262D29] font-[400] text-[16px] leading-[18px]'>Ivan Ivanov Ivanovich</p>
+                                                </div>
+                                                <div className={'flex items-center gap-1 flex-wrap'}>
+                                                    <div className={'item-stage1-header-contents-stars'}>
+                                                        {[1, 2, 3, 4, 5].map((star: number) => (
+                                                            <img key={star}
+                                                                src={`/svg/star${star <= item.quality ? '' : '-outline'}.svg`}
+                                                                alt='' />
+                                                        ))}
+                                                        <span> Quality </span>
+                                                    </div>
+                                                    <div className={'item-stage1-header-contents-stars'}>
+                                                        {[1, 2, 3, 4, 5].map((star: number) => (
+                                                            <img key={star}
+                                                                src={`/svg/star${star <= item.price_relevance ? '' : '-outline'}.svg`}
+                                                                alt='' />
+                                                        ))}
+                                                        <span> Price </span>
+                                                    </div>
+                                                    <div className={'item-stage1-header-contents-stars'}>
+                                                        {[1, 2, 3, 4, 5].map((star: number) => (
+                                                            <img key={star}
+                                                                src={`/svg/star${star <= item.delivery ? '' : '-outline'}.svg`}
+                                                                alt='' />
+                                                        ))}
+                                                        <span>Delivery</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p className='text-[#262D29CC] font-[400] text-[16px] leading-[22px]'>{item.comment}</p>
+                                                <Separator orientation={'horizontal'} className={'my-[20px]'} />
+                                                <div>
+                                                    <p className='text-[#262D2966] font-[400] text-[16px] leading-[22px] mb-[8px]'>Advantages</p>
+                                                    <p className='text-[#262D29CC] font-[400] text-[16px] leading-[22px] mb-[20px]'>{item.advantages}</p>
+                                                </div>
+                                                <div>
+                                                    <p className='text-[#262D2966] font-[400] text-[16px] leading-[22px] mb-[8px]'>Advantages</p>
+                                                    <p className='text-[#262D29CC] font-[400] text-[16px] leading-[22px]'>{item.disadvantages}</p>
+                                                </div>
+                                            </div>
+                                        </Box>
+                                    )
+                                }
+                            })
+                        }
                     </div>
                     <div className={'information'}>
                         <h3>Additional information</h3>
@@ -319,9 +355,68 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
                         </Box>
                     </div>
                 </div>
+                {
+                    (!!reviews && reviews?.find((val: any) => val.item?.id == product.id))
+                    &&
+                    <button onClick={() => setActiveStage(3)} className="text-[16px] leading-[18px] text-[#262D29] underline font-[400] underline-offset-[2px]">All comments</button>
+                }
             </div>
+            {/* <div className='mt-[80px]'>
+                <h2 className='text-[#262D29] text-[24px] leading-[26px] font-[500] mb-[24px]'>Related Products</h2>
+                <div className='flex gap-[24px]'>
+                    {
+                        popularItems.map((item: any) => (
+                            <ProductCard key={item.id} data={item} />
+                        ))
+                    }
+                </div>
+            </div> */}
+            <PopularProducts />
         </section>
     );
 };
 
 export default ItemStage1;
+
+
+function PopularProducts() {
+    const [popularItems, setPopularItems] = useState([]);
+    const { data: items } = useAppSelector(state => state.items);
+    const dispatch = useAppDispatch()
+
+
+    useEffect(() => {
+        if (items && items.length > 0) {
+            const sortedItems = items.slice().sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+            setPopularItems(sortedItems.slice(0, 3));
+        }
+    }, [items]);
+
+    useEffect(() => {
+        dispatch(fetchItems({}) as any)
+        // dispatch(FetchReviews() as any)
+    }, [])
+
+    // useEffect(() => {
+    // dispatch(FetchReviews() as any)
+    // .then(res => {
+    //     console.log(res);
+    // })
+    // }, [])
+
+    console.log(items);
+    console.log(popularItems, "pop");
+
+    return (
+        <div className='mt-[80px]'>
+            <h2 className='text-[#262D29] text-[24px] leading-[26px] font-[500] mb-[24px]'>Related Products</h2>
+            <div className='flex gap-[24px]'>
+                {
+                    popularItems.map((item: any) => (
+                        <ProductCard key={item.id} data={item} />
+                    ))
+                }
+            </div>
+        </div>
+    )
+}
