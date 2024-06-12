@@ -135,7 +135,7 @@ const ProductCard = ({ data, owner }: { data: any, owner?: boolean }) => {
                 </div>
                 <div onClick={() => router.push(`/catalog/subcategories/${data.code}`)} className='card-img'>
                     <img src={data.image} alt="Image" />
-                    <div className={'status-product'}>
+                    <div className={'status-product px-3'}>
                         {data.is_new && <div className='card-img-new'>New</div>}
                         {data.is_popular && <div className='card-img-popular'>Popular</div>}
                     </div>

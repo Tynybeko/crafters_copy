@@ -15,7 +15,7 @@ function Favorites() {
         <>
             <section>
                 <div className={'globalContainer'}>
-                    <div className={'favorites-items'}>
+                    <div className={'favorites-items gap-3'}>
                         {favorites && favorites.length ? (
                             favorites.map((item: any) => (
                                 <ProductCard key={item.id} data={item.item_data} />

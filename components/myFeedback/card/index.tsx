@@ -39,7 +39,6 @@ export default function FeedbackCard({ item, company }: IFeedbackCardProps) {
             {loading && <Loading />}
             <div className='feedback-card__head flex items-center justify-between'>
                 <div className="feedback-card__head_company">
-                    <img src={item?.company?.image} alt="Img" />
                     {item?.company?.legal_name}
                 </div>
                 <div className="feedback-card__head_reviews">
@@ -71,23 +70,23 @@ export default function FeedbackCard({ item, company }: IFeedbackCardProps) {
             </div>
             <div className="feedback-card__item">
                 <div className='flex items-center gap-5'>
-                    <img width={80} height={80} src={item?.item.image} alt="Img" />
+                    <img className='feedback-card__item_img' width={80} height={80} src={item?.item?.image} alt="Img" />
                     <div className='flex flex-col'>
-                        <p className='item_code flex gap-2'>Cod: {item?.item.code ?? '00000'}
+                        <p className='item_code flex gap-2'>Cod: {item?.item?.code ?? '00000'}
                             <img
                                 src="/svg/copy.svg"
                                 alt="Copy Code"
                                 onClick={handleCopy}
                                 style={{ cursor: 'pointer' }}
                             /></p>
-                        <h3 className='text-[20px]'>{item?.item.name ?? 'Неизвестно'}</h3>
+                        <h3 className='text-[20px]'>{item?.item?.name ?? 'Неизвестно'}</h3>
                     </div>
                 </div>
 
                 <div className='item_border_left w-full text-center'>
                     <p>Price</p>
                     <h3 className='text-orange-400'>
-                        {item?.item?.currency.code ?? 'С'}{item?.item.price}
+                        {item?.item?.currency?.code ?? 'С'}{item?.item?.price}
                     </h3>
                 </div>
             </div>

@@ -17,6 +17,7 @@ import { Separator } from "@/components/ui/separator";
 import './my-purchases.css'
 import { IPurchasesItem } from "@/types";
 import EmptyBox from '@/components/empty-box';
+import Loading from '../loading';
 
 
 function MyPurchases() {
@@ -31,9 +32,12 @@ function MyPurchases() {
         <section>
             <div className={'globalContainer'}>
                 <div className={'purchases-items'}>
-                    {purchases?.length ? purchases.map((item) => (
+                    {purchases ? purchases.map((item) => (
                         <PurchasesItem key={item.id} item={item} />
-                    )) : <EmptyBox />}
+                    )) : <Loading />}
+                    {
+                        purchases && purchases.length == 0 ? <EmptyBox /> : null
+                    }
                 </div>
             </div>
         </section>
