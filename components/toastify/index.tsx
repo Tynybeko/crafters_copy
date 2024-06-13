@@ -2,8 +2,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ToastifyTypesEnum, removeToastiState } from "@/redux/slices/toastiSlice"
 import React, { useEffect, useMemo, useState } from "react"
-import { memo } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
 
 const ToastiColorVar: { [key in ToastifyTypesEnum]: string } = {

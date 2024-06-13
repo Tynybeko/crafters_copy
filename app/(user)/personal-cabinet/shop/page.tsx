@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Box from '@/components/ui/Box';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,11 +11,13 @@ import { ICompany } from '@/types';
 import './shop.css';
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { apiToken } from '@/axios';
+import { setToastiState } from '@/redux/slices/toastiSlice';
 
 const Shop = () => {
     const { data } = useAppSelector((state) => state.company);
     const [inputData, setInputData] = useState<ICompany | null>(data)
-
+    const dispatch = useAppDispatch()
     const [isDisabledCompany, setIsDisabledCompany] = useState<boolean>(false);
     const [isDisabledAddress, setIsDisabledAddress] = useState<boolean>(false);
     const [isDisabledLocation, setIsDisabledLocation] = useState<boolean>(false);
@@ -41,6 +43,28 @@ const Shop = () => {
     }
 
 
+
+    const handleSubmit = () => {
+        if (!inputData) return
+        const { image, ...someData } = inputData
+        const response = apiToken.put('/my-company/', someData)
+        response
+            .then(res => dispatch(setToastiState([{ type: 'succes', data: 'Данные сохранились' }])))
+            .catch(err => {
+                if (err.response) {
+                    let errors: any[] = []
+                    for (let item of Object.values(err.response.data)) {
+                        if (!errors.find((el: any) => el.data == item)) {
+                            errors.push({ type: 'error', data: item })
+                        }
+                    }
+                    dispatch(setToastiState(errors))
+                }
+            })
+    }
+
+
+
     return (
         <div className='shop'>
             <div className='shop-wrapper'>
@@ -60,11 +84,11 @@ const Shop = () => {
                         <div className='shop-card-body'>
                             <div className={'shop-balance'}>
                                 <h3 className={'text-[#1DBE60]'}>
-                                    {data.balance?.amount}
+                                    {data?.balance?.amount}
                                     <span>Sold in the amount of</span>
                                 </h3>
                                 <h3 className={'text-[#F83427]'}>
-                                    {data.balance.balance}
+                                    {data?.balance?.balance}
                                     <span>Interest on payment</span>
                                 </h3>
                             </div>
@@ -73,17 +97,17 @@ const Shop = () => {
                             <div className={'shop-balance-info'}>
                                 <div className={'shop-balance-info-card'}>
                                     <span>From the website</span>
-                                    <p>C {data.balance.created_at.split('T')[0]}</p>
+                                    <p>C {data?.balance?.created_at.split('T')[0]}</p>
                                 </div>
                                 <Separator orientation={'vertical'} />
                                 <div className={'shop-balance-info-card'}>
                                     <span>Speed of transaction closing</span>
-                                    <p>{data.balance.days_transaction_closing} days on average</p>
+                                    <p>{data.balance?.days_transaction_closing} days on average</p>
                                 </div>
                                 <Separator orientation={'vertical'} />
                                 <div className={'shop-balance-info-card'}>
                                     <span>Buy</span>
-                                    <p>{data.balance.id}</p>
+                                    <p>{data?.balance?.id}</p>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +156,7 @@ const Shop = () => {
                                     disabled={!isDisabledCompany} />
                             </div>
                         </form>
-                        {isDisabledCompany && <Button className='mt-4'>Save</Button>}
+                        {isDisabledCompany && <Button onClick={handleSubmit} className='mt-4'>Save</Button>}
                     </Box>
                     <Box className='user'>
                         <div className='user-header'>
@@ -164,7 +188,7 @@ const Shop = () => {
                         <form className='user-contact'>
                             <div className='user-info-item'>
                                 <p>Email</p>
-                                <Input name={'legal_name'} value={inputData?.user.email} onChange={onInputChange}
+                                <Input name={'legal_name'} value={inputData?.user?.email} onChange={onInputChange}
                                     disabled={!isDisabledAddress} />
                             </div>
                             <div className='user-info-item'>
@@ -173,7 +197,7 @@ const Shop = () => {
                                     disabled={!isDisabledAddress} />
                             </div>
                         </form>
-                        {isDisabledAddress && <Button className='mt-4'>Save</Button>}
+                        {isDisabledAddress && <Button onClick={handleSubmit} className='mt-4'>Save</Button>}
                     </Box>
                     <Box className='user'>
                         <div className='user-header'>
@@ -219,7 +243,7 @@ const Shop = () => {
                                     disabled={!isDisabledLocation} />
                             </div>
                         </form>
-                        {isDisabledLocation && <Button className='mt-4'>Save</Button>}
+                        {isDisabledLocation && <Button onClick={handleSubmit} className='mt-4'>Save</Button>}
                     </Box>
                 </div>
             </div>

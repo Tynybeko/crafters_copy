@@ -44,7 +44,7 @@
     border-radius: 32px;
     padding: 24px;
     width: 100%;
-    
+
     gap: 20px;
     flex-direction: column;
     display: flex;
@@ -54,6 +54,11 @@
 .feedback-card__head_reviews {
     display: flex;
     gap: 10px;
+}
+
+.feedback-card__item_img {
+    border-radius: 16px;
+    object-fit: cover;
 }
 
 .feedback-card__head_company {
