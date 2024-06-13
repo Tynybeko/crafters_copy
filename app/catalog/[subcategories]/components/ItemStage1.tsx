@@ -378,7 +378,6 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
 
 export default ItemStage1;
 
-
 function PopularProducts() {
     const [popularItems, setPopularItems] = useState([]);
     const { data: items } = useAppSelector(state => state.items);
@@ -394,18 +393,7 @@ function PopularProducts() {
 
     useEffect(() => {
         dispatch(fetchItems({}) as any)
-        // dispatch(FetchReviews() as any)
     }, [])
-
-    // useEffect(() => {
-    // dispatch(FetchReviews() as any)
-    // .then(res => {
-    //     console.log(res);
-    // })
-    // }, [])
-
-    console.log(items);
-    console.log(popularItems, "pop");
 
     return (
         <div className='mt-[80px]'>
