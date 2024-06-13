@@ -325,3 +325,8 @@ const ItemStage1 = ({ product, setActiveStage, setColorModels, setIsActiveAlert 
 };
 
 export default ItemStage1;
+
+
+
+
+
