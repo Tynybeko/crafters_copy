@@ -13,6 +13,7 @@ import chatRoomsSlice from "@/redux/slices/chatRooms";
 import chatMessagesSlice from "@/redux/slices/chatMessages";
 import ToastifiReducer from '@/redux/slices/toastiSlice';
 import CartReducer from '@/redux/slices/cart'
+import ReviewReducer from '@/redux/slices/review'
 
 
 export const makeStore = () => {
@@ -31,7 +32,8 @@ export const makeStore = () => {
             chatRooms: chatRoomsSlice,
             chatMessages: chatMessagesSlice,
             toastify: ToastifiReducer,
-            cart: CartReducer
+            cart: CartReducer,
+            review: ReviewReducer
         },
         devTools: true,
         middleware: (getDefaultMiddleware) => {
