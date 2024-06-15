@@ -1,6 +1,18 @@
+"use client"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { fetchAllItemSubcategories } from "@/redux/slices/item-subcategories"
 import Link from "next/link"
+import { useEffect } from "react"
 
 export const Footer = () => {
+    const { data: categories } = useAppSelector(state => state.categories)
+    const { allItems } = useAppSelector(state => state.subCategories)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchAllItemSubcategories())
+    }, [])
+
     return (
         <footer className="bg-[#1DBE60] pt-[50px] pb-[14px] mt-[80px]">
             <div className="globalContainer">
@@ -18,40 +30,20 @@ export const Footer = () => {
                         </svg>
                         <p className="text-[#FFFFFF] font-[400] text-[16px] leading-[20px] opacity-[60%]">Don't miss the opportunity to buy handmade products. We have already gathered more than 200 partner companies.</p>
                     </div>
-                    <div>
-                        <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] mb-[16px]">Category 1</h3>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                    </div>
-                    <div>
-                        <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] mb-[16px]">Category 2</h3>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                    </div>
-                    <div>
-                        <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] mb-[16px]">Category 3</h3>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                    </div>
-                    <div>
-                        <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] mb-[16px]">Category 4</h3>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                        <p className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">BlockBlockBlockBlock</p>
-                    </div>
+                    {
+                        categories?.slice(0, 4).map(item => (
+                            <div className="flex flex-col">
+                                <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] mb-[16px]">{item.name}</h3>
+                                {
+                                    allItems?.map(itemEl => {
+                                        if (itemEl.category == item.id) {
+                                            return (<Link href={`/catalog/subcategory?category=${item.id}&subcategory=${itemEl.id}`} className="mb-[10px] text-[#FFFFFF] font-[400] text-[14px] leading-[16px] opacity-[60%]">{itemEl.name}</Link>)
+                                        }
+                                    })
+                                }
+                            </div>
+                        ))
+                    }
                     <div className="">
                         <h3 className="text-[#FFFFFF] font-[400] text-[16px] leading-[19px] opacity-[80%] mb-[12px]">Sign up for always up-to-date news</h3>
                         <label htmlFor="emailer" className="flex items-center px-[24px] py-[15px] gap-[10px] rounded-[54px] border border-solid border-[#FFFFFF] mb-[12px]">
