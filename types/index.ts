@@ -1,5 +1,6 @@
 export interface InitialStateType<T> {
     data: T | null
+    allItems?: T | null
     isLoading: boolean
     isError: boolean
     isAuth?: boolean
